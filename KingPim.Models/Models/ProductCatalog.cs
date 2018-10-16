@@ -7,6 +7,7 @@ namespace KingPim.Models.Models
     public class ProductCatalog
     {
         public int Id { get; set; }
+        public int CategoryId { get; set; }
         public virtual Category Category { get; set; }
     }
 }

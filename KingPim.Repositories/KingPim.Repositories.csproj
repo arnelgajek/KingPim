@@ -9,4 +9,9 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\KingPim.Data\KingPim.Data.csproj" />
+    <ProjectReference Include="..\KingPim.Models\KingPim.Models.csproj" />
+  </ItemGroup>
+
 </Project>

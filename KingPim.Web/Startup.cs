@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
 
 namespace KingPim.Web
 {
@@ -23,12 +24,15 @@ namespace KingPim.Web
         
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
             // Configuration for DB connection:
             var conn = _configuration.GetConnectionString("KingPim");
 
             // Service for the DB connection:
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(conn));
 
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,11 +41,29 @@ namespace KingPim.Web
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseStatusCodePages();
             }
 
-            app.Run(async (context) =>
+            // To get access to the wwwroot files:
+            app.UseStaticFiles();
+
+            app.UseMvcWithDefaultRoute();
+
+            app.UseMvc(routes =>
             {
-                await context.Response.WriteAsync("Hello World!");
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+
+                //routes.MapRoute(
+                //    name: "Contact",
+                //    template: "{controller=Contact}/{action=Contact}/{id?}");
+
+                //routes.MapRoute(
+                //   name: "Vehicles/vehicleId",
+                //   template: "Vehicle/{Brand}/{Model}/{ModelDescription}/{Id:int}",
+                //   defaults: new { controller = "Vehicle", action = "Index" }
+                //   );
             });
         }
     }

@@ -1,4 +1,8 @@
-﻿namespace KingPim.Data
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace KingPim.Data
 {
     public class ProductAttribute
     {

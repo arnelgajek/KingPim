@@ -30,13 +30,14 @@ namespace KingPim.Web
             var conn = _configuration.GetConnectionString("KingPim");
 
             // Service for the DB connection:
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(conn));
+            services.AddDbContext<ApplicationDbContext>(options => options.UseLazyLoadingProxies().UseSqlServer(conn));
+
 
             services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ApplicationDbContext ctx)
         {
             if (env.IsDevelopment())
             {
@@ -65,6 +66,8 @@ namespace KingPim.Web
                 //   defaults: new { controller = "Vehicle", action = "Index" }
                 //   );
             });
+
+            Seed.FillIfEmpty(ctx);
         }
     }
 }

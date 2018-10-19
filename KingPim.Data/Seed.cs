@@ -11,16 +11,17 @@ namespace KingPim.Data
         public static void FillIfEmpty(ApplicationDbContext ctx)
         {
             // The list variables created for the Seed():
+            var categoryList = new List<Category>();
             var subCategoryList = new List<SubCategory>();
             var productList = new List<Product>();
             var attributeGroupList = new List<AttributeGroup>();
             var oneAttributeList = new List<OneAttribute>();
-            
+
             var oneAttribute = new OneAttribute
             {
                 Name = "White",
                 Description = "The color of this longsleeved shirt is white.",
-                Type = "bool"
+                Type = "string"
             };
             oneAttributeList.Add(oneAttribute);
 
@@ -36,20 +37,24 @@ namespace KingPim.Data
             {
                 Name = "Ralph Lauren",
                 Description = "Slim fit, long sleeved shirt.",
-                Price = "999"
+                Price = "999",
+                UpdatedDate = DateTime.Now.Date,
+                AddedDate = DateTime.Today,
+                Published = false,
             };
             productList.Add(product);
 
-            var subCategoryDataOne = new SubCategory
+            var subCategory = new SubCategory
             {
                 Name = "Long sleeve",
                 Products = productList,
                 AttributeGroups = attributeGroupList,
                 UpdatedDate = DateTime.Now.Date,
-                AddedDate = DateTime.Today
+                AddedDate = DateTime.Today,
+                Published = false
             };
-            subCategoryList.Add(subCategoryDataOne);
-            
+            subCategoryList.Add(subCategory);
+
             // Category:
             if (!ctx.Categories.Any())
             {
@@ -65,6 +70,23 @@ namespace KingPim.Data
                 ctx.Categories.AddRange(category);
             };
             ctx.SaveChanges();
+
+            // Connect a product to a attribute to productoneattributevalues:
+            if (!ctx.ProductOneAttributeValues.Any())
+            {
+                var productTryout = ctx.Products.FirstOrDefault(x => x.Id == 1);
+
+                var attributeTryout = ctx.OneAttributes.FirstOrDefault(x => x.Id == 1);
+
+                var productAttributeValue = new ProductOneAttributeValue
+                {
+                    Value = "White",
+                    Product = productTryout,
+                    OneAttribute = attributeTryout
+                };
+                ctx.ProductOneAttributeValues.Add(productAttributeValue);
+                ctx.SaveChanges();
+            }
         }
     }
 }

@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
 
 namespace KingPim.Web
 {
@@ -32,12 +33,30 @@ namespace KingPim.Web
             // Service for the DB connection:
             services.AddDbContext<ApplicationDbContext>(options => options.UseLazyLoadingProxies().UseSqlServer(conn));
 
+            // Service for Identity:
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+
+            services.AddTransient<IIdentitySeed, IdentitySeed>();
+
+            // Service for the password to make it easier to play with:
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredLength = 3;
+            });
 
             services.AddMvc();
+            services.AddMemoryCache();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ApplicationDbContext ctx)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ApplicationDbContext ctx, IIdentitySeed identitySeed)
         {
             if (env.IsDevelopment())
             {
@@ -48,24 +67,20 @@ namespace KingPim.Web
             // To get access to the wwwroot files:
             app.UseStaticFiles();
 
+            app.UseAuthentication();
+
             app.UseMvcWithDefaultRoute();
+
+            app.UseSession();
 
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
-
-                //routes.MapRoute(
-                //    name: "Contact",
-                //    template: "{controller=Contact}/{action=Contact}/{id?}");
-
-                //routes.MapRoute(
-                //   name: "Vehicles/vehicleId",
-                //   template: "Vehicle/{Brand}/{Model}/{ModelDescription}/{Id:int}",
-                //   defaults: new { controller = "Vehicle", action = "Index" }
-                //   );
             });
+
+            var runIdentitySeed = Task.Run(async () => await identitySeed.CreateAdminAccountIfEmpty()).Result;
 
             Seed.FillIfEmpty(ctx);
         }

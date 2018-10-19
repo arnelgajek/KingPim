@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using KingPim.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,18 +11,54 @@ namespace KingPim.Web.Controllers
 {
     public class HomeController : Controller
     {
-        // TODO: Connect to database with private property and private cunstructor.
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
 
-        public IActionResult Index()
+        public HomeController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
         {
-            // TODO: Where should this one be returned?
-            return View();
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
 
-        // TODO: GetAll
-        public IActionResult GetAll()
+        [AllowAnonymous]
+        public IActionResult Index()
         {
-            return View();
+            // Checks if the user is authenticated/signed in and redirects him/her to Admin: 
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                // Otherwise, maybe return to an error page?
+                return View();
+            }
+        }
+
+        // Checks if the password matches to the account, redirects the user to Admin:
+        [AllowAnonymous]
+        public async Task<IActionResult> Login(HomeViewModel vm)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.FindByEmailAsync(vm.UserName);
+                if (user != null)
+                {
+                    await _signInManager.SignOutAsync();
+                    if ((await _signInManager.PasswordSignInAsync(user, vm.Password, false, false)).Succeeded)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                }
+            }
+            return View("Index", vm);
+        }
+
+        // Sends the user back to the login page:
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction(nameof(Index));
         }
     }
 }

@@ -1,22 +1,13 @@
-﻿@*@model IEnumerable<KingPim.Models.Models.SubCategory>*@
+﻿<!-- CRUD-buttons to modals:-->
+<div class="float-sm-right" style="margin-bottom:10px; margin-top:80px">
+    <button type="button" class="btn btn-sm btn-success" name="createSomething" id="createSomething" data-toggle="modal" data-target="#createModal">Create</button>
+    <button type="button" class="btn btn-sm btn-warning" name="updateSomething" id="updateSomething" data-toggle="modal" data-target="#updateModal">Update</button>
+    <button type="button" class="btn btn-sm btn-danger" name="deleteSomething" id="deleteSomething" data-toggle="modal" data-target="#deleteModal">Delete</button>
+</div>
 
+<!-- The title and all the other information that goes to the RenderBody: -->
+<div class="float-sm-left" style="margin-bottom:10px; margin-top:80px">
+    <h1>@ViewBag.Title CATEGORY</h1>
 
-@{
-    Layout = null;
-}
+</div> 
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    <h1>This the Index for Category</h1>
-    @*@foreach (var subcat in Model)
-        {
-            <strong>@subcat.Name</strong>
-        }*@
-</body>
-</html>

@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
+using KingPim.Repositories;
+using KingPim.Repositories.Repositories;
 
 namespace KingPim.Web
 {
@@ -39,6 +41,7 @@ namespace KingPim.Web
                 .AddDefaultTokenProviders();
 
             services.AddTransient<IIdentitySeed, IdentitySeed>();
+            //services.AddTransient<ISubCategory, SubCategoryRepository>();
 
             // Service for the password to make it easier to play with:
             services.Configure<IdentityOptions>(options =>
@@ -78,6 +81,14 @@ namespace KingPim.Web
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Login}/{action=Login}/{id?}");
+
+                routes.MapRoute(
+                    name: "home",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+
+                routes.MapRoute(
+                    name: "category",
+                    template: "{controller=Category}/{action=GetAll}/{id?}");
             });
 
             var runIdentitySeed = Task.Run(async () => await identitySeed.CreateAdminAccountIfEmpty()).Result;

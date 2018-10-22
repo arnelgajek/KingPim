@@ -1,4 +1,6 @@
-﻿
+﻿@*@model IEnumerable<KingPim.Models.Models.SubCategory>*@
+
+
 @{
     Layout = null;
 }
@@ -11,6 +13,10 @@
     <title>Index</title>
 </head>
 <body>
-    <h1>This the Index for SubCategory</h1>
+    <h1>This the Index for Category</h1>
+    @*@foreach (var subcat in Model)
+        {
+            <strong>@subcat.Name</strong>
+        }*@
 </body>
 </html>

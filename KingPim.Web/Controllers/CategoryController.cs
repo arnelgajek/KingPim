@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using KingPim.Repositories;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,12 @@ namespace KingPim.Web.Controllers
     public class CategoryController : Controller
     {
         // TODO: Connect to database with private property and private cunstructor.
+        //private ISubCategory repo;
+
+        //public CategoryController(ISubCategory subCatRepository)
+        //{
+        //    repo = subCatRepository;
+        //}
 
         public IActionResult Index()
         {

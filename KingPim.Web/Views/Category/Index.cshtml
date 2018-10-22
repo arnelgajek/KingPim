@@ -1,4 +1,6 @@
-﻿<!-- CRUD-buttons to modals:-->
+﻿@model IEnumerable<Category>
+
+<!-- CRUD-buttons to modals:-->
 <div class="float-sm-right" style="margin-bottom:10px; margin-top:80px">
     <button type="button" class="btn btn-sm btn-success" name="createSomething" id="createSomething" data-toggle="modal" data-target="#createModal">Create</button>
     <button type="button" class="btn btn-sm btn-warning" name="updateSomething" id="updateSomething" data-toggle="modal" data-target="#updateModal">Update</button>
@@ -6,7 +8,28 @@
 </div>
 
 <!-- The title and all the other information that goes to the RenderBody: -->
-<div class="float-sm-left" style="margin-bottom:10px; margin-top:80px">
-    <h1>@ViewBag.Title CATEGORY</h1>
+<div class="container">
+    <h1>Category</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Name:</th>
+                <th scope="col">Published Date:</th>
+                <th scope="col">Updated Date:</th>
+                <th scope="col">SubCategories:</th>
+            </tr>
+        </thead>
+        @foreach (var cat in Model)
+        {
+            <tbody>
+                <tr>
+                    <th scope="row">@cat.Name</th>
+                    <td>@cat.Published</td>
+                    <td>@cat.UpdatedDate</td>
+                    <td>@cat.SubCategories</td>
+                </tr>
+                </tbody>
+                }
+        </table>
 </div> 
 

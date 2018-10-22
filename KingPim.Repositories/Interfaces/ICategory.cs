@@ -5,8 +5,9 @@ using System.Text;
 
 namespace KingPim.Repositories
 {
-    public interface ISubCategory
+    public interface ICategory
     {
-        //IEnumerable<SubCategory> SubCategories { get; }
+        IEnumerable<Category> Categories { get; }
+        IEnumerable<Category> GetAll();
     }
 }

@@ -1,8 +1,11 @@
-﻿<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-1 shadow">
+﻿<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-3 shadow">
     <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">KingPim</a>
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
-            <a class="nav-link" href="#">Sign out</a>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <a asp-controller="Login" asp-action="Logout" class="btn btn-danger">Sign Out</a>
+            }
         </li>
     </ul>
 </nav>

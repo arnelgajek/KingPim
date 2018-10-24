@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using KingPim.Repositories;
 using KingPim.Repositories.Repositories;
+using KingPim.Repositories.Interfaces;
 
 namespace KingPim.Web
 {
@@ -42,6 +43,7 @@ namespace KingPim.Web
 
             services.AddTransient<IIdentitySeed, IdentitySeed>();
             services.AddTransient<ICategory, CategoryRepository>();
+            services.AddTransient<ISubCategory, SubCategoryRepository>();
 
             // Service for the password to make it easier to play with:
             services.Configure<IdentityOptions>(options =>

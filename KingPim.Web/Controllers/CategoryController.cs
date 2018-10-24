@@ -10,16 +10,16 @@ namespace KingPim.Web.Controllers
     public class CategoryController : Controller
     {
         // TODO: Connect to database with private property and private cunstructor.
-        private ICategory repo;
+        private ICategory catRepo;
 
         public CategoryController(ICategory catRepository)
         {
-            repo = catRepository;
+            catRepo = catRepository;
         }
 
         public IActionResult Index()
         {
-            var cat = repo.GetAll();
+            var cat = catRepo.GetAll();
 
             return View(cat);
         }
@@ -31,9 +31,9 @@ namespace KingPim.Web.Controllers
         }
 
         // TODO: Get
-        public IActionResult Get(int Id)
-        {
-            return View();
+        public IActionResult Get(int id)
+        {        
+            return View(catRepo.Get(id));
         }
 
         // TODO: Update

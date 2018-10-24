@@ -1,5 +1,6 @@
 ﻿using KingPim.Data;
 using KingPim.Models.Models;
+using KingPim.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,38 +8,38 @@ using System.Text;
 
 namespace KingPim.Repositories.Repositories
 {
-    public class CategoryRepository : ICategory
+    public class SubCategoryRepository : ISubCategory
     {
         // Put the Db into a variable to use later on:
         private ApplicationDbContext _ctx;
-        public CategoryRepository(ApplicationDbContext ctx)
+        public SubCategoryRepository(ApplicationDbContext ctx)
         {
             _ctx = ctx;
         }
 
-        public void Add(Category newCategory)
+        public void Add(SubCategory subCategory)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(Category updateCategory)
+        public void Update(SubCategory updateSubCategory)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(Category deleteCategory)
+        public void Delete(SubCategory deleteSubCategory)
         {
             throw new NotImplementedException();
         }
 
-        public Category Get(int id)
+        public SubCategory Get(int id)
         {
-            return _ctx.Categories.FirstOrDefault(x => x.Id == id);
+            return _ctx.SubCategories.FirstOrDefault(x => x.Id == id);
         }
 
-        public IEnumerable<Category> GetAll()
+        public IEnumerable<SubCategory> GetAll()
         {
-            return _ctx.Categories;
+            return _ctx.SubCategories;
         }
     }
 }

@@ -7,7 +7,10 @@ namespace KingPim.Repositories
 {
     public interface ICategory
     {
-        IEnumerable<Category> Categories { get; }
         IEnumerable<Category> GetAll();
+        Category Get(int id);
+        void Add(Category newCategory);
+        void Update(Category updateCategory);
+        void Delete(Category deleteCategory);
     }
 }

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using KingPim.Repositories;
+using KingPim.Repositories.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +11,18 @@ namespace KingPim.Web.Controllers
     public class SubCategoryController : Controller
     {
         // TODO: Connect to database with private property and private cunstructor.
+        private ISubCategory subCatrepo;
+
+        public SubCategoryController (ISubCategory subCatRepository)
+        {
+            subCatrepo = subCatRepository;
+        }
 
         public IActionResult Index()
         {
-            // TODO: Where should this one be returned?
-            return View();
+            var subCat = subCatrepo.GetAll();
+
+            return View(subCat);
         }
 
         // TODO: Add
@@ -23,15 +32,17 @@ namespace KingPim.Web.Controllers
         }
 
         // TODO: Get
-        public IActionResult Get(int Id)
+        public IActionResult Get(int id)
         {
-            return View();
+            return View(subCatrepo.Get(id));
         }
 
         // TODO: GetAll
         public IActionResult GetAll()
         {
-            return View();
+            var subCat = subCatrepo.GetAll();
+
+            return View(subCat);
         }
 
         // TODO: Update

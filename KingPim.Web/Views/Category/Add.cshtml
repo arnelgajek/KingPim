@@ -1,0 +1,37 @@
+﻿@model Category
+
+<!-- This is the createModal to create a category: -->
+<div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title mx-auto text-center" id="createModalLabel">You are about to create a category.</h5>
+            </div>
+            <div class="modal-body">
+                <!-- FORM SKA IN HÄR: -->
+                <form asp-action="Add" method="post">
+                        <p>
+                            <label asp-for="Name">Name:</label>
+                            <input asp-for="Name" />
+                        </p>
+                        <p>
+                            <label asp-for="AddedDate">AddedDate:</label>
+                            <input asp-for="AddedDate" type="datetime" />
+                        </p>
+                        <p>
+                            <label asp-for="Published">Published:</label>
+                            <input asp-for="Published" />
+                        </p>
+                    </form>
+                <p class="text-center">Make sure to save your changes.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+                <form asp-action="Add" method="post">
+                    <input type="hidden" name="categoryId" value="@Model.Id" />
+                    <button type="submit" id="createSomething" class="btn btn-success">Create</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

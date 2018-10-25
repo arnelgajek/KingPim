@@ -32,6 +32,7 @@
         }
     </table>
 </div> 
+
 <div id="tempModal" style="display:none">
     @await Component.InvokeAsync("Crud")
 </div>
@@ -40,6 +41,7 @@
 <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
 <script>
     $(document).ready(function () {
+
         // CREATE:
         $('#createSomething').click(function () {
             $('#tempModal').show();

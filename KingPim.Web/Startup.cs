@@ -47,6 +47,7 @@ namespace KingPim.Web
             services.AddTransient<IProduct, ProductRepository>();
             services.AddTransient<IAttributeGroup, AttributeGroupRepository>();
             services.AddTransient<IOneAttribute, OneAttributeRepository>();
+            services.AddTransient<IHome, HomeRepository>();
 
             // Service for the password to make it easier to play with:
             services.Configure<IdentityOptions>(options =>

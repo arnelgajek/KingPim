@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<SubCategory>
-
 <!-- CRUD-buttons to modals:-->
 <div class="float-sm-right" style="margin-bottom:10px; margin-top:80px">
     <button type="button" class="btn btn-md btn-success" name="createSomething" id="createSomething" data-toggle="modal" data-target="#createModal">Create</button>
@@ -22,8 +21,8 @@
             </tr>
         </thead>
         @foreach (var subCat in Model)
-        { 
-        <tbody>
+        {
+            <tbody>
                 <tr>
                     <th scope="row"><input type="checkbox" class="chk" value="@subCat.Id" /> @subCat.Name</th>
                     <!-- TODO: Implement button to Published to send value to Db with true=green button/false=red button-->
@@ -34,72 +33,35 @@
                     <td>@subCat.AttributeGroups.FirstOrDefault().Name</td>
                 </tr>
             </tbody>
-
-            <!-- This is the createModal to create a category: -->
-            <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModal" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title mx-auto text-center" id="createModalLabel">You are about to create a SubCategory.</h5>
-                        </div>
-                        <div class="modal-body">
-                            <!-- FORM SKA IN HÄR: -->
-                            <p class="text-center">Make sure to save your changes.</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
-                            <form asp-action="Add" method="post">
-                                <input type="hidden" name="categoryId" value="@subCat.Id" />
-                                <button type="submit" id="createSomething" class="btn btn-success">Create</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- This is the updateModal to update a category: -->
-            <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModal" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title mx-auto text-center" id="updateModalLabel">You are about to update a SubCategory.</h5>
-                        </div>
-                        <div class="modal-body">
-                            <!-- FORM SKA IN HÄR: -->
-                            <p class="text-center">Make sure to save your changes.</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
-                            <form asp-action="Update" method="post">
-                                <input type="hidden" name="categoryId" value="@subCat.Id" />
-                                <button type="submit" id="updateSomething" class="btn btn-success">Update</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- This is the deleteModal to delete a category: -->
-            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title mx-auto text-center" id="deleteModalLabel">You are about to delete a SubCategory.</h5>
-                        </div>
-                        <div class="modal-body">
-                            <p class="text-center">Are your sure that you want to delete a SubCategory?</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
-                            <form asp-action="Delete" method="post">
-                                <input type="hidden" name="categoryId" value="@subCat.Id" />
-                                <button type="submit" id="deleteSomething" class="btn btn-danger">Delete</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
         }
     </table>
 </div>
+
+<div id="tempModal" style="display:none">
+    @await Component.InvokeAsync("Crud")
+</div>
+
+<script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+<script>
+    $(document).ready(function () {
+
+        // CREATE:
+        $('#createSomething').click(function () {
+            $('#tempModal').show();
+            $('#createModal').modal('show');
+        });
+
+        // UPDATE:
+        $('#updateSomething').click(function () {
+            $('#tempModal').show();
+            $('#updateModal').modal('show');
+        });
+
+        // DELETE:
+        $('#deleteSomething').click(function () {
+            $('#tempModal').show();
+            $('#deleteModal').modal('show');
+        });
+    });
+</script>
 

@@ -1,16 +1,13 @@
-﻿
-@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+﻿@model IEnumerable<Category>
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    
-</body>
-</html>
+<div class="container">
+    <h1><strong>All the Categories in store:</strong></h1>
+    <div class="row">
+        <div class="col-md-3" style="background-color:lightgray; margin:10px; border-radius:5px;">
+            @foreach (var cat in Model)
+            {
+            <h1 style="text-align:center"><strong>@cat.Name</strong></h1>
+            }
+        </div>
+    </div>
+</div>

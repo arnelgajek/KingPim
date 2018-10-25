@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace KingPim.Web.Controllers
 {
+    // TODO: Don't forget to add authorization!
     public class SubCategoryController : Controller
     {
         // TODO: Connect to database with private property and private cunstructor.

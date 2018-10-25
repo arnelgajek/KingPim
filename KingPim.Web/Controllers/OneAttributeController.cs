@@ -6,14 +6,21 @@ using System.Threading.Tasks;
 
 namespace KingPim.Web.Controllers
 {
+    using KingPim.Repositories.Interfaces;
+    using Microsoft.AspNetCore.Mvc;
+
     public class OneAttributeController : Controller
     {
-        // TODO: Connect to database with private property and private cunstructor.
+        private IOneAttribute oneAttrRepo;
 
+        public OneAttributeController(IOneAttribute oneAttrRepository)
+        {
+            oneAttrRepo = oneAttrRepository;
+        }
         public IActionResult Index()
         {
-            // TODO: Where should this one be returned?
-            return View();
+            var oneAttr = oneAttrRepo.GetAll();
+            return View(oneAttr);
         }
 
         // TODO: Add
@@ -23,25 +30,19 @@ namespace KingPim.Web.Controllers
         }
 
         // TODO: Get
-        public IActionResult Get(int Id)
+        public IActionResult Get(int id)
         {
-            return View();
-        }
-
-        // TODO: GetAll
-        public IActionResult GetAll()
-        {
-            return View();
+            return View(oneAttrRepo.Get(id));
         }
 
         // TODO: Update
-        public IActionResult Update(int Id)
+        public IActionResult Update(int id)
         {
             return View();
         }
 
         // TODO: Delete
-        public IActionResult Delete(int Id)
+        public IActionResult Delete(int id)
         {
             return View();
         }

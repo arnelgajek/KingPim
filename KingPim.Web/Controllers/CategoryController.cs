@@ -1,4 +1,5 @@
 ﻿using KingPim.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -7,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace KingPim.Web.Controllers
 {
+    // TODO: Don't forget to add authorization!
     public class CategoryController : Controller
     {
-        // TODO: Connect to database with private property and private cunstructor.
         private ICategory catRepo;
 
         public CategoryController(ICategory catRepository)
@@ -20,7 +21,6 @@ namespace KingPim.Web.Controllers
         public IActionResult Index()
         {
             var cat = catRepo.GetAll();
-
             return View(cat);
         }
 
@@ -37,13 +37,13 @@ namespace KingPim.Web.Controllers
         }
 
         // TODO: Update
-        public IActionResult Update(int Id)
+        public IActionResult Update(int id)
         {
             return View();
         }
 
         // TODO: Delete
-        public IActionResult Delete(int Id)
+        public IActionResult Delete(int id)
         {
             return View();
         }

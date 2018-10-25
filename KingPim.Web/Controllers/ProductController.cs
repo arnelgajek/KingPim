@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using KingPim.Repositories.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,39 +10,39 @@ namespace KingPim.Web.Controllers
     public class ProductController : Controller
     {
         // TODO: Connect to database with private property and private cunstructor.
+        private IProduct prodRepo;
+
+        public ProductController(IProduct prodRepository)
+        {
+            prodRepo = prodRepository;
+        }
 
         public IActionResult Index()
         {
-            // TODO: Where should this one be returned?
-            return View();
+            var prod = prodRepo.GetAll();
+            return View(prod);
         }
 
         // TODO: Add
-        public IActionResult Add(int Id)
+        public IActionResult Add()
         {
             return View();
         }
 
         // TODO: Get
-        public IActionResult Get(int Id)
+        public IActionResult Get(int id)
         {
-            return View();
-        }
-
-        // TODO: GetAll
-        public IActionResult GetAll()
-        {
-            return View();
+            return View(prodRepo.Get(id));
         }
 
         // TODO: Update
-        public IActionResult Update(int Id)
+        public IActionResult Update(int id)
         {
             return View();
         }
 
         // TODO: Delete
-        public IActionResult Delete(int Id)
+        public IActionResult Delete(int id)
         {
             return View();
         }

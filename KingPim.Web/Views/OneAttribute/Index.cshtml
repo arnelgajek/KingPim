@@ -1,16 +1,58 @@
-﻿
-@{
-    Layout = null;
-}
+﻿@model IEnumerable<OneAttribute>
+<!-- CRUD-buttons to modals:-->
+<div class="float-sm-right" style="margin-bottom:10px; margin-top:80px">
+    <button type="button" class="btn btn-md btn-success" name="createSomething" id="createSomething">Create</button>
+    <button type="button" class="btn btn-md btn-warning" name="updateSomething" id="updateSomething">Update</button>
+    <button type="button" class="btn btn-md btn-danger" name="deleteSomething" id="deleteSomething">Delete</button>
+</div>
 
-<!DOCTYPE html>
+<div class="container">
+    <h1>AttributeGroup</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Name:</th>
+                <th scope="col">Description:</th>
+                <th scope="col">Type:</th>
+            </tr>
+        </thead>
+        @foreach (var oneAttr in Model)
+        {
+            <tbody>
+                <tr>
+                    <th scope="row"><input type="checkbox" class="chk" value="@oneAttr.Id" /> @oneAttr.Name</th>
+                    <!-- TODO: Implement button to Published to send value to Db with true=green button/false=red button-->
+                    <td>@oneAttr.Description</td>
+                    <td>@oneAttr.Type</td>
+                </tr>
+            </tbody>
+        }
+    </table>
+</div>
+<div id="tempModal" style="display:none">
+    @await Component.InvokeAsync("Crud")
+</div>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    <h1>This the Index for OneAttribute</h1>
-</body>
-</html>
+
+<script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+<script>
+    $(document).ready(function () {
+        // CREATE:
+        $('#createSomething').click(function () {
+            $('#tempModal').show();
+            $('#createModal').modal('show');
+        });
+
+        // UPDATE:
+        $('#updateSomething').click(function () {
+            $('#tempModal').show();
+            $('#updateModal').modal('show');
+        });
+
+        // DELETE:
+        $('#deleteSomething').click(function () {
+            $('#tempModal').show();
+            $('#deleteModal').modal('show');
+        });
+    });
+</script>

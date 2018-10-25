@@ -18,7 +18,7 @@
                 <th scope="col">Updated Date:</th>
                 @*<th scope="col">Categories:</th>*@
                 <th scope="col">Products:</th>
-                @*<th scope="col">AttributeGroups:</th>*@
+                <th scope="col">AttributeGroups:</th>
             </tr>
         </thead>
         @foreach (var subCat in Model)
@@ -30,8 +30,8 @@
                     <td>@subCat.Published</td>
                     <td>@subCat.UpdatedDate.ToString("yyyy-MM-dd")</td>
                     @*<td>@subCat.Category</td>*@
-                    <td>@subCat.Products</td>
-                    @*<td>@subCat.AttributeGroups</td>*@
+                    <td>@subCat.Products.FirstOrDefault().Name</td>
+                    <td>@subCat.AttributeGroups.FirstOrDefault().Name</td>
                 </tr>
             </tbody>
 

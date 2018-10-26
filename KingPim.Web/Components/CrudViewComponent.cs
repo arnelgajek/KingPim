@@ -20,9 +20,9 @@ namespace KingPim.Web.Components
 
         public IViewComponentResult Invoke()
         {
-            var cat = new Category();
+            var catVm = new CategoryViewModel();
 
-            return View(cat);
+            return View(catVm);
         }
     }
 }

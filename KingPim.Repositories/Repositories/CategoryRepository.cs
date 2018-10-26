@@ -24,7 +24,9 @@ namespace KingPim.Repositories.Repositories
                 var newCategory = new Category
                 {
                     Name = vm.Name,
+                    SubCategories = null,
                     AddedDate = DateTime.Now,
+                    UpdatedDate = DateTime.Now,
                     Published = false
                 };
                 _ctx.Categories.Add(newCategory);

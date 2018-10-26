@@ -14,8 +14,9 @@
             <tr>
                 <th scope="col">Name:</th>
                 <th scope="col">Published:</th>
-                <th scope="col">Updated Date:</th>
-                <th scope="col">SubCategories:</th>
+                <th scope="col">Added Date:</th>
+                @*<th scope="col">Updated Date:</th>*@
+                @*<th scope="col">SubCategories:</th>*@
             </tr>
         </thead>
         @foreach (var cat in Model)
@@ -25,8 +26,9 @@
                     <th scope="row"><input type="checkbox" class="chk" value="@cat.Id" /> @cat.Name</th>
                     <!-- TODO: Implement button to Published to send value to Db with true=green button/false=red button-->
                     <td>@cat.Published</td>
-                    <td>@cat.UpdatedDate.ToString("yyyy-MM-dd")</td>
-                    <td>@cat.SubCategories.FirstOrDefault().Name</td>
+                    <td>@cat.AddedDate.ToString("yyyy-MM-dd")</td>
+                    @*<td>@cat.UpdatedDate.ToString("yyyy-MM-dd")</td>*@
+                    @*<td>@cat.SubCategories.FirstOrDefault().Name</td>*@
                 </tr>
             </tbody>
         }

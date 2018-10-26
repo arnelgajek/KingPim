@@ -12,7 +12,7 @@ namespace KingPim.Models.ViewModels
         public DateTime AddedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
         public bool Published { get; set; }
-        public virtual List<Category> Categories { get; set; }
+        public IEnumerable<Category> Categories { get; set; }
         public virtual List<SubCategory> SubCategories { get; set; }
     }
 }

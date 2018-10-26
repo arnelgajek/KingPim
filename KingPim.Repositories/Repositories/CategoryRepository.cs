@@ -1,5 +1,6 @@
 ﻿using KingPim.Data;
 using KingPim.Models.Models;
+using KingPim.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,9 +17,19 @@ namespace KingPim.Repositories.Repositories
             _ctx = ctx;
         }
 
-        public void Add(Category newCategory)
+        public void Add(CreateCategoryViewModel vm)
         {
-            throw new NotImplementedException();
+            if (vm.Id == 0)
+            {
+                var newCategory = new Category
+                {
+                    Name = vm.Name,
+                    AddedDate = DateTime.Now,
+                    Published = false
+                };
+                _ctx.Categories.Add(newCategory);
+            }
+            _ctx.SaveChanges();
         }
 
         public void Update(Category updateCategory)

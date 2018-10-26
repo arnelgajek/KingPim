@@ -1,4 +1,5 @@
 ﻿using KingPim.Models.Models;
+using KingPim.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,7 +10,7 @@ namespace KingPim.Repositories
     {
         IEnumerable<Category> GetAll();
         Category Get(int id);
-        void Add(Category newCategory);
+        void Add(CreateCategoryViewModel newCategory);
         void Update(Category updateCategory);
         void Delete(Category deleteCategory);
     }

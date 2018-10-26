@@ -1,4 +1,5 @@
 ﻿using KingPim.Models.Models;
+using KingPim.Models.ViewModels;
 using KingPim.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using System;

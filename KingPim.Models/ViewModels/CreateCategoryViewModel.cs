@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace KingPim.Models.ViewModels
 {
-    public class HomeViewModel
+    public class CreateCategoryViewModel
     {
-        // Do i need this one?
+        public int Id { get; set; }
+        public string Name { get; set; }
     }
 }

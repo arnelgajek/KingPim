@@ -7,17 +7,13 @@
                 <h5 class="modal-title mx-auto text-center" id="createModalLabel"><strong>CREATE</strong></h5>
             </div>
             <div class="modal-body">
-                <!-- FORM SKA IN HÄR: -->
-                <form asp-action="Add" method="post">
-                    <p>
-                        <label asp-for="Name">Name:</label>
-                        <input asp-for="Name" />
-                    </p>
-                    <p>
-                        <label asp-for="AddedDate">AddedDate:</label>
-                        <input asp-for="AddedDate" type="datetime" />
-                    </p>
-                </form>
+                <!-- FORM SKA IN HÄR: -->                
+                    <form asp-action="Add" method="post">
+                        <p>
+                            <label asp-for="Name">Name:</label>
+                            <input type="text" asp-for="Name" class="form-control form-control-sm"/>
+                        </p>
+                    </form>              
                 <p class="text-center"><strong>Make sure to save your changes.</strong></p>
             </div>
             <div class="modal-footer">

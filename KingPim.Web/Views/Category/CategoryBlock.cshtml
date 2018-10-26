@@ -1,0 +1,11 @@
+﻿@*@model CategoryViewModel
+
+<tbody>
+    <tr>
+        <th scope="row"><input type="checkbox" class="chk" value="@Model.Id" /> @Model.Name</th>*@
+        <!-- TODO: Implement button to Published to send value to Db with true=green button/false=red button-->
+        @*<td>@Model.Published</td>
+        <td>@Model.UpdatedDate.ToString("yyyy-MM-dd")</td>
+        <td>@Model.SubCategories.FirstOrDefault().Name</td>
+    </tr>
+</tbody>*@

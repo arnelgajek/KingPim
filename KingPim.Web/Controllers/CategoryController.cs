@@ -40,9 +40,11 @@ namespace KingPim.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Update(int id)
+        public IActionResult Update(UpdateCategoryViewModel vm)
         {
-            return View();
+            catRepo.Update(vm);
+            var url = Url.Action("Index", "Category");
+            return Json(url);
         }
 
         [HttpPost]

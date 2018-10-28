@@ -11,7 +11,7 @@ namespace KingPim.Repositories
         IEnumerable<Category> GetAll();
         Category Get(int id);
         void Add(CreateCategoryViewModel newCategory);
-        void Update(Category updateCategory);
+        void Update(UpdateCategoryViewModel updateCategory);
         void Delete(Category deleteCategory);
     }
 }

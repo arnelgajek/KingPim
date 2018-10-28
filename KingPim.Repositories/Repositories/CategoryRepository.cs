@@ -34,9 +34,9 @@ namespace KingPim.Repositories.Repositories
             _ctx.SaveChanges();
         }
 
-        public void Update(Category updateCategory)
+        public void Update(UpdateCategoryViewModel vm)
         {
-            throw new NotImplementedException();
+            var category = _ctx.Categories.FirstOrDefault(x => x.Id.Equals(vm.Id));
         }
 
         public void Delete(Category deleteCategory)

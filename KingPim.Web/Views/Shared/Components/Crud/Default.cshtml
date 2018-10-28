@@ -9,7 +9,7 @@
             </div>
             <form asp-controller="Category" asp-action="Add" method="post">
                 <div class="modal-body">
-                    <!-- FORM SKA IN HÄR: -->
+                    <!-- FORM: -->
                     <p>
                         <label asp-for="Name">Name:</label>
                         <input type="text" asp-for="Name" class="form-control form-control-sm" />
@@ -18,7 +18,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
-                    @*<input type="hidden" name="categoryId" value="@Model.Id" />*@
+                    <input type="hidden" name="categoryId" value="@Model.Id" />
                     <button type="submit" id="createSomething" class="btn btn-success">Create</button>
                 </div>
             </form>
@@ -28,22 +28,28 @@
 
 <!-- This is the updateModal to update a category: -->
 <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModal" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title mx-auto text-center" id="updateModalLabel"><strong>UPDATE</strong></h5>
             </div>
-            <div class="modal-body">
-                <!-- FORM SKA IN HÄR: -->
-                <p class="text-center"><strong>Make sure to save your changes.</strong></p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
-                <form asp-action="Update" method="post">
-                    <input type="hidden" name="categoryId" value="@Model.Id" />
-                    <button type="submit" id="updateSomething" class="btn btn-success">Update</button>
-                </form>
-            </div>
+            <form asp-controller="Category" id="updateCategoryForm" asp-action="Update" method="post">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <p>
+                            <label asp-for="Name"><strong>Name: @Model.Name</strong></label>
+                            <input asp-for="Name" class="form-control form-control-sm" />
+                        </p>
+                    </div>
+                    <p class="text-center"><strong>Make sure to save your changes.</strong></p>
+                </div>
+                <div class="modal-footer">
+                    <div class="form-group">
+                        <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+                        <button type="submit" id="updateSomething" class="btn btn-success">Update</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -69,3 +75,46 @@
         </div>
     </div>
 </div>
+
+<script src="~/lib/jquery/jquery.min.js"></script>
+<script>
+    $(function () {
+
+    //    // TODO: Set the function for the variables to be used when the modal shows.
+    //    $('#editModal').on('show.bs.modal', function (event) {
+    //        var button = $(event.relatedTarget);
+    //        var idRecipient = button.data('id');
+    //        var nameRecipient = button.data('name');
+    //        var modal = $(this);
+    //        modal.find('.modal-body input').val(nameRecipient);
+    //    });
+
+    //    // TODO: Set the function for creating the form and adding the correct information.
+    //    $('#editCategoryForm').submit(function (e) {
+    //        e.preventDefault();
+    //        var formData = new FormData();
+    //        formData.append('id, idRecipient');
+    //        $('#editCategoryForm input').each(function () {
+    //            formData.append($(this).attr('name'), $(this).val());
+    //        });
+        
+    //    // Ajax-POST from the modal to Db:
+    //    $.ajax({
+    //        url: '/Category/Update',
+    //        type: 'POST',
+    //        data: formData,
+    //        dataType: 'json',
+    //        processData: false, 
+    //        contentType: false,
+    //        success: function (data) {
+    //            console.log(data);
+    //            window.location.href = data;
+    //        },
+    //        error: function (error) {
+    //            console.log(error);
+    //        }
+    //    });
+    //});
+    //console.log(idRecipient);
+});
+</script>

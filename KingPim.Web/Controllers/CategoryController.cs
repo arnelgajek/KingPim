@@ -39,18 +39,27 @@ namespace KingPim.Web.Controllers
             return View(catRepo.Get(id));
         }
 
-        [HttpPost]
-        public IActionResult Update(UpdateCategoryViewModel vm)
-        {
-            catRepo.Update(vm);
-            var url = Url.Action("Index", "Category");
-            return Json(url);
-        }
+        //[HttpPost]
+        //public IActionResult Update(UpdateCategoryViewModel vm)
+        //{
+        //    catRepo.Update(vm);
+        //    var url = Url.Action("Index", "Category");
+        //    return Json(url);
+        //}
 
         [HttpPost]
         public IActionResult Delete(int id)
         {
-            return View();
+            var deletedCategory = catRepo.Delete(id);
+            if (deletedCategory != null)
+            {
+
+            }
+            else
+            {
+
+            }
+            return RedirectToAction(nameof(Index));
         }
     }
 }

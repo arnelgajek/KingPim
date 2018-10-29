@@ -1,10 +1,9 @@
 ﻿@model IEnumerable<Category>
-
 <!-- CRUD-buttons to modals:-->
 <div class="float-sm-right" style="margin-bottom:10px; margin-top:80px">
     <button type="button" class="btn btn-md btn-success" name="createSomething" id="createSomething">Create</button>
     <button type="button" class="btn btn-md btn-warning" name="updateSomething" id="updateSomething">Update</button>
-    <button type="button" class="btn btn-md btn-danger" name="deleteSomething" id="deleteSomething">Delete</button>
+    <button type="button" class="btn btn-md btn-danger" name="deleteSomething" id="deleteSomething" data-toggle="modal" data-target="#deleteModal">Delete</button>
 </div>
 
 <div class="container">
@@ -15,34 +14,31 @@
                 <th scope="col">Name:</th>
                 <th scope="col">Published:</th>
                 <th scope="col">Added Date:</th>
-                @*<th scope="col">Updated Date:</th>*@
-                @*<th scope="col">SubCategories:</th>*@
             </tr>
         </thead>
         @foreach (var cat in Model)
         {
             <tbody>
                 <tr>
-                    <th scope="row"><input type="checkbox" class="chk" value="@cat.Id" /> @cat.Name</th>
+                    <th scope="row">
+                        <input type="checkbox" class="chk" value="@cat.Id" data-name="@cat.Name"/>
+                        @cat.Name
+                    </th>
                     <!-- TODO: Implement button to Published to send value to Db with true=green button/false=red button-->
                     <td>@cat.Published</td>
                     <td>@cat.AddedDate.ToString("yyyy-MM-dd")</td>
-                    @*<td>@cat.UpdatedDate.ToString("yyyy-MM-dd")</td>*@
-                    @*<td>@cat.SubCategories.FirstOrDefault().Name</td>*@
                 </tr>
             </tbody>
         }
     </table>
-</div> 
-
-<div id="tempModal" style="display:none">
-    @await Component.InvokeAsync("Crud")
 </div>
 
+@await Component.InvokeAsync("Crud")
 
 <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
 <script>
     $(document).ready(function () {
+
 
         // CREATE:
         $('#createSomething').click(function () {
@@ -58,8 +54,37 @@
 
         // DELETE:
         $('#deleteSomething').click(function () {
-            $('#tempModal').show();
-            $('#deleteModal').modal('show');
+            getValueUsingClass();
+
+            $('#deleteModal').on('show.bs.modal', function (event) {
+
+                var checkbox = $(event.relatedTarget);
+                //var nameRecipient = checkbox.data('name');
+                var modal = $(this);
+                var name = $(".table").find("input:checked").attr("data-name");
+                
+                modal.find('.modal-body p strong').text('You are about to delete "' + name + '"');
+            });
+
+            // TODO: Try to fix bulkdelete if you have time.
         });
+
+        function getValueUsingClass() {
+
+            // Declaring checkbox array:
+            var chkArray = [];
+
+            // Loop through all the classes with chk and see if they are checked:
+            $('.chk:checked').each(function () {
+                chkArray.push($(this).val());
+            });
+
+            // Join the array and separate the Ids with a comma:
+            var selected;
+            selected = chkArray.join(',');
+
+            $('input[name="id"]').val(selected);
+        }
+
     });
 </script>

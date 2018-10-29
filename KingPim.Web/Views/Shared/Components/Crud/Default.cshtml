@@ -1,5 +1,4 @@
 ﻿@model CategoryViewModel
-
 <!-- This is the createModal to create a category: -->
 <div class="modal fade" id="createModal">
     <div class="modal-dialog" role="document">
@@ -45,15 +44,15 @@
                 </div>
                 <div class="modal-footer">
                     <div class="form-group">
+                        <input type="hidden" name="id" value="@Model.Id" />
                         <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
-                        <button type="submit" id="updateSomething" class="btn btn-success">Update</button>
+                        <button type="submit" id="confirmUpdate" class="btn btn-success">Update</button>
                     </div>
                 </div>
             </form>
         </div>
     </div>
 </div>
-
 
 <!-- This is the deleteModal to delete a category: -->
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
@@ -63,58 +62,15 @@
                 <h5 class="modal-title mx-auto text-center" id="deleteModalLabel"><strong>DELETE</strong></h5>
             </div>
             <div class="modal-body">
-                <p class="text-center"><strong>Are your sure that you want to delete a category?</strong></p>
+                <p class="text-center"><strong></strong></p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
                 <form asp-action="Delete" method="post">
-                    <input type="hidden" name="categoryId" value="@Model.Id" />
-                    <button type="submit" id="deleteSomething" class="btn btn-danger">Delete</button>
+                    <input type="hidden" name="id" value="@Model.Id" />
+                    <button type="submit" id="confirmDelete" class="btn btn-danger">Delete</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
-
-<script src="~/lib/jquery/jquery.min.js"></script>
-<script>
-    $(function () {
-
-    //    // TODO: Set the function for the variables to be used when the modal shows.
-    //    $('#editModal').on('show.bs.modal', function (event) {
-    //        var button = $(event.relatedTarget);
-    //        var idRecipient = button.data('id');
-    //        var nameRecipient = button.data('name');
-    //        var modal = $(this);
-    //        modal.find('.modal-body input').val(nameRecipient);
-    //    });
-
-    //    // TODO: Set the function for creating the form and adding the correct information.
-    //    $('#editCategoryForm').submit(function (e) {
-    //        e.preventDefault();
-    //        var formData = new FormData();
-    //        formData.append('id, idRecipient');
-    //        $('#editCategoryForm input').each(function () {
-    //            formData.append($(this).attr('name'), $(this).val());
-    //        });
-        
-    //    // Ajax-POST from the modal to Db:
-    //    $.ajax({
-    //        url: '/Category/Update',
-    //        type: 'POST',
-    //        data: formData,
-    //        dataType: 'json',
-    //        processData: false, 
-    //        contentType: false,
-    //        success: function (data) {
-    //            console.log(data);
-    //            window.location.href = data;
-    //        },
-    //        error: function (error) {
-    //            console.log(error);
-    //        }
-    //    });
-    //});
-    //console.log(idRecipient);
-});
-</script>

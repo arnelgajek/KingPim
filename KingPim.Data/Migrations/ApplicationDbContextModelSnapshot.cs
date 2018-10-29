@@ -63,7 +63,7 @@ namespace KingPim.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AttributeGroupId");
+                    b.Property<int?>("AttributeGroupId");
 
                     b.Property<string>("Description");
 
@@ -94,7 +94,7 @@ namespace KingPim.Data.Migrations
 
                     b.Property<bool>("Published");
 
-                    b.Property<int>("SubCategoryId");
+                    b.Property<int?>("SubCategoryId");
 
                     b.Property<DateTime>("UpdatedDate");
 
@@ -111,9 +111,9 @@ namespace KingPim.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("OneAttributeId");
+                    b.Property<int?>("OneAttributeId");
 
-                    b.Property<int>("ProductId");
+                    b.Property<int?>("ProductId");
 
                     b.Property<string>("Value");
 
@@ -134,7 +134,7 @@ namespace KingPim.Data.Migrations
 
                     b.Property<DateTime>("AddedDate");
 
-                    b.Property<int>("CategoryId");
+                    b.Property<int?>("CategoryId");
 
                     b.Property<string>("Name");
 
@@ -314,7 +314,8 @@ namespace KingPim.Data.Migrations
                 {
                     b.HasOne("KingPim.Models.Models.SubCategory")
                         .WithMany("AttributeGroups")
-                        .HasForeignKey("SubCategoryId");
+                        .HasForeignKey("SubCategoryId")
+                        .OnDelete(DeleteBehavior.SetNull);
                 });
 
             modelBuilder.Entity("KingPim.Models.Models.OneAttribute", b =>
@@ -322,7 +323,7 @@ namespace KingPim.Data.Migrations
                     b.HasOne("KingPim.Models.Models.AttributeGroup", "AttributeGroup")
                         .WithMany("OneAttributes")
                         .HasForeignKey("AttributeGroupId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.SetNull);
                 });
 
             modelBuilder.Entity("KingPim.Models.Models.Product", b =>
@@ -330,7 +331,7 @@ namespace KingPim.Data.Migrations
                     b.HasOne("KingPim.Models.Models.SubCategory", "SubCategory")
                         .WithMany("Products")
                         .HasForeignKey("SubCategoryId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.SetNull);
                 });
 
             modelBuilder.Entity("KingPim.Models.Models.ProductOneAttributeValue", b =>
@@ -338,12 +339,12 @@ namespace KingPim.Data.Migrations
                     b.HasOne("KingPim.Models.Models.OneAttribute", "OneAttribute")
                         .WithMany()
                         .HasForeignKey("OneAttributeId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("KingPim.Models.Models.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.SetNull);
                 });
 
             modelBuilder.Entity("KingPim.Models.Models.SubCategory", b =>
@@ -351,7 +352,7 @@ namespace KingPim.Data.Migrations
                     b.HasOne("KingPim.Models.Models.Category")
                         .WithMany("SubCategories")
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.SetNull);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

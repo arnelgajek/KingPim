@@ -18,6 +18,6 @@ namespace KingPim.Models.Models
         [Column(Order = 4)]
         public virtual AttributeGroup AttributeGroup { get; set; }
         [Column(Order = 5)]
-        public int AttributeGroupId { get; set; }
+        public int? AttributeGroupId { get; set; }
     }
 }

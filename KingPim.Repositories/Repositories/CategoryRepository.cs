@@ -39,9 +39,19 @@ namespace KingPim.Repositories.Repositories
             var category = _ctx.Categories.FirstOrDefault(x => x.Id.Equals(vm.Id));
         }
 
-        public void Delete(Category deleteCategory)
+        public Category Delete(int id)
         {
-            throw new NotImplementedException();
+            var ctxCategory = _ctx.Categories.FirstOrDefault(c => c.Id.Equals(id));
+            if (ctxCategory != null)
+            {
+                _ctx.Categories.Remove(ctxCategory);
+                _ctx.SaveChanges();
+            }
+            else
+            {
+
+            }
+            return ctxCategory;
         }
 
         public Category Get(int id)

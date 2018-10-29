@@ -14,9 +14,9 @@ namespace KingPim.Models.Models
         [Column(Order = 2)]
         public virtual OneAttribute OneAttribute { get; set; }
         [Column(Order = 3)]
-        public int OneAttributeId { get; set; }
+        public int? OneAttributeId { get; set; }
         public virtual Product Product { get; set; }
         [Column(Order = 4)]
-        public int ProductId { get; set; }
+        public int? ProductId { get; set; }
     }
 }

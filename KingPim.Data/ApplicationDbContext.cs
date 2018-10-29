@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace KingPim.Data
@@ -20,5 +21,15 @@ namespace KingPim.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductOneAttributeValue> ProductOneAttributeValues { get; set; }
         public DbSet<SubCategory> SubCategories { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelbuilder)
+        {
+            foreach (var relationship in modelbuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
+            {
+                relationship.DeleteBehavior = DeleteBehavior.SetNull;
+            }
+
+            base.OnModelCreating(modelbuilder);
+        }
     }
 }

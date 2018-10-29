@@ -13,7 +13,7 @@ namespace KingPim.Models.Models
         public string Name { get; set; }
         public virtual Category Category { get; }
         [Column(Order = 2)]
-        public int CategoryId { get; set; }
+        public int? CategoryId { get; set; }
         public virtual List<Product> Products { get; set; }
         public virtual List<AttributeGroup> AttributeGroups { get; set; }
     }

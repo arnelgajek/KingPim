@@ -17,6 +17,6 @@ namespace KingPim.Models.Models
         public string Price { get; set; }
         public virtual SubCategory SubCategory { get; set; }
         [Column(Order = 4)]
-        public int SubCategoryId { get; set; }
+        public int? SubCategoryId { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using KingPim.Models.ViewModels;
+﻿using KingPim.Models.Models;
+using KingPim.Models.ViewModels;
 using KingPim.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -27,7 +28,7 @@ namespace KingPim.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(CreateCategoryViewModel vm)
+        public IActionResult Add(CategoryViewModel vm)
         {
             catRepo.Add(vm);
             return RedirectToAction(nameof(Index));
@@ -39,13 +40,12 @@ namespace KingPim.Web.Controllers
             return View(catRepo.Get(id));
         }
 
-        //[HttpPost]
-        //public IActionResult Update(UpdateCategoryViewModel vm)
-        //{
-        //    catRepo.Update(vm);
-        //    var url = Url.Action("Index", "Category");
-        //    return Json(url);
-        //}
+        [HttpPost]
+        public IActionResult Update(CategoryViewModel vm)
+        {
+            catRepo.Update(vm);
+            return RedirectToAction(nameof(Index));
+        }
 
         [HttpPost]
         public IActionResult Delete(int id)

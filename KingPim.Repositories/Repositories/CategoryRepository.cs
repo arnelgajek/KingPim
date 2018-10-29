@@ -1,6 +1,7 @@
 ﻿using KingPim.Data;
 using KingPim.Models.Models;
 using KingPim.Models.ViewModels;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace KingPim.Repositories.Repositories
             _ctx = ctx;
         }
 
-        public void Add(CreateCategoryViewModel vm)
+        public void Add(CategoryViewModel vm)
         {
             if (vm.Id == 0)
             {
@@ -34,9 +35,17 @@ namespace KingPim.Repositories.Repositories
             _ctx.SaveChanges();
         }
 
-        public void Update(UpdateCategoryViewModel vm)
+        public void Update(CategoryViewModel vm)
         {
-            var category = _ctx.Categories.FirstOrDefault(x => x.Id.Equals(vm.Id));
+            var ctxCategory = _ctx.Categories.FirstOrDefault(ccn => ccn.Id.Equals(vm.Id));
+
+            if (ctxCategory != null)
+            {
+                ctxCategory.Name = vm.Name;
+                ctxCategory.UpdatedDate = DateTime.Now;
+            }
+            
+            _ctx.SaveChanges();
         }
 
         public Category Delete(int id)

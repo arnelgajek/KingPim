@@ -32,22 +32,19 @@
             <div class="modal-header">
                 <h5 class="modal-title mx-auto text-center" id="updateModalLabel"><strong>UPDATE</strong></h5>
             </div>
-            <form asp-controller="Category" id="updateCategoryForm" asp-action="Update" method="post">
+            <form asp-controller="Category" asp-action="Update" method="post">
                 <div class="modal-body">
                     <div class="form-group">
-                        <p>
-                            <label asp-for="Name"><strong>Name: @Model.Name</strong></label>
+                        <p class="text-center">
+                            <label asp-for="Name"><strong></strong></label>
                             <input asp-for="Name" class="form-control form-control-sm" />
                         </p>
                     </div>
-                    <p class="text-center"><strong>Make sure to save your changes.</strong></p>
                 </div>
                 <div class="modal-footer">
-                    <div class="form-group">
-                        <input type="hidden" name="id" value="@Model.Id" />
-                        <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
-                        <button type="submit" id="confirmUpdate" class="btn btn-success">Update</button>
-                    </div>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>                   
+                    <input type="hidden" name="id" value="@Model.Id" />
+                    <button type="submit" id="confirmUpdate" class="btn btn-success">Update</button>
                 </div>
             </form>
         </div>

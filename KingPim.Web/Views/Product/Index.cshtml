@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<Product>
-
 <!-- CRUD-buttons to modals:-->
 <div class="float-sm-right" style="margin-bottom:10px; margin-top:80px">
     <button type="button" class="btn btn-md btn-success" name="createSomething" id="createSomething">Create</button>
@@ -23,9 +22,9 @@
             <tbody>
                 <tr>
                     <th scope="row"><input type="checkbox" class="chk" value="@prod.Id" /> @prod.Name</th>
-                    <!-- TODO: Implement button to Published to send value to Db with true=green button/false=red button-->
                     <td>@prod.Description</td>
-                    <td>@prod.Published</td>
+                    <!-- TODO: Implement button to Published to send value to Db with true=green button/false=red button-->
+                    <td><input type="checkbox" id="publishchk" value="@prod.Published" /></td>
                     <td>@prod.UpdatedDate.ToString("yyyy-MM-dd")</td>
                 </tr>
             </tbody>
@@ -33,29 +32,110 @@
     </table>
 </div>
 
-<div id="tempModal" style="display:none">
-    @await Component.InvokeAsync("Crud")
-</div>
+<!-- You need to move all this code to an own css-file! -->
+<script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+<style>
+    #publishchk {
+        position: relative;
+        width: 60px;
+        height: 30px;
+        -webkit-appearance: none;
+        background: #c6c6c6;
+        outline: none;
+        border-radius: 20px;
+        box-shadow: inset 0 0 05px rgba(0,0,0,.2);
+        transition: .5s;
+    }
 
+        #publishchk:checked {
+            background: #00ff21;
+        }
+
+        #publishchk:before {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border-radius: 20px;
+            top: 0;
+            left: 0;
+            background: #fff;
+            transform: scale(1.1);
+            box-shadow: 0 2px 5px rgba(0,0,0,.2);
+            transition: .5s;
+        }
+
+        #publishchk:checked:before {
+            left: 30px;
+        }
+</style>
+
+@await Component.InvokeAsync("SubCategoryCrudVc")
+
+<!-- MOVE JS TO SEPERATE FILE! -->
 <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
 <script>
     $(document).ready(function () {
+
+        // PUBLISH:
+        $('#publishchk').change(function () {
+            cb = $(this);
+            cb.val(cb.prop('checked'));
+
+            if ($(this).is(':checked')) {
+                // POST TO DB WITH AJAX (TRUE)
+                console.log("JIHUUU");
+            }
+            else {
+                // POST TO DB WITH AJAX (FALSE)
+                console.log("BUHUUUU");
+            }
+
+
+        });
+
         // CREATE:
         $('#createSomething').click(function () {
-            $('#tempModal').show();
             $('#createModal').modal('show');
         });
 
         // UPDATE:
         $('#updateSomething').click(function () {
-            $('#tempModal').show();
-            $('#updateModal').modal('show');
+            getValueUsingClass();
+
+            $('#updateModal').on('show.bs.modal', function (event) {
+                var modal = $(this);
+                var name = $(".table").find("input:checked").attr("data-name");
+                modal.find('.modal-body p strong').text('You are about to update "' + name + '"');
+            });
         });
 
         // DELETE:
         $('#deleteSomething').click(function () {
-            $('#tempModal').show();
-            $('#deleteModal').modal('show');
+            getValueUsingClass();
+
+            $('#deleteModal').on('show.bs.modal', function (event) {
+                var modal = $(this);
+                var name = $(".table").find("input:checked").attr("data-name");
+                modal.find('.modal-body p strong').text('You are about to delete "' + name + '"');
+            });
         });
+
+        function getValueUsingClass() {
+
+            // Declaring checkbox array:
+            var chkArray = [];
+
+            // Loop through all the classes with chk and see if they are checked:
+            $('.chk:checked').each(function () {
+                chkArray.push($(this).val());
+            });
+
+            // Join the array and separate the Ids with a comma:
+            var selected;
+            selected = chkArray.join(',');
+
+            $('input[name="id"]').val(selected);
+        }
     });
 </script>

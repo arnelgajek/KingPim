@@ -1,4 +1,5 @@
-﻿using KingPim.Repositories;
+﻿using KingPim.Models.ViewModels;
+using KingPim.Repositories;
 using KingPim.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -26,36 +27,35 @@ namespace KingPim.Web.Controllers
             return View(subCat);
         }
 
-        // TODO: Add
-        public IActionResult Add()
+        public IActionResult Add(SubCategoryViewModel vm)
         {
-            return View();
+            subCatrepo.Add(vm);
+            return RedirectToAction(nameof(Index));
         }
 
-        // TODO: Get
         public IActionResult Get(int id)
         {
             return View(subCatrepo.Get(id));
         }
 
-        // TODO: GetAll
-        public IActionResult GetAll()
+        public IActionResult Update(SubCategoryViewModel vm)
         {
-            var subCat = subCatrepo.GetAll();
-
-            return View(subCat);
+            subCatrepo.Update(vm);
+            return RedirectToAction(nameof(Index));
         }
 
-        // TODO: Update
-        public IActionResult Update(int Id)
+        public IActionResult Delete(int id)
         {
-            return View();
-        }
+            var deletedSubCategory = subCatrepo.Delete(id);
+            if (deletedSubCategory != null)
+            {
 
-        // TODO: Delete
-        public IActionResult Delete(int Id)
-        {
-            return View();
+            }
+            else
+            {
+
+            }
+            return RedirectToAction(nameof(Index));
         }
     }
 }

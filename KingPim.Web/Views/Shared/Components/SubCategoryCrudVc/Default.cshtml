@@ -1,0 +1,73 @@
+﻿@model SubCategoryViewModel
+
+<!-- This is the createModal to create a subcategory: -->
+<div class="modal fade" id="createModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title mx-auto text-center" id="createModalLabel"><strong>CREATE</strong></h5>
+            </div>
+            <form asp-controller="SubCategory" asp-action="Add" method="post">
+                <div class="modal-body">
+                    <p>
+                        <label asp-for="Name">Name:</label>
+                        <input type="text" asp-for="Name" class="form-control form-control-sm" />
+                    </p>
+                    <p class="text-center"><strong>Make sure to save your changes.</strong></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+                    <input type="hidden" name="categoryId" value="@Model.Id" />
+                    <button type="submit" id="createSomething" class="btn btn-success">Create</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- This is the updateModal to update a subcategory: -->
+<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title mx-auto text-center" id="updateModalLabel"><strong>UPDATE</strong></h5>
+            </div>
+            <form asp-controller="SubCategory" asp-action="Update" method="post">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <p class="text-center">
+                            <label asp-for="Name"><strong></strong></label>
+                            <input asp-for="Name" class="form-control form-control-sm" />
+                        </p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+                    <input type="hidden" name="id" value="@Model.Id" />
+                    <button type="submit" id="confirmUpdate" class="btn btn-success">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- This is the deleteModal to delete a subcategory: -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title mx-auto text-center" id="deleteModalLabel"><strong>DELETE</strong></h5>
+            </div>
+            <div class="modal-body">
+                <p class="text-center"><strong></strong></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+                <form asp-action="Delete" method="post">
+                    <input type="hidden" name="id" value="@Model.Id" />
+                    <button type="submit" id="confirmDelete" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

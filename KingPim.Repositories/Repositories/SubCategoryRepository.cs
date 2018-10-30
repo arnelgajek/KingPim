@@ -1,5 +1,6 @@
 ﻿using KingPim.Data;
 using KingPim.Models.Models;
+using KingPim.Models.ViewModels;
 using KingPim.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -17,19 +18,50 @@ namespace KingPim.Repositories.Repositories
             _ctx = ctx;
         }
 
-        public void Add(SubCategory subCategory)
+        public void Add(SubCategoryViewModel vm)
         {
-            throw new NotImplementedException();
+            if (vm.Id == 0)
+            {
+                var newSubCategory = new SubCategory
+                {
+                    Name = vm.Name,
+                    Products = null,
+                    AttributeGroups = null,
+                    AddedDate = DateTime.Now,
+                    UpdatedDate = DateTime.Now,
+                    Published = false,
+                };
+                _ctx.SubCategories.Add(newSubCategory);
+            }
+            _ctx.SaveChanges();
         }
 
-        public void Update(SubCategory updateSubCategory)
+        public void Update(SubCategoryViewModel vm)
         {
-            throw new NotImplementedException();
+            var ctxSubCategory = _ctx.SubCategories.FirstOrDefault(scn => scn.Id.Equals(vm.Id));
+
+            if (ctxSubCategory != null)
+            {
+                ctxSubCategory.Name = vm.Name;
+                ctxSubCategory.UpdatedDate = DateTime.Now;
+            }
+            _ctx.SaveChanges();
         }
 
-        public void Delete(SubCategory deleteSubCategory)
+        public SubCategory Delete(int id)
         {
-            throw new NotImplementedException();
+            var ctxSubCategory = _ctx.SubCategories.FirstOrDefault(sc => sc.Id.Equals(id));
+
+            if (ctxSubCategory != null)
+            {
+                _ctx.SubCategories.Remove(ctxSubCategory);
+                _ctx.SaveChanges();
+            }
+            else
+            {
+
+            }
+            return ctxSubCategory;
         }
 
         public SubCategory Get(int id)

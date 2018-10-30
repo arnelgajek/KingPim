@@ -1,6 +1,7 @@
 ﻿using KingPim.Models.Models;
 using KingPim.Models.ViewModels;
 using KingPim.Repositories;
+using KingPim.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace KingPim.Web.Components
 {
-    public class CrudViewComponent : ViewComponent
+    public class CategoryCrudVc : ViewComponent
     {
         private ICategory catRepo;
 
-        public CrudViewComponent(ICategory catRepository)
+        public CategoryCrudVc(ICategory catRepository)
         {
             catRepo = catRepository;
         }

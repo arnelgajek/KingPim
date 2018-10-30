@@ -22,9 +22,4 @@
     <ProjectReference Include="..\KingPim.Repositories\KingPim.Repositories.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\Shared\Components\AttributeGroupCrudVc\" />
-    <Folder Include="Views\Shared\Components\OneAttributeCrudVc\" />
-  </ItemGroup>
-
 </Project>

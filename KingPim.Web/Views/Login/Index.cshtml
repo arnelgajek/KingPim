@@ -13,7 +13,7 @@
         <label asp-for="Password" class="sr-only">Password</label>
         <input asp-for="Password" id="inputPassword" class="form-control" placeholder="Password" required style="margin:10px" />
         <div><span asp-validation-for="Password" class="text-danger"></span></div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit" style="margin:10px">Sign in</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" style="margin:10px">Sign in <span data-feather="log-in"></span></button>
     </form>
 </div>
 <div class="container mx-auto" style="width: 330px;">
@@ -22,3 +22,11 @@
         <a href="#" style="color:darkgreen; margin-left:5px"><strong>Create account</strong></a>
     </div>
 </div>
+
+<script src="https://unpkg.com/feather-icons"></script>
+<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+<script>
+    feather.replace();
+</script>
+<script src="~/lib/jquery/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>

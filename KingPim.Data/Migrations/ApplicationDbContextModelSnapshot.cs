@@ -25,11 +25,17 @@ namespace KingPim.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("AddedDate");
+
                     b.Property<string>("Description");
 
                     b.Property<string>("Name");
 
+                    b.Property<bool>("Published");
+
                     b.Property<int?>("SubCategoryId");
+
+                    b.Property<DateTime>("UpdatedDate");
 
                     b.HasKey("Id");
 
@@ -63,13 +69,19 @@ namespace KingPim.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("AddedDate");
+
                     b.Property<int?>("AttributeGroupId");
 
                     b.Property<string>("Description");
 
                     b.Property<string>("Name");
 
+                    b.Property<bool>("Published");
+
                     b.Property<string>("Type");
+
+                    b.Property<DateTime>("UpdatedDate");
 
                     b.HasKey("Id");
 

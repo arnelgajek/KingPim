@@ -3,12 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using KingPim.Repositories.Interfaces;
+using KingPim.Models.ViewModels;
 
 namespace KingPim.Web.Controllers
 {
-    using KingPim.Repositories.Interfaces;
-    using Microsoft.AspNetCore.Mvc;
-
+    // TODO: Don't forget to add authorization!
     public class OneAttributeController : Controller
     {
         private IOneAttribute oneAttrRepo;
@@ -17,34 +17,47 @@ namespace KingPim.Web.Controllers
         {
             oneAttrRepo = oneAttrRepository;
         }
+
+        [HttpGet]
         public IActionResult Index()
         {
             var oneAttr = oneAttrRepo.GetAll();
             return View(oneAttr);
         }
 
-        // TODO: Add
-        public IActionResult Add()
+        [HttpPost]
+        public IActionResult Add(OneAttributeViewModel vm)
         {
-            return View();
+            oneAttrRepo.Add(vm);
+            return RedirectToAction(nameof(Index));
         }
 
-        // TODO: Get
+        [HttpGet]
         public IActionResult Get(int id)
         {
             return View(oneAttrRepo.Get(id));
         }
 
-        // TODO: Update
-        public IActionResult Update(int id)
+        [HttpPost]
+        public IActionResult Update(OneAttributeViewModel vm)
         {
-            return View();
+            oneAttrRepo.Update(vm);
+            return RedirectToAction(nameof(Index));
         }
 
-        // TODO: Delete
+        [HttpPost]
         public IActionResult Delete(int id)
         {
-            return View();
+            var deletedOneAttr = oneAttrRepo.Delete(id);
+            if (deletedOneAttr != null)
+            {
+
+            }
+            else
+            {
+
+            }
+            return RedirectToAction(nameof(Index));
         }
     }
 }

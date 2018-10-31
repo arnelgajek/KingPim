@@ -196,6 +196,9 @@ namespace KingPim.Data.Migrations
                 name: "AttributeGroups",
                 columns: table => new
                 {
+                    AddedDate = table.Column<DateTime>(nullable: false),
+                    UpdatedDate = table.Column<DateTime>(nullable: false),
+                    Published = table.Column<bool>(nullable: false),
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
@@ -242,6 +245,9 @@ namespace KingPim.Data.Migrations
                 name: "OneAttributes",
                 columns: table => new
                 {
+                    AddedDate = table.Column<DateTime>(nullable: false),
+                    UpdatedDate = table.Column<DateTime>(nullable: false),
+                    Published = table.Column<bool>(nullable: false),
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),

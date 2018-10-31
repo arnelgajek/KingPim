@@ -1,4 +1,5 @@
-﻿using KingPim.Repositories.Interfaces;
+﻿using KingPim.Models.ViewModels;
+using KingPim.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ namespace KingPim.Web.Controllers
 {
     public class ProductController : Controller
     {
-        // TODO: Connect to database with private property and private cunstructor.
+        // TODO: Don't forget to add authorization!
         private IProduct prodRepo;
 
         public ProductController(IProduct prodRepository)
@@ -17,34 +18,46 @@ namespace KingPim.Web.Controllers
             prodRepo = prodRepository;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
             var prod = prodRepo.GetAll();
             return View(prod);
         }
 
-        // TODO: Add
-        public IActionResult Add()
+        [HttpPost]
+        public IActionResult Add(ProductViewModel vm)
         {
-            return View();
+            prodRepo.Add(vm);
+            return RedirectToAction(nameof(Index));
         }
 
-        // TODO: Get
+        [HttpGet]
         public IActionResult Get(int id)
         {
             return View(prodRepo.Get(id));
         }
 
-        // TODO: Update
-        public IActionResult Update(int id)
+        [HttpPost]
+        public IActionResult Update(ProductViewModel vm)
         {
-            return View();
+            prodRepo.Update(vm);
+            return RedirectToAction(nameof(Index));
         }
 
-        // TODO: Delete
+        [HttpPost]
         public IActionResult Delete(int id)
         {
-            return View();
+            var deletedProduct = prodRepo.Delete(id);
+            if (deletedProduct != null)
+            {
+
+            }
+            else
+            {
+
+            }
+            return RedirectToAction(nameof(Index));
         }
     }
 }

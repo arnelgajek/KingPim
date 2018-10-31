@@ -11,7 +11,6 @@ namespace KingPim.Repositories.Repositories
 {
     public class SubCategoryRepository : ISubCategory
     {
-        // Put the Db into a variable to use later on:
         private ApplicationDbContext _ctx;
         public SubCategoryRepository(ApplicationDbContext ctx)
         {

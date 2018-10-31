@@ -1,5 +1,6 @@
 ﻿using KingPim.Data;
 using KingPim.Models.Models;
+using KingPim.Models.ViewModels;
 using KingPim.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -9,27 +10,60 @@ using System.Text;
 namespace KingPim.Repositories.Repositories
 {
     public class OneAttributeRepository : IOneAttribute
-    {
-        // Put the Db into a variable to use later on:
+    {       
         private ApplicationDbContext _ctx;
         public OneAttributeRepository(ApplicationDbContext ctx)
         {
             _ctx = ctx;
         }
 
-        public void Add(OneAttribute newOneAttribute)
+        public void Add(OneAttributeViewModel vm)
         {
-            throw new NotImplementedException();
+            if (vm.Id == 0)
+            {
+                var newAttr = new OneAttribute
+                {
+                    Name = vm.Name,
+                    Description = vm.Description,
+                    Type = vm.Type,
+                    AttributeGroup = null,
+                    AddedDate = DateTime.Now,
+                    UpdatedDate = DateTime.Now,
+                    Published = false,
+                };
+                _ctx.OneAttributes.Add(newAttr);
+            }
+            _ctx.SaveChanges();
         }
 
-        public void Update(OneAttribute updatAttribute)
+        public void Update(OneAttributeViewModel vm)
         {
-            throw new NotImplementedException();
+            var ctxOneAttr = _ctx.OneAttributes.FirstOrDefault(a => a.Id.Equals(vm.Id));
+
+            if (ctxOneAttr != null)
+            {
+                ctxOneAttr.Name = vm.Name;
+                ctxOneAttr.Description = vm.Description;
+                ctxOneAttr.Type = vm.Type;
+                ctxOneAttr.UpdatedDate = DateTime.Now;
+            }
+            _ctx.SaveChanges();
         }
 
-        public void Delete(OneAttribute deleteAttribute)
+        public OneAttribute Delete(int id)
         {
-            throw new NotImplementedException();
+            var ctxOneAttr = _ctx.OneAttributes.FirstOrDefault(a => a.Id.Equals(id));
+
+            if (ctxOneAttr != null)
+            {
+                _ctx.OneAttributes.Remove(ctxOneAttr);
+                _ctx.SaveChanges();
+            }
+            else
+            {
+
+            }
+            return ctxOneAttr;
         }
 
         public OneAttribute Get(int id)

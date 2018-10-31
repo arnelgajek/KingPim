@@ -5,7 +5,7 @@ using System.Text;
 
 namespace KingPim.Models.Models
 {
-    public class OneAttribute
+    public class OneAttribute : ReadOnlyAttribute
     {
         [Column(Order = 0)]
         public int Id { get; set; }

@@ -15,7 +15,7 @@
             <tr>
                 <th scope="col">Name:</th>
                 <th scope="col">Description:</th>
-                <th scope="col">Attributes:</th>
+                @*<th scope="col">Attributes:</th>*@
             </tr>
         </thead>
         @foreach (var attGr in Model)
@@ -24,7 +24,7 @@
                 <tr>
                     <th scope="row"><input type="checkbox" class="chk" value="@attGr.Id" /> @attGr.Name</th>
                     <td>@attGr.Description</td>
-                    <td>@attGr.OneAttributes.FirstOrDefault().Name</td>
+                    @*<td>@attGr.OneAttributes.FirstOrDefault().Name</td>*@
                 </tr>
             </tbody>
         }

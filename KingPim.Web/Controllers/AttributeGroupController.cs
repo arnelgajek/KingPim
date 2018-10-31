@@ -1,4 +1,5 @@
-﻿using KingPim.Repositories.Interfaces;
+﻿using KingPim.Models.ViewModels;
+using KingPim.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,6 @@ namespace KingPim.Web.Controllers
     // TODO: Don't forget to add authorization!
     public class AttributeGroupController : Controller
     {
-        // TODO: Connect to database with private property and private cunstructor.
         private IAttributeGroup attrGroupRepo;
 
         public AttributeGroupController(IAttributeGroup attrGroupRepository)
@@ -18,34 +18,46 @@ namespace KingPim.Web.Controllers
             attrGroupRepo = attrGroupRepository;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
             var attrGroup = attrGroupRepo.GetAll();
             return View(attrGroup);
         }
 
-        // TODO: Add
-        public IActionResult Add()
+        [HttpPost]
+        public IActionResult Add(AttributeGroupViewModel vm)
         {
-            return View();
+            attrGroupRepo.Add(vm);
+            return RedirectToAction(nameof(Index));
         }
 
-        // TODO: Get
+        [HttpGet]
         public IActionResult Get(int id)
         {
             return View(attrGroupRepo.Get(id));
         }
 
-        // TODO: Update
-        public IActionResult Update(int id)
+        [HttpPost]
+        public IActionResult Update(AttributeGroupViewModel vm)
         {
-            return View();
+            attrGroupRepo.Update(vm);
+            return RedirectToAction(nameof(Index));
         }
 
-        // TODO: Delete
+        [HttpPost]
         public IActionResult Delete(int id)
         {
-            return View();
+            var deleteAttrGroup = attrGroupRepo.Delete(id);
+            if (deleteAttrGroup != null)
+            {
+
+            }
+            else
+            {
+
+            }
+            return RedirectToAction(nameof(Index));
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using KingPim.Data;
 using KingPim.Models.Models;
+using KingPim.Models.ViewModels;
 using KingPim.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -17,19 +18,53 @@ namespace KingPim.Repositories.Repositories
             _ctx = ctx;
         }
 
-        public void Add(Product newProduct)
+        public void Add(ProductViewModel vm)
         {
-            throw new NotImplementedException();
+            if (vm.Id == 0)
+            {
+                var newProduct = new Product
+                {
+                    Name = vm.Name,
+                    Description = vm.Description,
+                    Price = vm.Price,
+                    SubCategory = null,
+                    AddedDate = DateTime.Now,
+                    UpdatedDate = DateTime.Now,
+                    Published = false,
+                };
+                _ctx.Products.Add(newProduct);
+            }
+            _ctx.SaveChanges();
         }
 
-        public void Update(Product updateProduct)
+        public void Update(ProductViewModel vm)
         {
-            throw new NotImplementedException();
+            var ctxProduct = _ctx.Products.FirstOrDefault(p => p.Id.Equals(vm.Id));
+
+            if (ctxProduct != null)
+            {
+                ctxProduct.Name = vm.Name;
+                ctxProduct.Description = vm.Description;
+                ctxProduct.Price = vm.Price;
+                ctxProduct.UpdatedDate = DateTime.Now;
+            }
+            _ctx.SaveChanges();
         }
 
-        public void Delete(Product deleteProduct)
+        public Product Delete(int id)
         {
-            throw new NotImplementedException();
+            var ctxProduct = _ctx.Products.FirstOrDefault(p => p.Id.Equals(id));
+
+            if (ctxProduct != null)
+            {
+                _ctx.Products.Remove(ctxProduct);
+                _ctx.SaveChanges();
+            }
+            else
+            {
+
+            }
+            return ctxProduct;
         }
 
         public Product Get(int id)

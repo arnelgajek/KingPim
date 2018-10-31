@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KingPim.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181029090314_initial")]
+    [Migration("20181031104701_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,11 +27,17 @@ namespace KingPim.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("AddedDate");
+
                     b.Property<string>("Description");
 
                     b.Property<string>("Name");
 
+                    b.Property<bool>("Published");
+
                     b.Property<int?>("SubCategoryId");
+
+                    b.Property<DateTime>("UpdatedDate");
 
                     b.HasKey("Id");
 
@@ -65,13 +71,19 @@ namespace KingPim.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("AddedDate");
+
                     b.Property<int?>("AttributeGroupId");
 
                     b.Property<string>("Description");
 
                     b.Property<string>("Name");
 
+                    b.Property<bool>("Published");
+
                     b.Property<string>("Type");
+
+                    b.Property<DateTime>("UpdatedDate");
 
                     b.HasKey("Id");
 

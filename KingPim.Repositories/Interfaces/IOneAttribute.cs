@@ -1,4 +1,5 @@
 ﻿using KingPim.Models.Models;
+using KingPim.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,8 +10,8 @@ namespace KingPim.Repositories.Interfaces
     {
         IEnumerable<OneAttribute> GetAll();
         OneAttribute Get(int id);
-        void Add(OneAttribute newOneAttribute);
-        void Update(OneAttribute updateOneAttribute);
-        void Delete(OneAttribute deleteOneAttribute);
+        void Add(OneAttributeViewModel newOneAttribute);
+        void Update(OneAttributeViewModel updateOneAttribute);
+        OneAttribute Delete(int id);
     }
 }

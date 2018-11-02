@@ -5,8 +5,6 @@ using KingPim.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace KingPim.Repositories.Repositories
 {
@@ -44,6 +42,7 @@ namespace KingPim.Repositories.Repositories
             if (ctxSubCategory != null)
             {
                 ctxSubCategory.Name = vm.Name;
+                ctxSubCategory.CategoryId = vm.CategoryId;
                 ctxSubCategory.UpdatedDate = DateTime.Now;
             }
             _ctx.SaveChanges();

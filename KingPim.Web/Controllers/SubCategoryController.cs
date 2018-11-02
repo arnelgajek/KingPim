@@ -1,5 +1,4 @@
-﻿using KingPim.Models.Models;
-using KingPim.Models.ViewModels;
+﻿using KingPim.Models.ViewModels;
 using KingPim.Repositories;
 using KingPim.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -23,25 +22,12 @@ namespace KingPim.Web.Controllers
         {
             var subCatVm = new SubCategoryViewModel
             {
-                Categories = catRepo.GetAll(),
-                SubCategories = subCatrepo.GetAll()
-
+                SubCategories = subCatrepo.GetAll(),
+                Categories = catRepo.GetAll()
             };
 
             return View(subCatVm);
         }
-
-        //[HttpGet]
-        //public IActionResult GetCategories()
-        //{
-        //    var subCatVm = new SubCategoryViewModel
-        //    {
-        //        Categories = catRepo.GetAll(),
-        //        SubCategories = subCatrepo.GetAll()
-                
-        //    };
-        //    return View(subCatVm);
-        //}
 
         [HttpPost]
         public IActionResult Add(SubCategoryViewModel vm)

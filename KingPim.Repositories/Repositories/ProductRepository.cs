@@ -5,13 +5,11 @@ using KingPim.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace KingPim.Repositories.Repositories
 {
     public class ProductRepository : IProduct
     {
-        // Put the Db into a variable to use later on:
         private ApplicationDbContext _ctx;
         public ProductRepository(ApplicationDbContext ctx)
         {
@@ -25,6 +23,7 @@ namespace KingPim.Repositories.Repositories
                 var newProduct = new Product
                 {
                     Name = vm.Name,
+                    SubCategoryId = vm.SubCategoryId,
                     Description = vm.Description,
                     Price = vm.Price,
                     SubCategory = null,
@@ -46,6 +45,7 @@ namespace KingPim.Repositories.Repositories
                 ctxProduct.Name = vm.Name;
                 ctxProduct.Description = vm.Description;
                 ctxProduct.Price = vm.Price;
+                ctxProduct.SubCategoryId = vm.SubCategoryId;
                 ctxProduct.UpdatedDate = DateTime.Now;
             }
             _ctx.SaveChanges();
@@ -75,6 +75,16 @@ namespace KingPim.Repositories.Repositories
         public IEnumerable<Product> GetAll()
         {
             return _ctx.Products;
+        }
+
+        public void GetSubCategories(ProductViewModel vm)
+        {
+            var prodVm = new ProductViewModel
+            {
+                Id = vm.Id,
+                Name = vm.Name,
+                SubCategoryId = vm.SubCategoryId
+            };
         }
     }
 }

@@ -2,7 +2,7 @@
 
 <!-- CRUD-buttons to modals:-->
 <div class="float-sm-right" style="margin-bottom:10px; margin-top:80px">
-    <button type="button" class="btn btn-md btn-success" name="createSomething" id="createSomething">Create</button>
+    <button type="button" class="btn btn-md btn-success" name="createSomething" id="createSomething" data-toggle="modal" data-target="#createModal">Create</button>
     <button type="button" class="btn btn-md btn-warning" name="updateSomething" id="updateSomething" data-toggle="modal" data-target="#updateModal">Update</button>
     <button type="button" class="btn btn-md btn-danger" name="deleteSomething" id="deleteSomething" data-toggle="modal" data-target="#deleteModal">Delete</button>
 </div>
@@ -15,6 +15,7 @@
                 <th scope="col">Name:</th>
                 <th scope="col">Published:</th>
                 <th scope="col">Added Date:</th>
+                <th scope="col">Updated Date:</th>
             </tr>
         </thead>
         @foreach (var cat in Model)
@@ -28,6 +29,7 @@
                     <!-- TODO: Implement button to Published to send value to Db with true=green button/false=red button-->
                     <td><input type="checkbox" id="publishchk" value="@cat.Published" /></td>
                     <td>@cat.AddedDate.ToString("yyyy-MM-dd")</td>
+                    <td>@cat.UpdatedDate.ToString("yyyy-MM-dd")</td>
                 </tr>
             </tbody>
         }

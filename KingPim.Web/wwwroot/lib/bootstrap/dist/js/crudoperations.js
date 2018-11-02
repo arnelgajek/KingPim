@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
 
-        // PUBLISH:
-        $('#publishchk').change(function () {
+    // PUBLISH:
+    $('#publishchk').change(function () {
         cb = $(this);
         cb.val(cb.prop('checked'));
 
@@ -13,36 +13,40 @@
         // POST TO DB WITH AJAX (FALSE)
         console.log("BUHUUUU");
         }
-        });
+    });
 
-        // CREATE:
-        $('#createSomething').click(function () {
-        $('#createModal').modal('show');
-        });
+    // CREATE:
+    $('#createSomething').click(function () {
 
-        // UPDATE:
-        $('#updateSomething').click(function () {
+        $('#createModal').on('show.bs.modal', function (event) {
+            var modal = $(this);
+            modal.find('.modal-body select');
+        });
+    });
+
+    // UPDATE:
+    $('#updateSomething').click(function () {
         getValueUsingClass();
 
         $('#updateModal').on('show.bs.modal', function (event) {
-        var modal = $(this);
-        var name = $(".table").find("input:checked").attr("data-name");
-        modal.find('.modal-body p strong').text('You are about to update "' + name + '"');
+            var modal = $(this);
+            var name = $(".table").find("input:checked").attr("data-name");
+            modal.find('.modal-body p strong').text('You are about to update "' + name + '"');
         });
-        });
+    });
 
-        // DELETE:
-        $('#deleteSomething').click(function () {
+    // DELETE:
+    $('#deleteSomething').click(function () {
         getValueUsingClass();
 
         $('#deleteModal').on('show.bs.modal', function (event) {
-        var modal = $(this);
-        var name = $(".table").find("input:checked").attr("data-name");
-        modal.find('.modal-body p strong').text('You are about to delete "' + name + '"');
+            var modal = $(this);
+            var name = $(".table").find("input:checked").attr("data-name");
+            modal.find('.modal-body p strong').text('You are about to delete "' + name + '"');
         });
-        });
+    });
 
-        function getValueUsingClass() {
+    function getValueUsingClass() {
 
         // Declaring checkbox array:
         var chkArray = [];
@@ -57,5 +61,5 @@
         selected = chkArray.join(',');
 
         $('input[name="id"]').val(selected);
-        }
+    }
 });

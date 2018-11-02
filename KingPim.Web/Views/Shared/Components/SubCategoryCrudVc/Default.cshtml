@@ -9,10 +9,22 @@
             </div>
             <form asp-controller="SubCategory" asp-action="Add" method="post">
                 <div class="modal-body">
-                    <p>
-                        <label asp-for="Name">Name:</label>
-                        <input type="text" asp-for="Name" class="form-control form-control-sm" />
-                    </p>
+                    <div class="form-group">
+                        <p>
+                            <label asp-for="@Model.Name"></label>
+                            <input type="text" asp-for="@Model.Name" class="form-control form-control-sm" />
+                        </p>
+                    </div>
+                    <div class="form-group">                       
+                        <select asp-for="CategoryId" class="form-control" required>
+                            <option value="" selected>Select a category</option>
+                                @foreach (var cat in Model.Categories)
+                                {
+                                    <option value="@cat.Id">@cat.Name</option>
+                                }
+                        </select>
+                        <br />
+                    </div>
                     <p class="text-center"><strong>Make sure to save your changes.</strong></p>
                 </div>
                 <div class="modal-footer">
@@ -36,9 +48,19 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <p class="text-center">
-                            <label asp-for="Name"><strong></strong></label>
-                            <input asp-for="Name" class="form-control form-control-sm" />
+                            <label asp-for="@Model.Name"><strong></strong></label>
+                            <input asp-for="@Model.Name" class="form-control form-control-sm" />
                         </p>
+                    </div>
+                    <div class="form-group">
+                        <select asp-for="CategoryId" class="form-control" required>
+                            <option value="" selected>Select a category</option>
+                            @foreach (var cat in Model.Categories)
+                            {
+                                <option value="@cat.Id">@cat.Name</option>
+                            }
+                        </select>
+                        <br />
                     </div>
                 </div>
                 <div class="modal-footer">

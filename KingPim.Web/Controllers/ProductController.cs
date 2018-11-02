@@ -1,10 +1,6 @@
 ﻿using KingPim.Models.ViewModels;
 using KingPim.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace KingPim.Web.Controllers
 {
@@ -12,17 +8,24 @@ namespace KingPim.Web.Controllers
     {
         // TODO: Don't forget to add authorization!
         private IProduct prodRepo;
+        private ISubCategory subCatrepo;
 
-        public ProductController(IProduct prodRepository)
+        public ProductController(IProduct prodRepository, ISubCategory subCatRepository)
         {
             prodRepo = prodRepository;
+            subCatrepo = subCatRepository;
         }
 
         [HttpGet]
         public IActionResult Index()
         {
-            var prod = prodRepo.GetAll();
-            return View(prod);
+            var prodVm = new ProductViewModel
+            {
+                Products = prodRepo.GetAll(),
+                SubCategories = subCatrepo.GetAll()
+            };
+            
+            return View(prodVm);
         }
 
         [HttpPost]

@@ -1,10 +1,6 @@
 ﻿using KingPim.Models.ViewModels;
 using KingPim.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace KingPim.Web.Components
 {
@@ -17,11 +13,11 @@ namespace KingPim.Web.Components
             prodRepo = prodRepository;
         }
 
-        public IViewComponentResult Invoke()
+        public IViewComponentResult Invoke(ProductViewModel vm)
         {
             var prodVm = new ProductViewModel();
 
-            return View(prodVm);
+            return View(vm);
         }
     }
 }

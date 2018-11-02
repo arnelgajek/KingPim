@@ -1,5 +1,15 @@
 ﻿$(document).ready(function () {
 
+    // Allows the user to press Update and Delete when at least one checkbox i checked:
+    var checkboxes = $("input[type='checkbox']"),
+    submitButt = $("button[type='button']");
+
+    checkboxes.click(function () {
+        $('#createSomething').attr("disabled", checkboxes.is(":checked"));
+        $('#updateSomething').attr("disabled", !checkboxes.is(":checked"));
+        $('#deleteSomething').attr("disabled", !checkboxes.is(":checked"));
+    });
+
     // PUBLISH:
     $('#publishchk').change(function () {
         cb = $(this);

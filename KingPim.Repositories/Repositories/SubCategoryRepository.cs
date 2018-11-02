@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace KingPim.Repositories.Repositories
 {
@@ -24,6 +25,7 @@ namespace KingPim.Repositories.Repositories
                 var newSubCategory = new SubCategory
                 {
                     Name = vm.Name,
+                    CategoryId = vm.CategoryId,
                     Products = null,
                     AttributeGroups = null,
                     AddedDate = DateTime.Now,
@@ -71,6 +73,16 @@ namespace KingPim.Repositories.Repositories
         public IEnumerable<SubCategory> GetAll()
         {
             return _ctx.SubCategories;
+        }
+
+        public void GetCategories(SubCategoryViewModel vm)
+        {
+            var subCatVm = new SubCategoryViewModel
+            {
+                Id = vm.Id,
+                Name = vm.Name,
+                CategoryId = vm.CategoryId
+            };
         }
     }
 }

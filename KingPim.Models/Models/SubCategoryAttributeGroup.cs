@@ -11,6 +11,5 @@ namespace KingPim.Models.Models
         public virtual SubCategory SubCategory { get; set; }
         public int? AttributeGroupId { get; set; }
         public virtual AttributeGroup AttributeGroup { get; set; }
-
     }
 }

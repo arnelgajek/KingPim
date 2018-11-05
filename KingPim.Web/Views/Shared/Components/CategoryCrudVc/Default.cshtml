@@ -9,9 +9,12 @@
             </div>
             <form asp-controller="Category" asp-action="Add" method="post">
                 <div class="modal-body">
-                    <p>
-                        <input type="text" asp-for="Name" placeholder="Name..." class="form-control form-control-sm" />
-                    </p>
+                    <div class="form-group">
+                        <p class="text-center">
+                            <label asp-for="@Model.Name"><strong></strong></label>
+                            <input asp-for="@Model.Name" placeholder="Name..." class="form-control form-control-sm" />
+                        </p>
+                    </div>
                     <p class="text-center"><strong>Make sure to save your changes.</strong></p>
                 </div>
                 <div class="modal-footer">

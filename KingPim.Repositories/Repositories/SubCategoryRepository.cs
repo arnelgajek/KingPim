@@ -24,6 +24,7 @@ namespace KingPim.Repositories.Repositories
                 {
                     Name = vm.Name,
                     CategoryId = vm.CategoryId,
+                    AttributeGroupId = vm.AttributeGroupId,
                     Products = null,
                     SubCategoryAttributeGroups = null,
                     AddedDate = DateTime.Now,
@@ -31,6 +32,12 @@ namespace KingPim.Repositories.Repositories
                     Published = false,
                 };
                 _ctx.SubCategories.Add(newSubCategory);
+
+                var newSubCategoryAttributeGroup = new SubCategoryAttributeGroup
+                {
+                    SubCategoryId = vm.SubCategoryId,
+                    AttributeGroupId = vm.AttributeGroupId
+                };
             }
             _ctx.SaveChanges();
         }
@@ -43,6 +50,7 @@ namespace KingPim.Repositories.Repositories
             {
                 ctxSubCategory.Name = vm.Name;
                 ctxSubCategory.CategoryId = vm.CategoryId;
+                ctxSubCategory.AttributeGroupId = vm.AttributeGroupId;
                 ctxSubCategory.UpdatedDate = DateTime.Now;
             }
             _ctx.SaveChanges();

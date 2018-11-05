@@ -15,13 +15,22 @@
                             <input type="text" asp-for="@Model.Name" class="form-control form-control-sm" />
                         </p>
                     </div>
-                    <div class="form-group">                       
+                    <div class="form-group">
                         <select asp-for="CategoryId" class="form-control" required>
                             <option value="" selected>Select a category</option>
-                                @foreach (var cat in Model.Categories)
-                                {
-                                    <option value="@cat.Id">@cat.Name</option>
-                                }
+                            @foreach (var cat in Model.Categories)
+                            {
+                                <option value="@cat.Id">@cat.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <select asp-for="AttributeGroupId" class="form-control" required>
+                            <option value="" selected>Select an attribute group</option>
+                            @foreach (var attr in Model.AttributeGroups)
+                            {
+                                <option value="@attr.Id">@attr.Name</option>
+                            }
                         </select>
                         <br />
                     </div>

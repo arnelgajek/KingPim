@@ -22,19 +22,20 @@ namespace KingPim.Data
             var oneAttribute = new OneAttribute
             {
                 Name = "White",
-                Description = "The color of this longsleeved shirt is white.",
+                Description = "The specific color.",
                 Type = "string"
             };
-            oneAttributeList.Add(oneAttribute);
+            ctx.OneAttributes.Add(oneAttribute);
+            ctx.SaveChanges();
+
 
             // AttributeGroup:
             var attributeGroup = new AttributeGroup
             {
                 Name = "Color",
-                Description = "The color of the longsleeved shirt.",
+                Description = "The color.",
                 OneAttributes = oneAttributeList
             };
-            //attributeGroupList.Add(attributeGroup);
             ctx.AttributeGroups.Add(attributeGroup);
             ctx.SaveChanges();
 

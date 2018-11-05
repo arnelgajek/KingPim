@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KingPim.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181105080341_initial")]
+    [Migration("20181105101235_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -144,6 +144,8 @@ namespace KingPim.Data.Migrations
 
                     b.Property<DateTime>("AddedDate");
 
+                    b.Property<int?>("AttributeGroupId");
+
                     b.Property<int?>("CategoryId");
 
                     b.Property<string>("Name");
@@ -153,6 +155,8 @@ namespace KingPim.Data.Migrations
                     b.Property<DateTime>("UpdatedDate");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AttributeGroupId");
 
                     b.HasIndex("CategoryId");
 
@@ -370,6 +374,11 @@ namespace KingPim.Data.Migrations
 
             modelBuilder.Entity("KingPim.Models.Models.SubCategory", b =>
                 {
+                    b.HasOne("KingPim.Models.Models.AttributeGroup", "AttributeGroup")
+                        .WithMany()
+                        .HasForeignKey("AttributeGroupId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
                     b.HasOne("KingPim.Models.Models.Category")
                         .WithMany("SubCategories")
                         .HasForeignKey("CategoryId")

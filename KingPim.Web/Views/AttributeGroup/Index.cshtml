@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<AttributeGroup>
 
 <!-- CRUD-buttons to modals:-->
-<div class="float-sm-right" style="margin-bottom:20px; margin-top:80px; margin-right:60px">
+<div class="float-sm-right" style="margin-bottom:10px; margin-top:80px;">
     <button type="button" class="btn btn-md btn-success" name="createSomething" id="createSomething" data-toggle="modal" data-target="#createModal">Create</button>
     <button type="button" class="btn btn-md btn-warning" name="updateSomething" id="updateSomething" data-toggle="modal" data-target="#updateModal" disabled>Update</button>
     <button type="button" class="btn btn-md btn-danger" name="deleteSomething" id="deleteSomething" data-toggle="modal" data-target="#deleteModal" disabled>Delete</button>
@@ -15,16 +15,14 @@
             <tr>
                 <th scope="col">Name:</th>
                 <th scope="col">Description:</th>
-                @*<th scope="col">Attributes:</th>*@
             </tr>
         </thead>
         @foreach (var attGr in Model)
         {
             <tbody>
                 <tr>
-                    <th scope="row"><input type="checkbox" class="chk" value="@attGr.Id" /> @attGr.Name</th>
-                    <td>@attGr.Description</td>
-                    @*<td>@attGr.OneAttributes.FirstOrDefault().Name</td>*@
+                    <th scope="row"><input type="checkbox" class="chk" value="@attGr.Id" data-name="@attGr.Name"/> @attGr.Name</th>
+                    <td>@attGr.Description</td>                    
                 </tr>
             </tbody>
         }

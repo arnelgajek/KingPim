@@ -17,11 +17,11 @@ namespace KingPim.Web.Components
             oneAttrRepo = oneAttrRepository;
         }
 
-        public IViewComponentResult Invoke()
+        public IViewComponentResult Invoke(OneAttributeViewModel vm)
         {
             var oneAttrVm = new OneAttributeViewModel();
 
-            return View(oneAttrVm);
+            return View(vm);
         }
     }
 }

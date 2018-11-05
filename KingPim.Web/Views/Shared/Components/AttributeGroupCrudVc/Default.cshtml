@@ -1,4 +1,5 @@
 ﻿@model AttributeGroupViewModel
+
 <!-- This is the createModal to create a attributegroup: -->
 <div class="modal fade" id="createModal">
     <div class="modal-dialog" role="document">
@@ -10,21 +11,21 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <p>
-                            <label asp-for="@Model.Name"></label>
-                            <input type="text" asp-for="@Model.Name" class="form-control form-control-sm" />
+                            <label asp-for="@Model.Name" hidden></label>
+                            <input type="text" asp-for="@Model.Name" placeholder="Name..." class="form-control form-control-sm" />
                         </p>
                     </div>
                     <div class="form-group">
                         <p>
-                            <label asp-for="@Model.Description"></label>
-                            <input type="text" asp-for="@Model.Description" class="form-control form-control-sm" />
+                            <label asp-for="@Model.Description" hidden></label>
+                            <input type="text" asp-for="@Model.Description" placeholder="Description..." class="form-control form-control-sm" />
                         </p>
                     </div>
                     <p class="text-center"><strong>Make sure to save your changes.</strong></p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
-                    <input type="hidden" name="AttrGroupId" value="@Model.Id" />
+                    <input type="hidden" name="attributegroupId" value="@Model.Id" />
                     <button type="submit" id="createSomething" class="btn btn-success">Create</button>
                 </div>
             </form>

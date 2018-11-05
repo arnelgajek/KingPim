@@ -17,11 +17,11 @@ namespace KingPim.Web.Components
             attrGroupRepo = attrGroupRepository;
         }
 
-        public IViewComponentResult Invoke()
+        public IViewComponentResult Invoke(AttributeGroupViewModel vm)
         {
             var attrGroupVm = new AttributeGroupViewModel();
 
-            return View(attrGroupVm);
+            return View(vm);
         }
     }
 }

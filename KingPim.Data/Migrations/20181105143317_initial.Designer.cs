@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KingPim.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181105101235_initial")]
+    [Migration("20181105143317_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -374,8 +374,8 @@ namespace KingPim.Data.Migrations
 
             modelBuilder.Entity("KingPim.Models.Models.SubCategory", b =>
                 {
-                    b.HasOne("KingPim.Models.Models.AttributeGroup", "AttributeGroup")
-                        .WithMany()
+                    b.HasOne("KingPim.Models.Models.AttributeGroup")
+                        .WithMany("SubCategories")
                         .HasForeignKey("AttributeGroupId")
                         .OnDelete(DeleteBehavior.SetNull);
 

@@ -82,26 +82,9 @@ namespace KingPim.Data
                     AddedDate = DateTime.Now,
                     Published = false,
                 };
-                // Adds the categories and all the connections behind:
                 ctx.Categories.AddRange(category);
             };
             ctx.SaveChanges();
-
-            // Connect a attributegroup to a subcategory to subcategoryattributegroups:
-            //if (!ctx.SubCategoryAttributeGroups.Any())
-            //{
-            //    var subcategoryTryout = ctx.SubCategories.FirstOrDefault(x => x.Id == 1);
-
-            //    var attributeTryout = ctx.AttributeGroups.FirstOrDefault(x => x.Id == 1);
-
-            //    var SubCategoryAttributeGroup = new SubCategoryAttributeGroup
-            //    {
-            //        SubCategoryId = 1,
-            //        AttributeGroupId = 1
-            //    };
-            //    ctx.SubCategoryAttributeGroups.Add(SubCategoryAttributeGroup);
-            //    ctx.SaveChanges();
-            //}
 
             // Connect a product to a attribute to productoneattributevalues:
             if (!ctx.ProductOneAttributeValues.Any())

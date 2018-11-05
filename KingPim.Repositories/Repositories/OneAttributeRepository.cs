@@ -5,7 +5,6 @@ using KingPim.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace KingPim.Repositories.Repositories
 {
@@ -45,6 +44,7 @@ namespace KingPim.Repositories.Repositories
                 ctxOneAttr.Name = vm.Name;
                 ctxOneAttr.Description = vm.Description;
                 ctxOneAttr.Type = vm.Type;
+                //ctxOneAttr.AttributeGroupId = vm.AttributeGroupId;
                 ctxOneAttr.UpdatedDate = DateTime.Now;
             }
             _ctx.SaveChanges();

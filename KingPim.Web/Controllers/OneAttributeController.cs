@@ -12,17 +12,23 @@ namespace KingPim.Web.Controllers
     public class OneAttributeController : Controller
     {
         private IOneAttribute oneAttrRepo;
+        private IAttributeGroup attGroupRepo;
 
-        public OneAttributeController(IOneAttribute oneAttrRepository)
+        public OneAttributeController(IOneAttribute oneAttrRepository, IAttributeGroup attGroupRepository)
         {
             oneAttrRepo = oneAttrRepository;
+            attGroupRepo = attGroupRepository;
         }
 
         [HttpGet]
         public IActionResult Index()
         {
-            var oneAttr = oneAttrRepo.GetAll();
-            return View(oneAttr);
+            var oneAttrVm = new OneAttributeViewModel
+            {
+                OneAttributes = oneAttrRepo.GetAll(),
+                AttributeGroups = attGroupRepo.GetAll()
+            };
+            return View(oneAttrVm);
         }
 
         [HttpPost]

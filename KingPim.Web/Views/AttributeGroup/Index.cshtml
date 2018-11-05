@@ -1,8 +1,8 @@
-﻿@model IEnumerable<AttributeGroup>
+﻿@model AttributeGroupViewModel
 
 <!-- CRUD-buttons to modals:-->
 <div class="float-sm-right" style="margin-bottom:10px; margin-top:80px;">
-    <button type="button" class="btn btn-md btn-success" name="createSomething" id="createSomething" data-toggle="modal" data-target="#createModal">Create</button>
+    <button type="button" class="btn btn-md btn-success" name="createSomething" id="createSomething" data-toggle="modal" data-target="#createModal" data-name="@Model.SubCategories">Create</button>
     <button type="button" class="btn btn-md btn-warning" name="updateSomething" id="updateSomething" data-toggle="modal" data-target="#updateModal" disabled>Update</button>
     <button type="button" class="btn btn-md btn-danger" name="deleteSomething" id="deleteSomething" data-toggle="modal" data-target="#deleteModal" disabled>Delete</button>
 </div>
@@ -17,7 +17,7 @@
                 <th scope="col">Description:</th>
             </tr>
         </thead>
-        @foreach (var attGr in Model)
+        @foreach (var attGr in Model.AttributeGroups)
         {
             <tbody>
                 <tr>
@@ -29,5 +29,5 @@
     </table>
 </div>
 
-@await Component.InvokeAsync("AttributeGroupCrudVc")
+@await Component.InvokeAsync("AttributeGroupCrudVc", Model)
 

@@ -9,15 +9,41 @@
             </div>
             <form asp-controller="OneAttribute" asp-action="Add" method="post">
                 <div class="modal-body">
-                    <p>
-                        <label asp-for="Name">Name:</label>
-                        <input type="text" asp-for="Name" class="form-control form-control-sm" />
-                    </p>
-                    <p class="text-center"><strong>Make sure to save your changes.</strong></p>
+                    <div class="form-group">
+                        <p>
+                            <label asp-for="@Model.Name" hidden></label>
+                            <input type="text" asp-for="@Model.Name" placeholder="Name..." class="form-control form-control-sm" />
+                        </p>
+                    </div>
+                    <div class="form-group">
+                        <p>
+                            <label asp-for="@Model.Description" hidden></label>
+                            <input type="text" asp-for="@Model.Description" placeholder="Description..." class="form-control form-control-sm" />
+                        </p>
+                    </div>
+                    <div class="form-group">
+                        <select asp-for="AttributeGroupId" class="form-control" required>
+                            <option value="" selected>Select an attribute group</option>
+                            @foreach (var attrGr in Model.AttributeGroups)
+                            {
+                                <option value="@attrGr.Id">@attrGr.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <select asp-for="OneAttributeId" class="form-control" required>
+                            <option value="" selected>Select an attribute</option>
+                            @foreach (var tp in Model.OneAttributes)
+                            {
+                                <option value="@tp.Id">@tp.Name</option>
+                            }
+                        </select>
+                    </div>
                 </div>
+                <p class="text-center"><strong>Make sure to save your changes.</strong></p>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
-                    <input type="hidden" name="categoryId" value="@Model.Id" />
+                    <input type="hidden" name="oneattributeId" value="@Model.Id" />
                     <button type="submit" id="createSomething" class="btn btn-success">Create</button>
                 </div>
             </form>
@@ -40,6 +66,26 @@
                             <input asp-for="Name" class="form-control form-control-sm" />
                         </p>
                     </div>
+                    <div class="form-group">
+                        <div class="form-group">
+                            <p>
+                                <label asp-for="@Model.Description" hidden></label>
+                                <input asp-for="@Model.Description" placeholder="Description..." class="form-control form-control-sm" />
+                            </p>
+                        </div>
+                    </div>
+                    @*<div class="form-group">
+                        @foreach (var tp in Model)
+                        {
+                            <option value="@tp.Id">@tp.Name</option>
+                        }
+                    </div>*@
+                    @*<div class="form-group">
+                        @foreach (var attrGr in Model.AttributeGroups)
+                        {
+                            <option value="@attrGr.Id">@attGr.Name</option>
+                        }
+                    </div>*@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>

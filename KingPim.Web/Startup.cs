@@ -93,7 +93,7 @@ namespace KingPim.Web
 
             var runIdentitySeed = Task.Run(async () => await identitySeed.CreateAdminAccountIfEmpty()).Result;
 
-            Seed.FillIfEmpty(ctx);
+            //Seed.FillIfEmpty(ctx);
         }
     }
 }

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace KingPim.Models.Models
 {
@@ -14,5 +12,6 @@ namespace KingPim.Models.Models
         [Column(Order = 2)]
         public string Description { get; set; }
         public virtual List<OneAttribute> OneAttributes { get; set; } 
+        public virtual List<SubCategory> SubCategories { get; set; }
     }
 }

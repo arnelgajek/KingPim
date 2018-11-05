@@ -33,13 +33,9 @@ namespace KingPim.Data.Migrations
 
                     b.Property<bool>("Published");
 
-                    b.Property<int?>("SubCategoryId");
-
                     b.Property<DateTime>("UpdatedDate");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("SubCategoryId");
 
                     b.ToTable("AttributeGroups");
                 });
@@ -159,6 +155,25 @@ namespace KingPim.Data.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("SubCategories");
+                });
+
+            modelBuilder.Entity("KingPim.Models.Models.SubCategoryAttributeGroup", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("AttributeGroupId");
+
+                    b.Property<int?>("SubCategoryId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AttributeGroupId");
+
+                    b.HasIndex("SubCategoryId");
+
+                    b.ToTable("SubCategoryAttributeGroups");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -322,14 +337,6 @@ namespace KingPim.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("KingPim.Models.Models.AttributeGroup", b =>
-                {
-                    b.HasOne("KingPim.Models.Models.SubCategory")
-                        .WithMany("AttributeGroups")
-                        .HasForeignKey("SubCategoryId")
-                        .OnDelete(DeleteBehavior.SetNull);
-                });
-
             modelBuilder.Entity("KingPim.Models.Models.OneAttribute", b =>
                 {
                     b.HasOne("KingPim.Models.Models.AttributeGroup", "AttributeGroup")
@@ -364,6 +371,19 @@ namespace KingPim.Data.Migrations
                     b.HasOne("KingPim.Models.Models.Category")
                         .WithMany("SubCategories")
                         .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.SetNull);
+                });
+
+            modelBuilder.Entity("KingPim.Models.Models.SubCategoryAttributeGroup", b =>
+                {
+                    b.HasOne("KingPim.Models.Models.AttributeGroup", "AttributeGroup")
+                        .WithMany()
+                        .HasForeignKey("AttributeGroupId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.HasOne("KingPim.Models.Models.SubCategory", "SubCategory")
+                        .WithMany("SubCategoryAttributeGroups")
+                        .HasForeignKey("SubCategoryId")
                         .OnDelete(DeleteBehavior.SetNull);
                 });
 

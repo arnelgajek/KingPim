@@ -25,7 +25,7 @@ namespace KingPim.Repositories.Repositories
                     Name = vm.Name,
                     CategoryId = vm.CategoryId,
                     Products = null,
-                    AttributeGroups = null,
+                    SubCategoryAttributeGroups = null,
                     AddedDate = DateTime.Now,
                     UpdatedDate = DateTime.Now,
                     Published = false,

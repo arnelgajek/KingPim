@@ -15,6 +15,6 @@ namespace KingPim.Models.Models
         [Column(Order = 2)]
         public int? CategoryId { get; set; }
         public virtual List<Product> Products { get; set; }
-        public virtual List<AttributeGroup> AttributeGroups { get; set; }
+        public virtual List<SubCategoryAttributeGroup> SubCategoryAttributeGroups { get; set; }
     }
 }

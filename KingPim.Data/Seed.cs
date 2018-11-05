@@ -16,7 +16,9 @@ namespace KingPim.Data
             var productList = new List<Product>();
             var attributeGroupList = new List<AttributeGroup>();
             var oneAttributeList = new List<OneAttribute>();
+            var subCategoryAttributeGroupList = new List<SubCategoryAttributeGroup>();
 
+            // Attribute:
             var oneAttribute = new OneAttribute
             {
                 Name = "White",
@@ -25,14 +27,18 @@ namespace KingPim.Data
             };
             oneAttributeList.Add(oneAttribute);
 
+            // AttributeGroup:
             var attributeGroup = new AttributeGroup
             {
                 Name = "Color",
                 Description = "The color of the longsleeved shirt.",
                 OneAttributes = oneAttributeList
             };
-            attributeGroupList.Add(attributeGroup);
+            //attributeGroupList.Add(attributeGroup);
+            ctx.AttributeGroups.Add(attributeGroup);
+            ctx.SaveChanges();
 
+            // Product:
             var product = new Product
             {
                 Name = "Ralph Lauren",
@@ -44,16 +50,25 @@ namespace KingPim.Data
             };
             productList.Add(product);
 
+            // SubCategory:
             var subCategory = new SubCategory
             {
                 Name = "Long sleeve",
                 Products = productList,
-                AttributeGroups = attributeGroupList,
+                SubCategoryAttributeGroups = subCategoryAttributeGroupList,
                 UpdatedDate = DateTime.Now.Date,
                 AddedDate = DateTime.Today,
                 Published = false
             };
             subCategoryList.Add(subCategory);
+
+            // SubCategoryAttributeGroups:
+            var subCategoryAttributeGroups = new SubCategoryAttributeGroup
+            {
+                SubCategory = ctx.SubCategories.FirstOrDefault(x => x.Id == 1),
+                AttributeGroup = ctx.AttributeGroups.FirstOrDefault(x => x.Id == 1)
+            };
+            subCategoryAttributeGroupList.Add(subCategoryAttributeGroups);
 
             // Category:
             if (!ctx.Categories.Any())
@@ -70,6 +85,22 @@ namespace KingPim.Data
                 ctx.Categories.AddRange(category);
             };
             ctx.SaveChanges();
+
+            // Connect a attributegroup to a subcategory to subcategoryattributegroups:
+            //if (!ctx.SubCategoryAttributeGroups.Any())
+            //{
+            //    var subcategoryTryout = ctx.SubCategories.FirstOrDefault(x => x.Id == 1);
+
+            //    var attributeTryout = ctx.AttributeGroups.FirstOrDefault(x => x.Id == 1);
+
+            //    var SubCategoryAttributeGroup = new SubCategoryAttributeGroup
+            //    {
+            //        SubCategoryId = 1,
+            //        AttributeGroupId = 1
+            //    };
+            //    ctx.SubCategoryAttributeGroups.Add(SubCategoryAttributeGroup);
+            //    ctx.SaveChanges();
+            //}
 
             // Connect a product to a attribute to productoneattributevalues:
             if (!ctx.ProductOneAttributeValues.Any())

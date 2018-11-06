@@ -1,28 +1,43 @@
 ﻿$(document).ready(function () {
 
     // Allows the user to press Update and Delete when at least one checkbox i checked:
-    var checkboxes = $("input[type='checkbox']"),
-    submitButt = $("button[type='button']");
+    var checkboxes = $(".chk");
 
     checkboxes.click(function () {
-        $('#createSomething').attr("disabled", checkboxes.is(":checked"));
-        $('#updateSomething').attr("disabled", !checkboxes.is(":checked"));
-        $('#deleteSomething').attr("disabled", !checkboxes.is(":checked"));
+        $('#createSomething').prop("disabled", checkboxes.is(":checked"));
+        $('#updateSomething').prop("disabled", !checkboxes.is(":checked"));
+        $('#deleteSomething').prop("disabled", !checkboxes.is(":checked"));
     });
 
     // PUBLISH:
-    $('#publishchk').change(function () {
+    
+    $('#publishchk').click(function () {
         cb = $(this);
         cb.val(cb.prop('checked'));
-
+        
         if ($(this).is(':checked')) {
-        // POST TO DB WITH AJAX (TRUE)
-        console.log("JIHUUU");
+            var trufal = $(this).prop('value');
+            var id = $(this).attr('data-name');
         }
         else {
-        // POST TO DB WITH AJAX (FALSE)
-        console.log("BUHUUUU");
+            var trufal = $(this).prop('value');
+            var id = $(this).attr('data-name');
         }
+
+        $.ajax({
+            type: 'POST',
+            url: 'Category/Publish',
+            data: { id: id, published: trufal },
+            dataType: 'JSON',
+            success: function () {
+                console.log('JIPPIEEE!!!');
+                //location.reload();
+            },
+            error: function () {
+                console.log('NOOOO...');
+            }
+        });
+
     });
 
     // CREATE:

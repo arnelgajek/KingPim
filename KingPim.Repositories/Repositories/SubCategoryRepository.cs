@@ -82,15 +82,5 @@ namespace KingPim.Repositories.Repositories
         {
             return _ctx.SubCategories;
         }
-
-        //public void GetCategories(SubCategoryViewModel vm)
-        //{
-        //    var subCatVm = new SubCategoryViewModel
-        //    {
-        //        Id = vm.Id,
-        //        Name = vm.Name,
-        //        CategoryId = vm.CategoryId
-        //    };
-        //}
     }
 }

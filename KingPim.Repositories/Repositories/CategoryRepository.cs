@@ -1,11 +1,9 @@
 ﻿using KingPim.Data;
 using KingPim.Models.Models;
 using KingPim.Models.ViewModels;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace KingPim.Repositories.Repositories
 {
@@ -37,7 +35,7 @@ namespace KingPim.Repositories.Repositories
 
         public void Update(CategoryViewModel vm)
         {
-            var ctxCategory = _ctx.Categories.FirstOrDefault(ccn => ccn.Id.Equals(vm.Id));
+            var ctxCategory = _ctx.Categories.FirstOrDefault(c => c.Id.Equals(vm.Id));
 
             if (ctxCategory != null)
             {
@@ -71,6 +69,19 @@ namespace KingPim.Repositories.Repositories
         public IEnumerable<Category> GetAll()
         {
             return _ctx.Categories;
+        }
+
+        public void Publish(CategoryViewModel vm)
+        {
+            var ctxCategory = _ctx.Categories.FirstOrDefault(c => c.Id.Equals(vm.Id));
+
+            if (ctxCategory != null)
+            {
+                ctxCategory.Id = vm.Id;
+                ctxCategory.Published = vm.Published;
+            }
+
+            _ctx.SaveChanges();
         }
     }
 }

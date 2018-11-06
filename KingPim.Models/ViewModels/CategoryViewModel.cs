@@ -1,7 +1,5 @@
 ﻿using KingPim.Models.Models;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace KingPim.Models.ViewModels
 {
@@ -9,5 +7,8 @@ namespace KingPim.Models.ViewModels
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public bool Published { get; set; }
+        public int CategoryId { get; }
+        public IEnumerable<Category> Categories { get; set; }
     }
 }

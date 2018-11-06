@@ -1,8 +1,8 @@
-﻿@model IEnumerable<Category>
+﻿@model CategoryViewModel
 
 <!-- CRUD-buttons to modals:-->
 <div class="float-sm-right" style="margin-bottom:10px; margin-top:80px">
-    <button type="button" class="btn btn-md btn-success" name="createSomething" id="createSomething" data-toggle="modal" data-target="#createModal">Create</button>
+    <button type="button" class="btn btn-md btn-success" name="createSomething" id="createSomething" data-toggle="modal" data-target="#createModal" data-name="@Model.Categories">Create</button>
     <button type="button" class="btn btn-md btn-warning" name="updateSomething" id="updateSomething" data-toggle="modal" data-target="#updateModal" disabled>Update</button>
     <button type="button" class="btn btn-md btn-danger" name="deleteSomething" id="deleteSomething" data-toggle="modal" data-target="#deleteModal" disabled>Delete</button>
 </div>
@@ -18,7 +18,7 @@
                 <th scope="col">Updated Date:</th>
             </tr>
         </thead>
-        @foreach (var cat in Model)
+        @foreach (var cat in Model.Categories)
         {
             <tbody>
                 <tr>
@@ -26,10 +26,9 @@
                         <input type="checkbox" class="chk" value="@cat.Id" data-name="@cat.Name" />
                         @cat.Name
                     </th>
-                    <!-- TODO: Implement button to Published to send value to Db with true=green button/false=red button-->
-                    <td><input type="checkbox" id="publishchk" value="@cat.Published" /></td>
-                    <td>@cat.AddedDate.ToString("yyyy-MM-dd")</td>
-                    <td>@cat.UpdatedDate.ToString("yyyy-MM-dd")</td>
+                        <td><input type="checkbox" id="publishchk" for="Published" value="@cat.Published" data-name="@cat.Id" /></td>
+                        <td>@cat.AddedDate.ToString("yyyy-MM-dd")</td>
+                        <td>@cat.UpdatedDate.ToString("yyyy-MM-dd")</td>
                 </tr>
             </tbody>
         }

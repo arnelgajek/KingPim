@@ -1,12 +1,6 @@
-﻿using KingPim.Models.Models;
-using KingPim.Models.ViewModels;
+﻿using KingPim.Models.ViewModels;
 using KingPim.Repositories;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace KingPim.Web.Controllers
 {
@@ -23,8 +17,11 @@ namespace KingPim.Web.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var cat = catRepo.GetAll();
-            return View(cat);
+            var catVm = new CategoryViewModel
+            {
+                Categories = catRepo.GetAll()
+            };
+            return View(catVm);
         }
 
         [HttpPost]
@@ -60,6 +57,13 @@ namespace KingPim.Web.Controllers
 
             }
             return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public IActionResult Publish(CategoryViewModel vm)
+        {
+            catRepo.Publish(vm);
+            return Json(vm);
         }
     }
 }

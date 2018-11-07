@@ -9,8 +9,10 @@
         $('#deleteSomething').prop("disabled", !checkboxes.is(":checked"));
     });
 
+    // BG-COLOR PUBLISH:
+    // TODO: Need to set red bg-color if publishvalue = false, green bg-color if publishvalue = true.
+
     // PUBLISH:
-    
     $('#publishchk').click(function () {
         cb = $(this);
         cb.val(cb.prop('checked'));

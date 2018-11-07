@@ -25,7 +25,7 @@ namespace KingPim.Repositories.Repositories
                     Name = vm.Name,
                     SubCategories = null,
                     AddedDate = DateTime.Now,
-                    UpdatedDate = DateTime.Now,
+                    UpdatedDate = DateTime.Now,                    
                     Published = false
                 };
                 _ctx.Categories.Add(newCategory);

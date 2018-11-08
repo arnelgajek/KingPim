@@ -26,7 +26,6 @@
                         <input type="checkbox" class="chk" value="@subCat.Id" data-name="@subCat.Name" />
                         @subCat.Name
                     </th>
-                    <td><input type="checkbox" id="publishchk" value="@subCat.Published" /></td>
                     <td>@subCat.AddedDate.ToString("yyyy-MM-dd")</td>
                     <td>@subCat.UpdatedDate.ToString("yyyy-MM-dd")</td>
                     @if (subCat.Published == true)

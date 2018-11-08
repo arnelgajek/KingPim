@@ -12,7 +12,7 @@
     // TODO: Need to set red bg-color if publishvalue = false, green bg-color if publishvalue = true.
 
     // PUBLISH:
-    $('#publishchk').click(function () {
+    $('.publishchk').click(function () {
         cb = $(this);
         cb.val(cb.prop('checked'));
         

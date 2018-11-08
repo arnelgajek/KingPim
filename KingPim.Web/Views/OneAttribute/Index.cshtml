@@ -14,6 +14,8 @@
             <tr>
                 <th scope="col">Name:</th>
                 <th scope="col">Description:</th>
+                <th scope="col">Added Date:</th>
+                <th scope="col">Updated Date:</th>
                 <th scope="col">Type:</th>
             </tr>
         </thead>
@@ -23,6 +25,8 @@
                 <tr>
                     <th scope="row"><input type="checkbox" class="chk" value="@oneAttr.Id" data-name="@oneAttr.Name" /> @oneAttr.Name</th>
                     <td>@oneAttr.Description</td>
+                    <td>@oneAttr.AddedDate.ToString("yyyy-MM-dd")</td>
+                    <td>@oneAttr.UpdatedDate.ToString("yyyy-MM-dd")</td>
                     <td>@oneAttr.Type</td>
                 </tr>
             </tbody>

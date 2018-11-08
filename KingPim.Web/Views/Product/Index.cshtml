@@ -15,22 +15,28 @@
                 <th scope="col">Name:</th>
                 <th scope="col">Description:</th>
                 <th scope="col">Price:</th>
-                <th scope="col">Published:</th>
                 <th scope="col">Added Date:</th>
                 <th scope="col">Updated Date:</th>
+                <th scope="col">Published:</th>
             </tr>
         </thead>
         @foreach (var prod in Model.Products)
         {
             <tbody>
                 <tr>
-                    <th scope="row"><input type="checkbox" class="chk" value="@prod.Id" data-name="@prod.Name"/> @prod.Name</th>
+                    <th scope="row"><input type="checkbox" class="chk" value="@prod.Id" data-name="@prod.Name" /> @prod.Name</th>
                     <td><p><i>@prod.Description</i></p></td>
                     <td>@prod.Price:-</td>
-                    <!-- TODO: Implement button to Published to send value to Db with true=green button/false=red button-->
-                    <td><input type="checkbox" id="publishchk" value="@prod.Published" /></td>
                     <td>@prod.AddedDate.ToString("yyyy-MM-dd")</td>
                     <td>@prod.UpdatedDate.ToString("yyyy-MM-dd")</td>
+                    @if (prod.Published == true)
+                    {
+                        <td><input type="checkbox" class="publishchk" for="Published" value="@prod.Published" data-name="@prod.Id" checked /></td>
+                    }
+                    @if (prod.Published == false)
+                    {
+                        <td><input type="checkbox" class="publishchk" for="Published" value="@prod.Published" data-name="@prod.Id" /></td>
+                    }
                 </tr>
             </tbody>
         }

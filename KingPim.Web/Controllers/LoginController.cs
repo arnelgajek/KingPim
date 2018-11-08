@@ -2,9 +2,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace KingPim.Web.Controllers
@@ -23,7 +20,7 @@ namespace KingPim.Web.Controllers
         [AllowAnonymous]
         public IActionResult Index()
         {
-            // Checks if the user is authenticated/signed in and redirects him/her to Admin: 
+            // Checks if the user is authenticated/signed in and redirectsthe user to Home: 
             if (User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("Index", "Home");

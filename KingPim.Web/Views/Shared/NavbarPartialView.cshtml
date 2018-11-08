@@ -4,7 +4,7 @@
         <li class="nav-item text-nowrap">
             @if (User.Identity.IsAuthenticated)
             {
-            <a asp-controller="Login" asp-action="Logout" class="btn btn-danger">Sign Out <span data-feather="log-out"></span></a>
+                <a asp-controller="Login" asp-action="Logout" class="btn btn-danger">Sign Out</a>
             }
         </li>
     </ul>
@@ -13,7 +13,7 @@
 <script src="https://unpkg.com/feather-icons"></script>
 <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
 <script>
-    feather.replace();
+        feather.replace();
 </script>
 <script src="~/lib/jquery/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>

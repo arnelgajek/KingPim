@@ -21,6 +21,27 @@
                             <input type="text" asp-for="@Model.Description" placeholder="Description..." class="form-control form-control-sm" />
                         </p>
                     </div>
+                    <div class="form-group">
+                        <select asp-for="OneAttributeId" class="form-control" required>
+                            <option value="" disabled selected>Select an attribute</option>
+                            @foreach (var oneAttr in Model.OneAttributes)
+                            {
+                                <option value="@oneAttr.Id">@oneAttr.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <button type="button" class="btn btn-toolbar' btn btn-sm" style="margin-top:10px;" id="addAttributeBtn">Add +</button>
+                            <div class="addAttribute">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div id="saveAddedAttributes">
+                                <!-- I'll maybe need this later on... -->
+                            </div>
+                        </div>
+                    </div>
                     <p class="text-center"><strong>Make sure to save your changes.</strong></p>
                 </div>
                 <div class="modal-footer">
@@ -43,19 +64,39 @@
             <form asp-controller="AttributeGroup" asp-action="Update" method="post">
                 <div class="modal-body">
                     <div class="form-group">
-                        <div class="form-group">
-                            <p class="text-center">
-                                <label asp-for="@Model.Name"><strong></strong></label>
-                                <input asp-for="@Model.Name" placeholder="Name..." class="form-control form-control-sm" />
-                            </p>
+                        <p>
+                            <label asp-for="@Model.Name" hidden></label>
+                            <input type="text" asp-for="@Model.Name" placeholder="Name..." class="form-control form-control-sm" />
+                        </p>
+                    </div>
+                    <div class="form-group">
+                        <p>
+                            <label asp-for="@Model.Description" hidden></label>
+                            <input type="text" asp-for="@Model.Description" placeholder="Description..." class="form-control form-control-sm" />
+                        </p>
+                    </div>
+                    <div class="form-group">
+                        <select asp-for="OneAttributeId" class="form-control" required>
+                            <option value="" disabled selected>Select an attribute</option>
+                            @foreach (var oneAttr in Model.OneAttributes)
+                            {
+                                <option value="@oneAttr.Id">@oneAttr.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <button type="button" class="btn btn-toolbar' btn btn-sm" style="margin-top:10px;" id="addAttributeBtn">Add +</button>
+                            <div class="addAttribute">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <p>
-                                <label asp-for="@Model.Description" hidden></label>
-                                <input asp-for="@Model.Description" placeholder="Description..." class="form-control form-control-sm" />
-                            </p>
+                        <div class="col-sm-6">
+                            <div id="saveAddedAttributes">
+                                <!-- I'll maybe need this later on... -->
+                            </div>
                         </div>
                     </div>
+                    <p class="text-center"><strong>Make sure to save your changes.</strong></p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>

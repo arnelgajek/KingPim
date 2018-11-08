@@ -13,9 +13,9 @@
         <thead>
             <tr>
                 <th scope="col">Name:</th>
-                <th scope="col">Published:</th>
                 <th scope="col">Added Date:</th>
                 <th scope="col">Updated Date:</th>
+                <th scope="col">Published:</th>
             </tr>
         </thead>
         @foreach (var subCat in Model.SubCategories)
@@ -23,13 +23,20 @@
             <tbody>
                 <tr>
                     <th scope="row">
-                        <input type="checkbox" class="chk" value="@subCat.Id" data-name="@subCat.Name"/>
+                        <input type="checkbox" class="chk" value="@subCat.Id" data-name="@subCat.Name" />
                         @subCat.Name
                     </th>
-                    <!-- TODO: Implement button to Published to send value to Db with true=green button/false=red button-->
                     <td><input type="checkbox" id="publishchk" value="@subCat.Published" /></td>
                     <td>@subCat.AddedDate.ToString("yyyy-MM-dd")</td>
                     <td>@subCat.UpdatedDate.ToString("yyyy-MM-dd")</td>
+                    @if (subCat.Published == true)
+                    {
+                        <td><input type="checkbox" class="publishchk" for="Published" value="@subCat.Published" data-name="@subCat.Id" checked /></td>
+                    }
+                    @if (subCat.Published == false)
+                    {
+                        <td><input type="checkbox" class="publishchk" for="Published" value="@subCat.Published" data-name="@subCat.Id" /></td>
+                    }
                 </tr>
             </tbody>
         }

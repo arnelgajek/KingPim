@@ -30,15 +30,6 @@
                             }
                         </select>
                     </div>
-                    <div class="form-group">
-                        <select asp-for="OneAttributeId" class="form-control" required>
-                            <option value="" selected>Select an attribute</option>
-                            @foreach (var tp in Model.OneAttributes)
-                            {
-                                <option value="@tp.Id">@tp.Name</option>
-                            }
-                        </select>
-                    </div>
                 </div>
                 <p class="text-center"><strong>Make sure to save your changes.</strong></p>
                 <div class="modal-footer">

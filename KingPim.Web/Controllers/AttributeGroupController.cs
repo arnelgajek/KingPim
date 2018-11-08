@@ -10,11 +10,13 @@ namespace KingPim.Web.Controllers
     {
         private IAttributeGroup attrGroupRepo;
         private ISubCategory subCatRepo;
+        private IOneAttribute oneAttrRepo;
 
-        public AttributeGroupController(IAttributeGroup attrGroupRepository, ISubCategory subCatRepository)
+        public AttributeGroupController(IAttributeGroup attrGroupRepository, ISubCategory subCatRepository, IOneAttribute oneAttrRepository)
         {
             attrGroupRepo = attrGroupRepository;
             subCatRepo = subCatRepository;
+            oneAttrRepo = oneAttrRepository;
         }
 
         [HttpGet]
@@ -23,7 +25,8 @@ namespace KingPim.Web.Controllers
             var attrGroupVm = new AttributeGroupViewModel
             {
                 AttributeGroups = attrGroupRepo.GetAll(),
-                SubCategories = subCatRepo.GetAll()
+                SubCategories = subCatRepo.GetAll(),
+                OneAttributes = oneAttrRepo.GetAll()
             };
             return View(attrGroupVm);
         }

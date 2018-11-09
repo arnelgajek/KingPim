@@ -4,7 +4,7 @@
         <li class="nav-item text-nowrap">
             @if (User.Identity.IsAuthenticated)
             {
-                <a asp-controller="Login" asp-action="Logout" class="btn btn-danger">Sign Out</a>
+                <a asp-controller="Account" asp-action="Logout" class="btn btn-danger">Sign Out</a>
             }
         </li>
     </ul>

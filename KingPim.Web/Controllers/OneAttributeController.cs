@@ -1,14 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using KingPim.Repositories.Interfaces;
 using KingPim.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace KingPim.Web.Controllers
 {
-    // TODO: Don't forget to add authorization!
+    [Authorize]
     public class OneAttributeController : Controller
     {
         private IOneAttribute oneAttrRepo;

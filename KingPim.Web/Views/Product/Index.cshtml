@@ -29,15 +29,21 @@
                     <td>@prod.Price:-</td>
                     <td>@prod.AddedDate.ToString("yyyy-MM-dd")</td>
                     <td>@prod.UpdatedDate.ToString("yyyy-MM-dd")</td>
-                    @if (prod.Published == true)
+                    @if (User.Identity.IsAuthenticated)
                     {
-                        <td><input type="checkbox" class="publishchk" for="Published" value="@prod.Published" data-name="@prod.Id" checked /></td>
+                        @if (User.IsInRole("Administrator") || User.IsInRole("Publisher"))
+                        {
+                            @if (prod.Published == true)
+                            {
+                                <td><input type="checkbox" class="publishchk" for="Published" value="@prod.Published" data-name="@prod.Id" checked /></td>
+                            }
+                            @if (prod.Published == false)
+                            {
+                                <td><input type="checkbox" class="publishchk" for="Published" value="@prod.Published" data-name="@prod.Id" /></td>
+                            }
+                        }
                     }
-                    @if (prod.Published == false)
-                    {
-                        <td><input type="checkbox" class="publishchk" for="Published" value="@prod.Published" data-name="@prod.Id" /></td>
-                    }
-                </tr>
+                        </tr>
             </tbody>
         }
     </table>

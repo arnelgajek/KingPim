@@ -28,15 +28,21 @@
                     </th>
                     <td>@cat.AddedDate.ToString("yyyy-MM-dd")</td>
                     <td>@cat.UpdatedDate.ToString("yyyy-MM-dd")</td>
-                    @if (cat.Published == true)
+                    @if (User.Identity.IsAuthenticated)
                     {
-                        <td><input type="checkbox" class="publishchk" for="Published" value="@cat.Published" data-name="@cat.Id" checked /></td>
+                        @if (User.IsInRole("Administrator") || User.IsInRole("Publisher"))
+                        {
+                            @if (cat.Published == true)
+                            {
+                                <td><input type="checkbox" class="publishchk" for="Published" value="@cat.Published" data-name="@cat.Id" checked /></td>
+                            }
+                            @if (cat.Published == false)
+                            {
+                                <td><input type="checkbox" class="publishchk" for="Published" value="@cat.Published" data-name="@cat.Id" /></td>
+                            }
+                        }
                     }
-                    @if (cat.Published == false)
-                    {
-                        <td><input type="checkbox" class="publishchk" for="Published" value="@cat.Published" data-name="@cat.Id" /></td>
-                    }
-                </tr>
+                        </tr>
             </tbody>
         }
     </table>

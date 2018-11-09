@@ -1,10 +1,11 @@
-﻿using KingPim.Models.ViewModels;
-using KingPim.Repositories.Interfaces;
+﻿using KingPim.Repositories.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 
 namespace KingPim.Web.Controllers
 {
+    [Authorize]
     public class ProductOneAttributeValuesController : Controller
     {
         private IProductOneAttributeValues prodOneAttrValRepo;

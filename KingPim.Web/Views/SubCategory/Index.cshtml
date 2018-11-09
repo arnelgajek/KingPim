@@ -28,13 +28,19 @@
                     </th>
                     <td>@subCat.AddedDate.ToString("yyyy-MM-dd")</td>
                     <td>@subCat.UpdatedDate.ToString("yyyy-MM-dd")</td>
-                    @if (subCat.Published == true)
+                    @if (User.Identity.IsAuthenticated)
                     {
-                        <td><input type="checkbox" class="publishchk" for="Published" value="@subCat.Published" data-name="@subCat.Id" checked /></td>
-                    }
-                    @if (subCat.Published == false)
-                    {
-                        <td><input type="checkbox" class="publishchk" for="Published" value="@subCat.Published" data-name="@subCat.Id" /></td>
+                        @if (User.IsInRole("Administrator") || User.IsInRole("Publisher"))
+                        {
+                            @if (subCat.Published == true)
+                            {
+                                <td><input type="checkbox" class="publishchk" for="Published" value="@subCat.Published" data-name="@subCat.Id" checked /></td>
+                            }
+                            @if (subCat.Published == false)
+                            {
+                                <td><input type="checkbox" class="publishchk" for="Published" value="@subCat.Published" data-name="@subCat.Id" /></td>
+                            }
+                        }
                     }
                 </tr>
             </tbody>

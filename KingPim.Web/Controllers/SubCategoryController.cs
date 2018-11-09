@@ -1,11 +1,12 @@
 ﻿using KingPim.Models.ViewModels;
 using KingPim.Repositories;
 using KingPim.Repositories.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KingPim.Web.Controllers
 {
-    // TODO: Don't forget to add authorization!
+    [Authorize]
     public class SubCategoryController : Controller
     {
         private ISubCategory subCatrepo;

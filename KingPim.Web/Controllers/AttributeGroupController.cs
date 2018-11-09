@@ -1,11 +1,12 @@
 ﻿using KingPim.Models.ViewModels;
 using KingPim.Repositories.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 
 namespace KingPim.Web.Controllers
 {
-    // TODO: Don't forget to add authorization!
+    [Authorize]
     public class AttributeGroupController : Controller
     {
         private IAttributeGroup attrGroupRepo;

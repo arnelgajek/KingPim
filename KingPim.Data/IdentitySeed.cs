@@ -6,10 +6,15 @@ namespace KingPim.Data
 {
     public class IdentitySeed : IIdentitySeed
     {
-        private const string _admin = "admin@kingpim.se";
+        private const string _administrator = "administrator@kingpim.se";
         private const string _password = "buggeroff";
 
-        // Constructor so we can use Dependency Injection from DB.
+        private const string _editor = "editor@kingpim.se";
+        private const string _password2 = "buggeroff2";
+
+        private const string _publisher = "publisher@kingpim.se";
+        private const string _password3 = "buggeroff3";
+
         private readonly ApplicationDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
 
@@ -21,17 +26,36 @@ namespace KingPim.Data
 
         public async Task<bool> CreateAdminAccountIfEmpty()
         {
-            if (!_context.Users.Any(u => u.UserName == _admin))
+            if (!_context.Users.Any())
             {
-                var user = new IdentityUser
+                var administrator = new IdentityUser
                 {
-                    UserName = _admin,
-                    Email = "admin@kingpim.se",
+                    UserName = _administrator,
+                    Email = "administrator@kingpim.se",
                     EmailConfirmed = true
                 };
 
-                var result = await _userManager.CreateAsync(user, _password);
-                var test = result.Succeeded;
+                var editor = new IdentityUser
+                {
+                    UserName = _editor,
+                    Email = "editor@kingpim.se",
+                    EmailConfirmed = true
+                };
+
+                var publisher = new IdentityUser
+                {
+                    UserName = _publisher,
+                    Email = "publisher@kingpim.se",
+                    EmailConfirmed = true
+                };
+
+                var admin = await _userManager.CreateAsync(administrator, _password);
+                var edit = await _userManager.CreateAsync(editor, _password2);
+                var publish = await _userManager.CreateAsync(publisher, _password3);
+
+                var identitySeed1 = admin.Succeeded;
+                var identitySeed2 = edit.Succeeded;
+                var identitySeed3 = publish.Succeeded;
             }
             return true;
         }

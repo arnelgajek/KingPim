@@ -1,14 +1,46 @@
-﻿@model IEnumerable<Category>
+﻿@model AccountViewModel
 
-<div class="container">
-    <h1><strong>All the Categories in store:</strong></h1>
-    <div class="row">
-        @*<div class="col-md-3" style="background-color:lightgray; margin:10px; border-radius:5px;">
-                @foreach (var cat in Model)
-                {
-                    <h1 style="text-align:center"><strong>@cat.Name</strong></h1>
-                }
+    <div class="container">
+        <h1 class="text-center" style="margin-bottom:50px;"><strong>Welcome to KingPim!</strong></h1>
+        <div class="row">
+            <div class="col-6" style="background-color:lightgrey;padding-bottom:100px;border-radius:10px;">
+                <h3 class="text-center" style="margin-top:10px"><strong>Create Account</strong></h3>
+                <form asp-controller="Account" asp-action="Index" method="post">
+                    <div class="form-group">
+                            <label asp-for="@Model.UserName"><strong></strong></label>
+                            <input asp-for="@Model.UserName" placeholder="UserName..." class="form-control form-control-sm" />
+
+                            <label asp-for="@Model.Password"><strong></strong></label>
+                            <input asp-for="@Model.Password" placeholder="Password..." class="form-control form-control-sm" />
+
+                            <label asp-for="@Model.ConfirmPassword"><strong></strong></label>
+                            <input asp-for="@Model.ConfirmPassword" placeholder="Confirm Password..." class="form-control form-control-sm" />
+                                <select @*asp-for=""*@ class="form-control-sm" required style="margin-top:10px">
+                                    <option value="" selected disabled>Select a role</option>
+                                    <option>Administrator</option>
+                                    <option>Publisher</option>
+                                    <option>Editor</option>
+                                </select>
+                                @*<div class="form-group">
+                                    <select asp-for="RolesId" class="form-control" required>
+                                        <option value="" selected>Select a subcategory</option>
+                                        @foreach (var r in Model.Roles)
+                                        {
+                                            <option value="@r.Id">@r.Name</option>
+                                        }
+                                    </select>
+                                    <br />
+                                </div>*@
+                    </div>
+                    <div class="text-center">
+                        <button type="button" class="btn btn-danger">Close</button>
+                        <input type="hidden" name="categoryId" value="" />
+                        <button type="submit" id="createAccount" class="btn btn-success">Create</button>
+                    </div>
+                </form>
+            </div>
+            @*<div class="col-6" style="background-color:lightgray;padding-bottom:300px">
+                <h3 class="text-center" style="margin:10px"><strong>All the accounts</strong></h3>
             </div>*@
+        </div>
     </div>
-    <button type="button" class="btn btn-md btn-info" name="changePassword" id="changePassword" data-toggle="modal" data-target="#changePasswordModal">Change Password</button>
-</div>

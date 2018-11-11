@@ -15,13 +15,7 @@ namespace KingPim.Web.Controllers
         }
         public IActionResult Index()
         {
-            var cat = homeRepo.GetAll();
-            return View(cat);
-        }
-
-        public IActionResult Get(int id)
-        {
-            return View(homeRepo.Get(id));
+            return View();
         }
     }
 }

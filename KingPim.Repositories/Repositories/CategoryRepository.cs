@@ -9,7 +9,6 @@ namespace KingPim.Repositories.Repositories
 {
     public class CategoryRepository : ICategory
     {
-        // Put the Db into a variable to use later on:
         private ApplicationDbContext _ctx;
         public CategoryRepository(ApplicationDbContext ctx)
         {
@@ -80,7 +79,6 @@ namespace KingPim.Repositories.Repositories
                 ctxCategory.Id = vm.Id;
                 ctxCategory.Published = vm.Published;
             }
-
             _ctx.SaveChanges();
         }
     }

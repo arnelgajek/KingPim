@@ -46,6 +46,13 @@ namespace KingPim.Web.Controllers
         }
 
         [HttpPost]
+        public IActionResult Publish(CategoryViewModel vm)
+        {
+            catRepo.Publish(vm);
+            return Json(vm);
+        }
+
+        [HttpPost]
         public IActionResult Delete(int id)
         {
             var deletedCategory = catRepo.Delete(id);
@@ -58,13 +65,6 @@ namespace KingPim.Web.Controllers
 
             }
             return RedirectToAction(nameof(Index));
-        }
-
-        [HttpPost]
-        public IActionResult Publish(CategoryViewModel vm)
-        {
-            catRepo.Publish(vm);
-            return Json(vm);
         }
     }
 }

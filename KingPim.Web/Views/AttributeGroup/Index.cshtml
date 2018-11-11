@@ -26,8 +26,8 @@
                 <tr>
                     <th scope="row"><input type="checkbox" class="chk" value="@attGr.Id" data-name="@attGr.Name" /> @attGr.Name</th>
                     <td>@attGr.Description</td>
-                    <td>@attGr.AddedDate</td>
-                    <td>@attGr.UpdatedDate</td>
+                    <td>@attGr.AddedDate.ToString("yyyy-MM-dd")</td>
+                    <td>@attGr.UpdatedDate.ToString("yyyy-MM-dd")</td>
                     @if (attGr.Published == true)
                     {
                         <td><input type="checkbox" class="publishchk" for="Published" value="@attGr.Published" data-name="@attGr.Id" checked /></td>

@@ -74,5 +74,17 @@ namespace KingPim.Repositories.Repositories
         {
             return _ctx.AttributeGroups;
         }
+
+        public void Publish(AttributeGroupViewModel vm)
+        {
+            var ctxAttributeGroup = _ctx.AttributeGroups.FirstOrDefault(ag => ag.Id.Equals(vm.Id));
+
+            if (ctxAttributeGroup != null)
+            {
+                ctxAttributeGroup.Id = vm.Id;
+                ctxAttributeGroup.Published = vm.Published;
+            }
+            _ctx.SaveChanges();
+        }
     }
 }

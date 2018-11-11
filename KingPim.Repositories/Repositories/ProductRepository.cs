@@ -86,5 +86,17 @@ namespace KingPim.Repositories.Repositories
                 SubCategoryId = vm.SubCategoryId
             };
         }
+
+        public void Publish(ProductViewModel vm)
+        {
+            var ctxProduct = _ctx.Products.FirstOrDefault(p => p.Id.Equals(vm.Id));
+
+            if (ctxProduct != null)
+            {
+                ctxProduct.Id = vm.Id;
+                ctxProduct.Published = vm.Published;
+            }
+            _ctx.SaveChanges();
+        }
     }
 }

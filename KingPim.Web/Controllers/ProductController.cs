@@ -50,6 +50,14 @@ namespace KingPim.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+
+        [HttpPost]
+        public IActionResult Publish(ProductViewModel vm)
+        {
+            prodRepo.Publish(vm);
+            return Json(vm);
+        }
+
         [HttpPost]
         public IActionResult Delete(int id)
         {

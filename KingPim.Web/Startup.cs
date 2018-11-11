@@ -101,7 +101,7 @@ namespace KingPim.Web
             var runRoleSeed = Task.Run(async () => await roleSeed.CreateRoleIfEmpty()).Result;
             // var runUserRoleSeed = Task.Run(async () => await userRoleSeed.CreateUserRoleIfEmpty()).Result;
 
-            Seed.FillIfEmpty(ctx);
+            //Seed.FillIfEmpty(ctx);
         }
     }
 }

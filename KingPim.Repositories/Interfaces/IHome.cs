@@ -7,7 +7,5 @@ namespace KingPim.Repositories.Interfaces
 {
     public interface IHome
     {
-        IEnumerable<Category> GetAll();
-        Category Get(int id);
     }
 }

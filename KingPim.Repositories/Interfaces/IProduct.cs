@@ -1,8 +1,6 @@
 ﻿using KingPim.Models.Models;
 using KingPim.Models.ViewModels;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace KingPim.Repositories.Interfaces
 {
@@ -12,6 +10,7 @@ namespace KingPim.Repositories.Interfaces
         Product Get(int id);
         void Add(ProductViewModel newProduct);
         void Update(ProductViewModel updateProduct);
+        void Publish(ProductViewModel publishProduct);
         Product Delete(int id);
     }
 }

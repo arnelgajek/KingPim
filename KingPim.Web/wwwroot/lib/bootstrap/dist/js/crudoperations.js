@@ -25,16 +25,17 @@
             var id = $(this).attr('data-name');
         }
 
+        // Need to fix a if/else for the post depending if it is an category, product or attributegroup:
         $.ajax({
             type: 'POST',
             url: 'Category/Publish',
             data: { id: id, published: trufal },
             dataType: 'JSON',
             success: function () {
-                console.log('JIPPIEEE!!!');
+                console.log("The value for publish has been changed and updated in the Db!");
             },
             error: function () {
-                console.log('NOOOO...');
+                console.log("Whoops, something went wrong with the publish action...");
             }
         });
 

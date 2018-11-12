@@ -2,7 +2,7 @@
     <div class="sidebar-sticky">
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link active" asp-controller="Home" asp-action="Index">
+                <a class="nav-link active" asp-controller="Account" asp-action="Index">
                     <span data-feather="home"></span>
                     Dashboard <span class="sr-only">(current)</span>
                 </a>
@@ -10,7 +10,7 @@
             <li class="nav-item">
                 <a class="nav-link" asp-controller="Category" asp-action="Index">
                     <span data-feather="align-justify"></span>
-                    Category                 
+                    Category
                 </a>
             </li>
             <li class="nav-item">
@@ -35,6 +35,13 @@
                 <a class="nav-link" asp-controller="OneAttribute" asp-action="Index">
                     <span data-feather="align-left"></span>
                     Attribute
+                </a>
+            </li>
+            <li class="nav-item">
+                <!-- Connect to a modal if you have time? -->
+                <a class="nav-link" asp-controller="Account" asp-action="Index">
+                    <span data-feather="user-plus"></span>
+                    Add User
                 </a>
             </li>
         </ul>

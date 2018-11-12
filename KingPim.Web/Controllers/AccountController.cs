@@ -6,58 +6,42 @@ using System.Threading.Tasks;
 
 namespace KingPim.Web.Controllers
 {
+    [Authorize]
     public class AccountController : Controller
     {
         private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
 
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, RoleManager<IdentityRole> roleManager)
+        public AccountController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
-            _signInManager = signInManager;
             _roleManager = roleManager;
         }
 
-        [AllowAnonymous]
         public IActionResult Index()
         {
-            // Checks if the user is authenticated/signed in and redirectsthe user to Home: 
-            if (User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("Index", "Home");
-            }
-            else
-            {
-                // Otherwise, maybe return to an error page?
-                return View();
-            }
+            return View();
         }
 
-        // Checks if the password matches to the account, redirects the user to Admin:
-        [AllowAnonymous]
-        public async Task<IActionResult> Login(LoginViewModel vm)
+        [HttpPost]
+        public async Task<IActionResult> Add(AccountViewModel vm)
         {
-            if (ModelState.IsValid)
+            var user = new IdentityUser
             {
-                var user = await _userManager.FindByEmailAsync(vm.UserName);
-                if (user != null)
-                {
-                    await _signInManager.SignOutAsync();
-                    if ((await _signInManager.PasswordSignInAsync(user, vm.Password, false, false)).Succeeded)
-                    {
-                        return RedirectToAction("Index", "Home");
-                    }
-                }
-            }
-            return View("Index", vm);
-        }
+                UserName = vm.UserName,
+                Email = vm.UserName,
+                EmailConfirmed = true
+            };
 
-        // Sends the user back to the login page:
-        public async Task<IActionResult> Logout()
-        {
-            await _signInManager.SignOutAsync();
-            return RedirectToAction(nameof(Index));
+            var result = await _userManager.CreateAsync(user, vm.Password);
+
+            if (result.Succeeded)
+            {
+                var findByEmail = await _userManager.FindByEmailAsync(user.Email);
+
+                await _userManager.AddToRoleAsync(findByEmail, vm.Roles);
+            }
+            return View(nameof(Index));
         }
     }
 }

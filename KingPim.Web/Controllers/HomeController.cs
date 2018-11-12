@@ -53,11 +53,5 @@ namespace KingPim.Web.Controllers
             return View("Index", vm);
         }
 
-        // Sends the user back to the login page:
-        public async Task<IActionResult> Logout()
-        {
-            await _signInManager.SignOutAsync();
-            return RedirectToAction(nameof(Index));
-        }
     }
 }

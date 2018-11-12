@@ -15,5 +15,7 @@ namespace KingPim.Models.ViewModels
         [DataType(DataType.Password), Compare(nameof(Password))]
         [Required]
         public string ConfirmPassword { get; set; }
+        
+        public string Roles { get; set; }
     }
 }

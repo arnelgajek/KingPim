@@ -19,6 +19,7 @@ namespace KingPim.Web.Controllers
             _signInManager = signInManager;
             _roleManager = roleManager;
         }
+
         [AllowAnonymous]
         public IActionResult Index()
         {

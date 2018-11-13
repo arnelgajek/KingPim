@@ -23,6 +23,8 @@ namespace KingPim.Web.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            ViewBag.EntityType = "SubCategory";
+
             var subCatVm = new SubCategoryViewModel
             {
                 SubCategories = subCatrepo.GetAll(),
@@ -51,6 +53,13 @@ namespace KingPim.Web.Controllers
         {
             subCatrepo.Update(vm);
             return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public IActionResult Publish(SubCategoryViewModel vm)
+        {
+            subCatrepo.Publish(vm);
+            return Json(vm);
         }
 
         [HttpPost]

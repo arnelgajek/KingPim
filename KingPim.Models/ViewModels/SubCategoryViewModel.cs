@@ -7,6 +7,7 @@ namespace KingPim.Models.ViewModels
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public bool Published { get; set; }
         public int CategoryId { get; set; }
         public int SubCategoryId { get; set; }
         public int AttributeGroupId {get; set;}

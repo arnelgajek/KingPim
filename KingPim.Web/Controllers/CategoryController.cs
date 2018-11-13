@@ -18,9 +18,12 @@ namespace KingPim.Web.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            ViewBag.EntityType = "Category";
+
             var catVm = new CategoryViewModel
             {
-                Categories = catRepo.GetAll()
+                Categories = catRepo.GetAll(),
+
             };
             return View(catVm);
         }

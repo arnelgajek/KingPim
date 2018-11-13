@@ -8,9 +8,6 @@
         $('#deleteSomething').prop("disabled", !checkboxes.is(":checked"));
     });
 
-    // BG-COLOR PUBLISH:
-    // TODO: Need to set red bg-color if publishvalue = false, green bg-color if publishvalue = true.
-
     // PUBLISH:
     $('.publishchk').click(function () {
         cb = $(this);
@@ -25,10 +22,27 @@
             var id = $(this).attr('data-name');
         }
 
+        var url = "";
+        //var entityType = "@ViewBag.EntityType";
+
+        switch (entityType) {
+            case "Category":
+                url = "Category/Publish";
+                break;
+            case "SubCategory":
+                url = "SubCategory/Publish";
+                break;
+            case "Product":
+                url = "Product/Publish";
+                break;
+            default:
+                break;
+        }
+
         // Need to fix a if/else for the post depending if it is an category, product or attributegroup:
         $.ajax({
             type: 'POST',
-            url: 'Category/Publish',
+            url: url,
             data: { id: id, published: trufal },
             dataType: 'JSON',
             success: function () {
@@ -38,7 +52,6 @@
                 console.log("Whoops, something went wrong with the publish action...");
             }
         });
-
     });
 
     // CREATE:
@@ -87,32 +100,4 @@
 
         $('input[name="id"]').val(selected);
     }
-
-    $("#addAttributeBtn").on("click", function () {
-        $(".addAttribute").append(
-            "<div class='form-group' id='addAttributeForm'>" 
-            + "</br>"
-            + "<div class='form-group'>"
-            + "<input type='text' name='AttributeName' placeholder='Attribute Name...' class='form-control form-control-sm' /> </div>"
-            + "<div class='form-group'>"
-            + "<input type='text' name='Description' placeholder='Description...' class='form-control form-control-sm' /> </div>"
-            + "<div class='form-group'>"
-            + "<select class='form-control'>"
-            + "<option value='' disabled selected>Select a type</option>"
-            + "</br>"
-            + "<option>Number</option>"
-            + "<option>Text</option>"
-            + "<option>Checkbox</option>"
-            + "<option>Bool</option>"
-            + "</select>"
-            + "<button type='button' class='btn btn-success btn-sm' style='margin:5px'>Save</button>"
-            + "<button type='button' class='btn btn-danger btn-sm' id='deleteAttrBtn'>Delete</button>"
-            + "</div>"
-        );
-
-        $('#deleteAttrBtn').on("click", function () {
-            $(this).closest('#addAttributeForm').remove();
-            // After this function the user is not able to add a attribute again...
-        })
-    });
 });

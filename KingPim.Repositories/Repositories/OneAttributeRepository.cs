@@ -25,7 +25,7 @@ namespace KingPim.Repositories.Repositories
                     Name = vm.Name,
                     Description = vm.Description,
                     Type = vm.Type,
-                    AttributeGroup = null,
+                    AttributeGroupId = vm.AttributeGroupId,
                     AddedDate = DateTime.Now,
                     UpdatedDate = DateTime.Now,
                     Published = false,

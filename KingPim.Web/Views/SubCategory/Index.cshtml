@@ -8,7 +8,7 @@
 </div>
 
 <div class="container">
-    <h1>SubCategory</h1>
+    <h1>@ViewBag.EntityType</h1>
     <table class="table">
         <thead>
             <tr>
@@ -47,5 +47,9 @@
         }
     </table>
 </div>
+
+<script>
+    var entityType = '@ViewBag.EntityType';
+</script>
 
 @await Component.InvokeAsync("SubCategoryCrudVc", Model)

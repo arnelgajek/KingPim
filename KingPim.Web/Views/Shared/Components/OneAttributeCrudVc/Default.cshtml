@@ -10,19 +10,25 @@
             <form asp-controller="OneAttribute" asp-action="Add" method="post">
                 <div class="modal-body">
                     <div class="form-group">
-                        <p>
-                            <label asp-for="@Model.Name" hidden></label>
-                            <input type="text" asp-for="@Model.Name" placeholder="Name..." class="form-control form-control-sm" />
-                        </p>
+                        <label asp-for="@Model.Name" hidden></label>
+                        <input type="text" asp-for="@Model.Name" placeholder="Name..." class="form-control form-control-sm" />
                     </div>
                     <div class="form-group">
-                        <p>
-                            <label asp-for="@Model.Description" hidden></label>
-                            <input type="text" asp-for="@Model.Description" placeholder="Description..." class="form-control form-control-sm" />
-                        </p>
+                        <label asp-for="@Model.Description" hidden></label>
+                        <input type="text" asp-for="@Model.Description" placeholder="Description..." class="form-control form-control-sm" />
                     </div>
                     <div class="form-group">
-                        <select asp-for="AttributeGroupId" class="form-control" required>
+                        <label asp-for="@Model.Type" hidden></label>
+                        <select asp-for="@Model.Type" class="form-control">
+                            <option value="" selected disabled>Select a type</option>
+                            <option value="string">Text</option>
+                            <option value="int">Number</option>
+                            <option value="bool">Yes/No</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.AttributeGroupId" hidden></label>
+                        <select asp-for="@Model.AttributeGroupId" class="form-control" required>
                             <option value="" selected>Select an attribute group</option>
                             @foreach (var attrGr in Model.AttributeGroups)
                             {
@@ -49,39 +55,41 @@
             <div class="modal-header">
                 <h5 class="modal-title mx-auto text-center" id="updateModalLabel"><strong>UPDATE</strong></h5>
             </div>
-            <form asp-controller="OneAttribute" asp-action="Update" method="post">
+            <form asp-controller="OneAttribute" asp-action="Add" method="post">
                 <div class="modal-body">
                     <div class="form-group">
-                        <p class="text-center">
-                            <label asp-for="Name"><strong></strong></label>
-                            <input asp-for="Name" class="form-control form-control-sm" />
-                        </p>
+                        <label asp-for="@Model.Name" hidden></label>
+                        <input type="text" asp-for="@Model.Name" placeholder="Name..." class="form-control form-control-sm" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Description" hidden></label>
+                        <input type="text" asp-for="@Model.Description" placeholder="Description..." class="form-control form-control-sm" />
                     </div>
                     <div class="form-group">
                         <div class="form-group">
-                            <p>
-                                <label asp-for="@Model.Description" hidden></label>
-                                <input asp-for="@Model.Description" placeholder="Description..." class="form-control form-control-sm" />
-                            </p>
+                            <select class="form-control" name="Types">
+                                <option value="" selected disabled>Select a type</option>
+                                <option value="string">Text</option>
+                                <option value="int">Number</option>
+                                <option value="bool">Yes/No</option>
+                            </select>
                         </div>
                     </div>
-                    @*<div class="form-group">
-                        @foreach (var tp in Model)
-                        {
-                            <option value="@tp.Id">@tp.Name</option>
-                        }
-                    </div>*@
-                    @*<div class="form-group">
-                        @foreach (var attrGr in Model.AttributeGroups)
-                        {
-                            <option value="@attrGr.Id">@attGr.Name</option>
-                        }
-                    </div>*@
+                    <div class="form-group">
+                        <select asp-for="AttributeGroupId" class="form-control" required>
+                            <option value="" selected>Select an attribute group</option>
+                            @foreach (var attrGr in Model.AttributeGroups)
+                            {
+                                <option value="@attrGr.Id">@attrGr.Name</option>
+                            }
+                        </select>
+                    </div>
                 </div>
+                <p class="text-center"><strong>Make sure to save your changes.</strong></p>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
-                    <input type="hidden" name="id" value="@Model.Id" />
-                    <button type="submit" id="confirmUpdate" class="btn btn-success">Update</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <input type="hidden" name="oneattributeId" value="@Model.Id" />
+                    <button type="submit" id="updateSomething" class="btn btn-success">Update</button>
                 </div>
             </form>
         </div>

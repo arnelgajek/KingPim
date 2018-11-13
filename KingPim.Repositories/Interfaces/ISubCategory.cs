@@ -10,6 +10,7 @@ namespace KingPim.Repositories.Interfaces
         SubCategory Get(int id);
         void Add(SubCategoryViewModel newSubCategory);
         void Update(SubCategoryViewModel updateSubCategory);
+        void Publish(SubCategoryViewModel publishSubCategory);
         SubCategory Delete(int id);
     }
 }

@@ -1,4 +1,4 @@
-﻿@model CategoryViewModel
+﻿@model CategoryViewModel           
 
 <!-- CRUD-buttons to modals:-->
 <div class="float-sm-right" style="margin-bottom:10px; margin-top:80px">
@@ -8,7 +8,7 @@
 </div>
 
 <div class="container">
-    <h1>Category</h1>
+    <h1>@ViewBag.EntityType</h1>
     <table class="table">
         <thead>
             <tr>
@@ -42,10 +42,14 @@
                             }
                         }
                     }
-                        </tr>
+                </tr>
             </tbody>
         }
     </table>
 </div>
+
+<script>
+    var entityType = '@ViewBag.EntityType';
+</script>
 
 @await Component.InvokeAsync("CategoryCrudVc", Model)

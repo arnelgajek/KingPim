@@ -1,40 +1,40 @@
 ﻿@if (User.Identity.IsAuthenticated)
 {
-    <nav class="col-md-2 d-none d-md-block bg-light sidebar position-fixed" style="height:100%">
+    <nav class="col-md-2 d-none d-md-block bg-transparent sidebar shadow position-fixed" style="height:100%;">
         <div class="sidebar-sticky">
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link active" asp-controller="Account" asp-action="Index">
+                    <a class="nav-link active" asp-controller="Account" asp-action="Index" style="color:black;">
                         <span data-feather="home"></span>
                         Dashboard <span class="sr-only">(current)</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" asp-controller="Category" asp-action="Index">
+                    <a class="nav-link" asp-controller="Category" asp-action="Index" style="color:black;">
                         <span data-feather="align-justify"></span>
                         Category
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" asp-controller="SubCategory" asp-action="Index">
+                    <a class="nav-link" asp-controller="SubCategory" asp-action="Index" style="color:black;">
                         <span data-feather="align-left"></span>
                         SubCategory
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" asp-controller="Product" asp-action="Index">
+                    <a class="nav-link" asp-controller="Product" asp-action="Index" style="color:black;">
                         <span data-feather="shopping-cart"></span>
                         Product
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" asp-controller="AttributeGroup" asp-action="Index">
+                    <a class="nav-link" asp-controller="AttributeGroup" asp-action="Index" style="color:black;">
                         <span data-feather="align-justify"></span>
                         AttributeGroup
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" asp-controller="OneAttribute" asp-action="Index">
+                    <a class="nav-link" asp-controller="OneAttribute" asp-action="Index" style="color:black;">
                         <span data-feather="align-left"></span>
                         Attribute
                     </a>
@@ -43,11 +43,20 @@
                 {
                     <li class="nav-item">
                         <!-- Connect to a modal if you have time? -->
-                        <a class="nav-link" asp-controller="Account" asp-action="Index">
+                        <a class="nav-link" asp-controller="Account" asp-action="Index" style="color:black;">
                             <span data-feather="user-plus"></span>
                             Add User
                         </a>
                     </li>
+                }
+                @if (User.Identity.IsAuthenticated)
+                {
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Account" asp-action="Logout" style="color:black;">
+                        <span data-feather="log-out"></span>
+                    Sign Out
+                    </a>
+                </li>
                 }
             </ul>
         </div>

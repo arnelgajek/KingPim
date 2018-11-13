@@ -10,37 +10,12 @@
             <form asp-controller="AttributeGroup" asp-action="Add" method="post">
                 <div class="modal-body">
                     <div class="form-group">
-                        <p>
-                            <label asp-for="@Model.Name" hidden></label>
-                            <input type="text" asp-for="@Model.Name" placeholder="Name..." class="form-control form-control-sm" />
-                        </p>
+                        <label asp-for="@Model.Name" hidden></label>
+                        <input type="text" asp-for="@Model.Name" placeholder="Name..." class="form-control form-control-sm" />
                     </div>
                     <div class="form-group">
-                        <p>
-                            <label asp-for="@Model.Description" hidden></label>
-                            <input type="text" asp-for="@Model.Description" placeholder="Description..." class="form-control form-control-sm" />
-                        </p>
-                    </div>
-                    <div class="form-group">
-                        <select asp-for="OneAttributeId" class="form-control" required>
-                            <option value="" disabled selected>Select an attribute</option>
-                            @foreach (var oneAttr in Model.OneAttributes)
-                            {
-                                <option value="@oneAttr.Id">@oneAttr.Name</option>
-                            }
-                        </select>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <button type="button" class="btn btn-toolbar' btn btn-sm" style="margin-top:10px;" id="addAttributeBtn">Add +</button>
-                            <div class="addAttribute">
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div id="saveAddedAttributes">
-                                <!-- I'll maybe need this later on... -->
-                            </div>
-                        </div>
+                        <label asp-for="@Model.Description" hidden></label>
+                        <input type="text" asp-for="@Model.Description" placeholder="Description..." class="form-control form-control-sm" />
                     </div>
                     <p class="text-center"><strong>Make sure to save your changes.</strong></p>
                 </div>
@@ -74,27 +49,6 @@
                             <label asp-for="@Model.Description" hidden></label>
                             <input type="text" asp-for="@Model.Description" placeholder="Description..." class="form-control form-control-sm" />
                         </p>
-                    </div>
-                    <div class="form-group">
-                        <select asp-for="OneAttributeId" class="form-control" required>
-                            <option value="" disabled selected>Select an attribute</option>
-                            @foreach (var oneAttr in Model.OneAttributes)
-                            {
-                                <option value="@oneAttr.Id">@oneAttr.Name</option>
-                            }
-                        </select>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <button type="button" class="btn btn-toolbar' btn btn-sm" style="margin-top:10px;" id="addAttributeBtn">Add +</button>
-                            <div class="addAttribute">
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div id="saveAddedAttributes">
-                                <!-- I'll maybe need this later on... -->
-                            </div>
-                        </div>
                     </div>
                     <p class="text-center"><strong>Make sure to save your changes.</strong></p>
                 </div>

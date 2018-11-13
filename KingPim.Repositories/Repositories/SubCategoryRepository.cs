@@ -82,5 +82,17 @@ namespace KingPim.Repositories.Repositories
         {
             return _ctx.SubCategories;
         }
+
+        public void Publish(SubCategoryViewModel vm)
+        {
+            var ctxSubCategory = _ctx.SubCategories.FirstOrDefault(c => c.Id.Equals(vm.Id));
+
+            if (ctxSubCategory != null)
+            {
+                ctxSubCategory.Id = vm.Id;
+                ctxSubCategory.Published = vm.Published;
+            }
+            _ctx.SaveChanges();
+        }
     }
 }

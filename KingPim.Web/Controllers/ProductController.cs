@@ -21,6 +21,8 @@ namespace KingPim.Web.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            ViewBag.EntityType = "Product";
+
             var prodVm = new ProductViewModel
             {
                 Products = prodRepo.GetAll(),

@@ -53,13 +53,6 @@ namespace KingPim.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Publish(AttributeGroupViewModel vm)
-        {
-            attrGroupRepo.Publish(vm);
-            return Json(vm);
-        }
-
-        [HttpPost]
         public IActionResult Delete(int id)
         {
             var deleteAttrGroup = attrGroupRepo.Delete(id);

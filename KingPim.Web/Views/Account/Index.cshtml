@@ -3,32 +3,38 @@
 <div class="container">
     <h1 class="text-center" style="margin-bottom:50px;"><strong>Welcome to KingPim!</strong></h1>
     <div class="row">
-        <div class="col-12" style="background-color:lightgrey;margin-bottom:100px;border-radius:10px;">
-            <h3 class="text-center" style="margin-top:10px"><strong>Create Account</strong></h3>
-            <form asp-controller="Account" asp-action="Add" method="post">
-                <div class="form-group">
-                    <label asp-for="@Model.UserName"><strong></strong></label>
-                    <input asp-for="@Model.UserName" placeholder="UserName..." class="form-control form-control-sm" />
+        @if (User.Identity.IsAuthenticated)
+        {
+            @if (User.IsInRole("Administrator") || User.IsInRole("Publisher"))
+            {
+                <div class="col-12" style="background-color:lightgrey;margin-bottom:100px;border-radius:10px;">
+                    <h3 class="text-center" style="margin-top:10px"><strong>Create Account</strong></h3>
+                    <form asp-controller="Account" asp-action="Add" method="post">
+                        <div class="form-group">
+                            <label asp-for="@Model.UserName"><strong></strong></label>
+                            <input asp-for="@Model.UserName" placeholder="UserName..." class="form-control form-control-sm" />
 
-                    <label asp-for="@Model.Password"><strong></strong></label>
-                    <input asp-for="@Model.Password" placeholder="Password..." class="form-control form-control-sm" />
+                            <label asp-for="@Model.Password"><strong></strong></label>
+                            <input asp-for="@Model.Password" placeholder="Password..." class="form-control form-control-sm" />
 
-                    <label asp-for="@Model.ConfirmPassword"><strong></strong></label>
-                    <input asp-for="@Model.ConfirmPassword" placeholder="Confirm Password..." class="form-control form-control-sm" />
-                    <br />
-                    <div class="form-group">
-                        <select class="form-control" name="Roles">
-                            <option value="">Select a role</option>
-                            <option value="Administrator">Administrator</option>
-                            <option value="Editor">Editor</option>
-                            <option value="Publisher">Publisher</option>
-                        </select>
-                    </div>
+                            <label asp-for="@Model.ConfirmPassword"><strong></strong></label>
+                            <input asp-for="@Model.ConfirmPassword" placeholder="Confirm Password..." class="form-control form-control-sm" />
+                            <br />
+                            <div class="form-group">
+                                <select class="form-control" name="Roles">
+                                    <option value="">Select a role</option>
+                                    <option value="Administrator">Administrator</option>
+                                    <option value="Editor">Editor</option>
+                                    <option value="Publisher">Publisher</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="text-center" style="margin-bottom:50px;margin-top:100px;">
+                            <button type="submit" id="createAccount" class="btn btn-success">Create</button>
+                        </div>
+                    </form>
                 </div>
-                <div class="text-center" style="margin-bottom:50px;margin-top:100px;">
-                    <button type="submit" id="createAccount" class="btn btn-success">Create</button>
-                </div>
-            </form>
-        </div>
+            }
+        }
     </div>
 </div>

@@ -18,6 +18,9 @@
 </div>
 <div class="container mx-auto" style="width: 330px;">
     <div class="text-center">
-        <a style="color:red; margin-right:5px;"><strong>Forgotten password?</strong></a>
+        <a style="color:red; margin-right:5px;" name="passwordModalOpen" id="passwordModalOpen" data-toggle="modal" href="#passwordModal"><strong>Forgotten password?</strong></a>       
+
     </div>
 </div>
+
+@await Component.InvokeAsync("PasswordVc", Model)

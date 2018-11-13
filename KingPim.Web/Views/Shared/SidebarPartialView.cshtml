@@ -1,44 +1,44 @@
-﻿<nav class="col-md-2 d-none d-md-block bg-light sidebar position-fixed" style="height:100%">
-    <div class="sidebar-sticky">
-        <ul class="nav flex-column">
-            <li class="nav-item">
-                <a class="nav-link active" asp-controller="Account" asp-action="Index">
-                    <span data-feather="home"></span>
-                    Dashboard <span class="sr-only">(current)</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" asp-controller="Category" asp-action="Index">
-                    <span data-feather="align-justify"></span>
-                    Category
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" asp-controller="SubCategory" asp-action="Index">
-                    <span data-feather="align-left"></span>
-                    SubCategory
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" asp-controller="Product" asp-action="Index">
-                    <span data-feather="shopping-cart"></span>
-                    Product
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" asp-controller="AttributeGroup" asp-action="Index">
-                    <span data-feather="align-justify"></span>
-                    AttributeGroup
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" asp-controller="OneAttribute" asp-action="Index">
-                    <span data-feather="align-left"></span>
-                    Attribute
-                </a>
-            </li>
-            @if (User.Identity.IsAuthenticated)
-            {
+﻿@if (User.Identity.IsAuthenticated)
+{
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar position-fixed" style="height:100%">
+        <div class="sidebar-sticky">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link active" asp-controller="Account" asp-action="Index">
+                        <span data-feather="home"></span>
+                        Dashboard <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Category" asp-action="Index">
+                        <span data-feather="align-justify"></span>
+                        Category
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="SubCategory" asp-action="Index">
+                        <span data-feather="align-left"></span>
+                        SubCategory
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Product" asp-action="Index">
+                        <span data-feather="shopping-cart"></span>
+                        Product
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="AttributeGroup" asp-action="Index">
+                        <span data-feather="align-justify"></span>
+                        AttributeGroup
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="OneAttribute" asp-action="Index">
+                        <span data-feather="align-left"></span>
+                        Attribute
+                    </a>
+                </li>
                 @if (User.IsInRole("Administrator"))
                 {
                     <li class="nav-item">
@@ -49,15 +49,15 @@
                         </a>
                     </li>
                 }
-            }
-        </ul>
-    </div>
-</nav>
+            </ul>
+        </div>
+    </nav>
+}
 
-<script src="https://unpkg.com/feather-icons"></script>
-<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-<script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script>
         feather.replace();
-</script>
-<script src="~/lib/jquery/jquery.min.js"></script>
-<script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    </script>
+    <script src="~/lib/jquery/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>

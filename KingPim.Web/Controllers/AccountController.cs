@@ -25,6 +25,7 @@ namespace KingPim.Web.Controllers
             return View();
         }
 
+        // Allows the Administrator to add a new user and does the connection with FK for User and Roles to Db:
         [HttpPost]
         public async Task<IActionResult> Add(AccountViewModel vm)
         {
@@ -45,6 +46,16 @@ namespace KingPim.Web.Controllers
             }
             return View(nameof(Index));
         }
+
+        // If the user has forgotten his/hers password:
+        [AllowAnonymous]
+        public IActionResult SendEmail(AccountViewModel vm)
+        {
+            return View();
+        }
+
+        // Send the resetlink via mail to the users mail:
+
 
         // Sends the user back to the login page:
         public async Task<IActionResult> Logout()

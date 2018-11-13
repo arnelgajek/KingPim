@@ -30,16 +30,19 @@ namespace KingPim.Web
             var conn = _configuration.GetConnectionString("KingPim");
 
             // Service for the DB connection:
-            services.AddDbContext<ApplicationDbContext>(options => options.UseLazyLoadingProxies().UseSqlServer(conn));
+            services.AddDbContext<ApplicationDbContext>(options =>
+            options.UseLazyLoadingProxies().UseSqlServer(conn));
 
             // Service for Identity:
-            services.AddIdentity<IdentityUser, IdentityRole>()
+            services.AddIdentity<IdentityUser, IdentityRole>(config =>
+            {
+                config.SignIn.RequireConfirmedEmail = true;
+            })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
             services.AddTransient<IIdentitySeed, IdentitySeed>();
             services.AddTransient<IRoleSeed, RoleSeed>();
-            // services.AddTransient<IUserRoleSeed, UserRoleSeed>();
             services.AddTransient<ICategory, CategoryRepository>();
             services.AddTransient<ISubCategory, SubCategoryRepository>();
             services.AddTransient<IProduct, ProductRepository>();
@@ -69,11 +72,11 @@ namespace KingPim.Web
 
             services.AddMvc();
             services.AddMemoryCache();
-            services.AddSession();
+            services.AddSession();               
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ApplicationDbContext ctx, IIdentitySeed identitySeed, IRoleSeed roleSeed/*, IUserRoleSeed userRoleSeed*/)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ApplicationDbContext ctx, IIdentitySeed identitySeed, IRoleSeed roleSeed)
         {
             if (env.IsDevelopment())
             {
@@ -83,11 +86,8 @@ namespace KingPim.Web
 
             // To get access to the wwwroot files:
             app.UseStaticFiles();
-
             app.UseAuthentication();
-
             app.UseMvcWithDefaultRoute();
-
             app.UseSession();
 
             app.UseMvc(routes =>
@@ -99,7 +99,6 @@ namespace KingPim.Web
 
             var runIdentitySeed = Task.Run(async () => await identitySeed.CreateAdminAccountIfEmpty()).Result;
             var runRoleSeed = Task.Run(async () => await roleSeed.CreateRoleIfEmpty()).Result;
-            // var runUserRoleSeed = Task.Run(async () => await userRoleSeed.CreateUserRoleIfEmpty()).Result;
 
             //Seed.FillIfEmpty(ctx);
         }

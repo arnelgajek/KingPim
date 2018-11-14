@@ -39,7 +39,6 @@
                 break;
         }
 
-        // Need to fix a if/else for the post depending if it is an category, product or attributegroup:
         $.ajax({
             type: 'POST',
             url: url,
@@ -59,6 +58,37 @@
         $('#createModal').on('show.bs.modal', function () {
             var modal = $(this);
             modal.find('.modal-body select');
+
+            $('#addSubCatForm').submit(function (e) {
+                e.preventDefault;
+
+                var formData = new FormData();
+                var inputValue = $('#addSubCatForm input').val();
+                formData.append('name', inputValue);
+
+                var catSelectValue = $('#catSelect').val();
+                formData.append('categoryId', catSelectValue);
+
+                // var attGrSelectValue = $('#attGrSelect').val();
+                $('#attGrSelect').each(function () {
+                    formData.append('attributegroupId', $(this).val());
+                });
+                
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/SubCategory/Add',
+                    data: formData,
+                    dataType: 'JSON',
+                    success: function () {
+                        console.log("WIHUUUUUU!");
+                        window.location.href() = data;
+                    },
+                    error: function () {
+                        console.log("DOOOOOOEEEHHHHH!");
+                    }
+                });
+            });
         });
     });
 

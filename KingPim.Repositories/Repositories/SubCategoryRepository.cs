@@ -21,17 +21,21 @@ namespace KingPim.Repositories.Repositories
             if (vm.Id == 0)
             {
                 var testList = new List<SubCategoryAttributeGroup>();
-                var newSubCategoryAttributeGroup = new SubCategoryAttributeGroup
+
+                foreach (var attrGrId in vm.AttributeGroupId)
                 {
-                    SubCategoryId = vm.SubCategoryId,
-                    AttributeGroupId = vm.AttributeGroupId,
-                };
-                testList.Add(newSubCategoryAttributeGroup);
+                    var newSubCategoryAttributeGroup = new SubCategoryAttributeGroup
+                    {
+                        SubCategoryId = vm.SubCategoryId,
+                        AttributeGroupId = attrGrId,
+                    };
+                    testList.Add(newSubCategoryAttributeGroup);
+                }
 
                 var newSubCategory = new SubCategory
                 {
                     Name = vm.Name,
-                    CategoryId = vm.CategoryId,
+                    CategoryId = vm.CategoryId,                    
                     SubCategoryAttributeGroups = testList,
                     AddedDate = DateTime.Now,
                     UpdatedDate = DateTime.Now,

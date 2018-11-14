@@ -5,9 +5,9 @@
     <div class="row">
         @if (User.Identity.IsAuthenticated)
         {
-            @if (User.IsInRole("Administrator") || User.IsInRole("Publisher"))
+            @if (User.IsInRole("Administrator"))
             {
-                <div class="col-12" style="background-color:lightgrey;margin-bottom:100px;border-radius:10px;">
+                <div class="col-4" style="background-color:lightgrey;margin-bottom:100px;border-radius:10px;">
                     <h3 class="text-center" style="margin-top:10px"><strong>Create Account</strong></h3>
                     <form asp-controller="Account" asp-action="Add" method="post">
                         <div class="form-group">
@@ -33,6 +33,33 @@
                             <button type="submit" id="createAccount" class="btn btn-success">Create</button>
                         </div>
                     </form>
+                </div>
+                <div class="col-4" style="background-color:lightgreen;margin-bottom:100px;border-radius:10px;">
+                    <h3 class="text-center" style="margin-top:10px"><strong>Change Password</strong></h3>
+                    <form asp-controller="Account" asp-action="Add" method="post">
+                        <div class="form-group">
+                            <label asp-for="@Model.UserName"><strong></strong></label>
+                            <input asp-for="@Model.UserName" placeholder="UserName..." class="form-control form-control-sm" />
+
+                            <label asp-for="@Model.Password"><strong></strong></label>
+                            <input asp-for="@Model.Password" placeholder="Password..." class="form-control form-control-sm" />
+
+                            <label asp-for="@Model.ConfirmPassword"><strong></strong></label>
+                            <input asp-for="@Model.ConfirmPassword" placeholder="Confirm Password..." class="form-control form-control-sm" />
+                            <br />
+                        </div>
+                        <div class="text-center" style="margin-bottom:50px;margin-top:100px;">
+                            <button type="submit" id="createAccount" class="btn btn-success">Change</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-4" style="background-color:lightcoral;margin-bottom:100px;border-radius:10px;">
+                    <h3 class="text-center" style="margin-top:10px"><strong>All the Users</strong></h3>
+                    <br />
+                    @foreach (var user in Model.Users)
+                    {
+                        <h5 class="text-center"><strong>@user</strong></h5>
+                    }
                 </div>
             }
         }

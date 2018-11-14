@@ -20,9 +20,15 @@ namespace KingPim.Web.Controllers
             _signInManager = signInManager;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(AccountViewModel vm)
         {
-            return View();
+            var userRoleInfo = new AccountViewModel
+
+            {
+                Users = _userManager.Users
+            };
+
+            return View(userRoleInfo);
         }
 
         // Allows the Administrator to add a new user and does the connection with FK for User and Roles to Db:
@@ -44,8 +50,12 @@ namespace KingPim.Web.Controllers
 
                 await _userManager.AddToRoleAsync(findByEmail, vm.Roles);
             }
-            return View(nameof(Index));
+            return RedirectToAction(nameof(Index));
         }
+
+        // Forgotten Password:
+        
+        // Change Password:
 
         // Sends the user back to the login page:
         public async Task<IActionResult> Logout()

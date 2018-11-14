@@ -1,6 +1,6 @@
 ﻿@model AccountViewModel
 
-<!-- This is the deleteModal to delete a attributegroup: -->
+<!-- This is the passwordModal to reset a password: -->
 <div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="passwordModal" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -8,7 +8,7 @@
                 <h5 class="modal-title mx-auto text-center" id="passwordModalLabel"><strong>RESET PASSWORD</strong></h5>
             </div>
             <div class="modal-body center">
-                <form asp-controller="Account" asp-action="SendMail" method="post">
+                <form asp-controller="Account" asp-action="SendPasswordResetLink" method="post">
                     <div class="modal-body">
                         <div class="form-group">
                                 <label asp-for="@Model.UserName"><strong></strong></label>
@@ -18,7 +18,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
-                        <button type="submit" id="resetPassword" class="btn btn-success">Send Link</button>
+                        <button type="submit" value="Reset Password" id="resetPassword" class="btn btn-success">Send Link</button>
                     </div>
                 </form>
             </div>

@@ -1,55 +1,64 @@
 ﻿@model SubCategoryViewModel
 
-<!-- CRUD-buttons to modals:-->
-<div class="float-sm-right" style="margin-bottom:10px; margin-top:80px">
-    <button type="button" class="btn btn-md btn-success" name="createSomething" id="createSomething" data-toggle="modal" data-target="#createModal" data-name="@Model.SubCategories">Create</button>
-    <button type="button" class="btn btn-md btn-warning" name="updateSomething" id="updateSomething" data-toggle="modal" data-target="#updateModal" disabled>Update</button>
-    <button type="button" class="btn btn-md btn-danger" name="deleteSomething" id="deleteSomething" data-toggle="modal" data-target="#deleteModal" disabled>Delete</button>
-</div>
-
+<!-- EXPORT-buttons: -->
 <div class="container">
-    <h1>@ViewBag.EntityType</h1>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Name:</th>
-                <th scope="col">Added Date:</th>
-                <th scope="col">Updated Date:</th>
-                <th scope="col">Published:</th>
-            </tr>
-        </thead>
-        @foreach (var subCat in Model.SubCategories)
-        {
-            <tbody>
+    @*<div class="float-sm-left" style="margin-bottom:10px; margin-top:80px;">
+        <a asp-controller="SubCategory" asp-action="GetAllSubCategoriesToXml" class="btn btn-info btn-md" asp-route-id="@Model.Id">Export XML</a>
+        <a asp-controller="SubCategory" asp-action="GetAllSubCategoriesToJson" class="btn btn-info btn-md" asp-route-id="@Model.Id">Export Json</a>
+    </div>*@
+    <!-- CRUD-buttons to modals:-->
+    <div class="float-sm-right" style="margin-bottom:10px; margin-top:80px">
+        <button type="button" class="btn btn-md btn-success" name="createSomething" id="createSomething" data-toggle="modal" data-target="#createModal" data-name="@Model.SubCategories">Create</button>
+        <button type="button" class="btn btn-md btn-warning" name="updateSomething" id="updateSomething" data-toggle="modal" data-target="#updateModal" disabled>Update</button>
+        <button type="button" class="btn btn-md btn-danger" name="deleteSomething" id="deleteSomething" data-toggle="modal" data-target="#deleteModal" disabled>Delete</button>
+    </div>
+
+        <h1>@ViewBag.EntityType</h1>
+        <table class="table">
+            <thead>
                 <tr>
-                    <th scope="row">
-                        <input type="checkbox" class="chk" value="@subCat.Id" data-name="@subCat.Name" />
-                        @subCat.Name
-                    </th>
-                    <td>@subCat.AddedDate.ToString("yyyy-MM-dd")</td>
-                    <td>@subCat.UpdatedDate.ToString("yyyy-MM-dd")</td>
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        @if (User.IsInRole("Administrator") || User.IsInRole("Publisher"))
+                    <th scope="col">Name:</th>
+                    <th scope="col">Added Date:</th>
+                    <th scope="col">Updated Date:</th>
+                    <th scope="col">Export XML:</th>
+                    <th scope="col">Export JSON:</th>
+                    <th scope="col">Published:</th>
+                </tr>
+            </thead>
+            @foreach (var subCat in Model.SubCategories)
+            {
+                <tbody>
+                    <tr>
+                        <th scope="row">
+                            <input type="checkbox" class="chk" value="@subCat.Id" data-name="@subCat.Name" />
+                            @subCat.Name
+                        </th>
+                        <td>@subCat.AddedDate.ToString("yyyy-MM-dd")</td>
+                        <td>@subCat.UpdatedDate.ToString("yyyy-MM-dd")</td>
+                        <td><button type="submit" class="btn btn-info btn-sm">Export XML</button></td>
+                        <td><button type="submit" class="btn btn-info btn-sm">Export JSON</button></td>
+                        @if (User.Identity.IsAuthenticated)
                         {
-                            @if (subCat.Published == true)
+                            @if (User.IsInRole("Administrator") || User.IsInRole("Publisher"))
                             {
-                                <td><input type="checkbox" class="publishchk" for="Published" value="@subCat.Published" data-name="@subCat.Id" checked /></td>
-                            }
-                            @if (subCat.Published == false)
-                            {
-                                <td><input type="checkbox" class="publishchk" for="Published" value="@subCat.Published" data-name="@subCat.Id" /></td>
+                                @if (subCat.Published == true)
+                                {
+                                    <td><input type="checkbox" class="publishchk" for="Published" value="@subCat.Published" data-name="@subCat.Id" checked /></td>
+                                }
+                                @if (subCat.Published == false)
+                                {
+                                    <td><input type="checkbox" class="publishchk" for="Published" value="@subCat.Published" data-name="@subCat.Id" /></td>
+                                }
                             }
                         }
-                    }
-                </tr>
-            </tbody>
-        }
-    </table>
-</div>
+                    </tr>
+                </tbody>
+            }
+        </table>
+    </div>
 
-<script>
+    <script>
     var entityType = '@ViewBag.EntityType';
-</script>
+    </script>
 
-@await Component.InvokeAsync("SubCategoryCrudVc", Model)
+    @await Component.InvokeAsync("SubCategoryCrudVc", Model)

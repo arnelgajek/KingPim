@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using KingPim.Repositories;
 using KingPim.Repositories.Repositories;
 using KingPim.Repositories.Interfaces;
+using Newtonsoft.Json;
 
 namespace KingPim.Web
 {
@@ -25,6 +26,11 @@ namespace KingPim.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            // So the Json() in the controller will return correctly:
+            services.AddMvc().AddJsonOptions(options => {
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            });
 
             // Configuration for DB connection:
             var conn = _configuration.GetConnectionString("KingPim");
@@ -70,7 +76,10 @@ namespace KingPim.Web
                 // options.User.RequireUniqueEmail = true;
             });
 
-            services.AddMvc();
+            services.AddMvc()
+                  // To return data in XML.
+                .AddXmlSerializerFormatters()
+                .AddXmlDataContractSerializerFormatters();
             services.AddMemoryCache();
             services.AddSession();               
         }

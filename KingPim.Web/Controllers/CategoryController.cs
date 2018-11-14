@@ -1,7 +1,11 @@
 ﻿using KingPim.Models.ViewModels;
 using KingPim.Repositories;
+using KingPim.Web.Infrastructure.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using System.Linq;
+using System.Text;
 
 namespace KingPim.Web.Controllers
 {
@@ -68,6 +72,48 @@ namespace KingPim.Web.Controllers
 
             }
             return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        [Produces("application/json")]
+        public IActionResult GetAllCategoriesToJson(int id)
+        {
+            var allCategories = catRepo.GetAll();
+            var getCategories = ExportHelper.GetCategoriesToXml(allCategories);
+            var selCategory = getCategories.FirstOrDefault(c => c.Id.Equals(id));
+            
+            if (id == 0)
+            {
+                var catJson = JsonConvert.SerializeObject(getCategories);
+                var catBytes = Encoding.UTF8.GetBytes(catJson);
+                return File(catBytes, "application/octet-stream", "jsoncategories.json");
+            }
+            else
+            {
+                var selCatJson = JsonConvert.SerializeObject(selCategory);
+                var catBytes = Encoding.UTF8.GetBytes(selCatJson);
+                return File(catBytes, "application/octet-stream", "categoryid" + id +  ".json");
+            }
+        }
+
+        [HttpGet]
+        [Produces("application/xml")]
+        public IActionResult GetAllCategoriesToXml(int id)
+        {
+            // Gets all the categories:
+            var allCategories = catRepo.GetAll();
+            // Sends us to the XmlHelper method:
+            var getCategoriesToXml = ExportHelper.GetCategoriesToXml(allCategories);
+            var specificCategory = getCategoriesToXml.FirstOrDefault(c => c.Id.Equals(id));
+
+            if (id == 0)
+            {
+                return Ok(getCategoriesToXml);
+            }
+            else
+            {
+                return Ok(specificCategory);
+            }
         }
     }
 }

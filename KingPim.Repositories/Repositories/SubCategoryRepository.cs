@@ -26,7 +26,6 @@ namespace KingPim.Repositories.Repositories
                     SubCategoryId = vm.SubCategoryId,
                     AttributeGroupId = vm.AttributeGroupId,
                 };
-                //_ctx.SubCategoryAttributeGroups.Add(newSubCategoryAttributeGroup);
                 testList.Add(newSubCategoryAttributeGroup);
 
                 var newSubCategory = new SubCategory
@@ -34,7 +33,6 @@ namespace KingPim.Repositories.Repositories
                     Name = vm.Name,
                     CategoryId = vm.CategoryId,
                     SubCategoryAttributeGroups = testList,
-                    //SubCategoryAttributeGroups = vm.SubCategoryAttributeGroups,
                     AddedDate = DateTime.Now,
                     UpdatedDate = DateTime.Now,
                     Published = false,

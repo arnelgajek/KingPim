@@ -10,7 +10,7 @@ namespace KingPim.Models.ViewModels
         public bool Published { get; set; }
         public int CategoryId { get; set; }
         public int SubCategoryId { get; set; }
-        public int AttributeGroupId {get; set;}
+        public List<int> AttributeGroupId {get; set;}
         public IEnumerable<Category> Categories { get; set; }
         public IEnumerable<SubCategory> SubCategories { get; set; }
         public IEnumerable<AttributeGroup> AttributeGroups { get; set; }

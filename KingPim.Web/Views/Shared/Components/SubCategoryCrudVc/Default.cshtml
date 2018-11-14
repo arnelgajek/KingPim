@@ -7,16 +7,14 @@
             <div class="modal-header">
                 <h5 class="modal-title mx-auto text-center" id="createModalLabel"><strong>CREATE</strong></h5>
             </div>
-            <form asp-controller="SubCategory" asp-action="Add" method="post">
+            <form asp-controller="SubCategory" asp-action="Add" method="post" id="addSubCatForm">
                 <div class="modal-body">
                     <div class="form-group">
-                        <p>
-                            <label asp-for="@Model.Name" hidden></label>
-                            <input type="text" asp-for="@Model.Name" placeholder="Name..." class="form-control form-control-sm" />
-                        </p>
+                            <label for="Name" hidden></label>
+                            <input type="text" name="Name" placeholder="Name..." class="form-control form-control-sm" />
                     </div>
                     <div class="form-group">
-                        <select asp-for="CategoryId" class="form-control" required>
+                        <select name="CategoryId" class="form-control" required id="catSelect">
                             <option value="" disabled selected>Select a category</option>
                             @foreach (var cat in Model.Categories)
                             {
@@ -25,7 +23,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <select asp-for="AttributeGroupId" class="form-control" required>
+                        <select name="AttributeGroupId" class="form-control" required multiple id="attGrSelect">
                             <option value="" disabled selected>Select an attribute group</option>
                             @foreach (var attr in Model.AttributeGroups)
                             {
@@ -39,7 +37,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
                     <input type="hidden" name="categoryId" value="@Model.Id" />
-                    <button type="submit" id="createSomething" class="btn btn-success">Create</button>
+                    <button type="submit" id="createSomethingBtn" class="btn btn-success">Create</button>
                 </div>
             </form>
         </div>

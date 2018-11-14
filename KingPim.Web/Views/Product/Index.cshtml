@@ -25,8 +25,11 @@
                 <th scope="col">Updated Date:</th>
                 <th scope="col">Export XML:</th>
                 <th scope="col">Export JSON:</th>
-                <th scope="col">Published:</th>
-            </tr>
+                @if (User.IsInRole("Administrator") || User.IsInRole("Publisher"))
+                {
+                    <th scope="col">Published:</th>
+                }
+                </tr>
         </thead>
         @foreach (var prod in Model.Products)
         {

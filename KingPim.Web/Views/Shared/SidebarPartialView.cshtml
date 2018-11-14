@@ -39,16 +39,15 @@
                         Attribute
                     </a>
                 </li>
-                @if (User.IsInRole("Administrator"))
+                @*@if (User.IsInRole("Administrator"))
                 {
                     <li class="nav-item">
-                        <!-- Connect to a modal if you have time? -->
                         <a class="nav-link" asp-controller="Account" asp-action="Add" style="color:black;">
                             <span data-feather="user-plus"></span>
                             Add User
                         </a>
                     </li>
-                }
+                }*@
                 @if (User.Identity.IsAuthenticated)
                 {
                 <li class="nav-item">

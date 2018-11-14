@@ -10,5 +10,6 @@ namespace KingPim.Models.ViewModels
         public bool Published { get; set; }
         public int CategoryId { get; }
         public IEnumerable<Category> Categories { get; set; }
+        public IEnumerable<SubCategoryViewModel> SubCategories { get; set; }
     }
 }

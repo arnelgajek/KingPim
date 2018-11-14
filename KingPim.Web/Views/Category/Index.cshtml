@@ -1,13 +1,19 @@
 ﻿@model CategoryViewModel           
 
-<!-- CRUD-buttons to modals:-->
-<div class="float-sm-right" style="margin-bottom:10px; margin-top:80px">
-    <button type="button" class="btn btn-md btn-success" name="createSomething" id="createSomething" data-toggle="modal" data-target="#createModal" data-name="@Model.Categories">Create</button>
-    <button type="button" class="btn btn-md btn-warning" name="updateSomething" id="updateSomething" data-toggle="modal" data-target="#updateModal" disabled>Update</button>
-    <button type="button" class="btn btn-md btn-danger" name="deleteSomething" id="deleteSomething" data-toggle="modal" data-target="#deleteModal" disabled>Delete</button>
-</div>
-
+<!-- EXPORT-buttons: -->
 <div class="container">
+    <div class="float-sm-left" style="margin-bottom:10px; margin-top:80px;">
+        <a asp-controller="Category" asp-action="GetAllCategoriesToXml" class="btn btn-info btn-md">Export XML</a>
+        <a asp-controller="Category" asp-action="GetAllCategoriesToJson" class="btn btn-info btn-md">Export Json</a>
+    </div>
+
+    <!-- CRUD-buttons to modals:-->
+    <div class="float-sm-right" style="margin-bottom:10px; margin-top:80px">
+        <button type="button" class="btn btn-md btn-success" name="createSomething" id="createSomething" data-toggle="modal" data-target="#createModal" data-name="@Model.Categories">Create</button>
+        <button type="button" class="btn btn-md btn-warning" name="updateSomething" id="updateSomething" data-toggle="modal" data-target="#updateModal" disabled>Update</button>
+        <button type="button" class="btn btn-md btn-danger" name="deleteSomething" id="deleteSomething" data-toggle="modal" data-target="#deleteModal" disabled>Delete</button>
+    </div>
+
     <h1>@ViewBag.EntityType</h1>
     <table class="table">
         <thead>
@@ -15,6 +21,8 @@
                 <th scope="col">Name:</th>
                 <th scope="col">Added Date:</th>
                 <th scope="col">Updated Date:</th>
+                <th scope="col">Export XML:</th>
+                <th scope="col">Export JSON:</th>
                 <th scope="col">Published:</th>
             </tr>
         </thead>
@@ -28,6 +36,8 @@
                     </th>
                     <td>@cat.AddedDate.ToString("yyyy-MM-dd")</td>
                     <td>@cat.UpdatedDate.ToString("yyyy-MM-dd")</td>
+                    <td><a asp-controller="Category" asp-action="GetAllCategoriesToXml" class="btn btn-info btn-sm" asp-route-id="@cat.Id">Export XML</a></td>
+                    <td><a asp-controller="Category" asp-action="GetAllCategoriesToJson" class="btn btn-info btn-sm" asp-route-id="@cat.Id">Export Json</a></td>
                     @if (User.Identity.IsAuthenticated)
                     {
                         @if (User.IsInRole("Administrator") || User.IsInRole("Publisher"))

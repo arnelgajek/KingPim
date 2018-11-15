@@ -20,8 +20,6 @@ namespace KingPim.Web.Components
 
         public IViewComponentResult Invoke(int id)
         {
-
-
             var prodDetailsVm = new ProductDetailsViewModel()
             {
                 Product = prodRepo.Get(id),

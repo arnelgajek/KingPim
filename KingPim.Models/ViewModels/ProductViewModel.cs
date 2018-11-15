@@ -11,7 +11,9 @@ namespace KingPim.Models.ViewModels
         public string Price { get; set; }
         public bool Published { get; set; }
         public int SubCategoryId { get; set; }
+        public int AttributeGroupId { get; set; }
         public IEnumerable<Product> Products { get; set; }
         public IEnumerable<SubCategory> SubCategories {get; set; }
+        public IEnumerable<AttributeGroup> AttributeGroups { get; set; }
     }
 }

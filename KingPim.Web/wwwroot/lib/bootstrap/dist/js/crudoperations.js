@@ -6,6 +6,7 @@
         $('#createSomething').prop("disabled", checkboxes.is(":checked"));
         $('#updateSomething').prop("disabled", !checkboxes.is(":checked"));
         $('#deleteSomething').prop("disabled", !checkboxes.is(":checked"));
+        $('#productDetails').prop("disabled", !checkboxes.is(":checked"));
     });
 
     // PUBLISH:
@@ -72,8 +73,7 @@
                 // var attGrSelectValue = $('#attGrSelect').val();
                 $('#attGrSelect').each(function () {
                     formData.append('attributegroupId', $(this).val());
-                });
-                
+                });                
 
                 $.ajax({
                     type: 'POST',
@@ -111,6 +111,17 @@
             var modal = $(this);
             var name = $(".table").find("input:checked").attr("data-name");
             modal.find('.modal-body p strong').text('You are about to delete "' + name + '"');
+        });
+    });
+
+    // DETAILS:
+    $('#productDetails').click(function () {
+        getValueUsingClass();
+
+        $('#detailsModal').on('show.bs.modal', function () {
+            var modal = $(this);
+            var name = $(".table").find("input:checked").attr("data-name");
+            modal.find('#detailsModalLabel strong').text('Product details for "' + name + '"');
         });
     });
 

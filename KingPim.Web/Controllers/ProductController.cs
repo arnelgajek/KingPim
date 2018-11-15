@@ -1,4 +1,5 @@
-﻿using KingPim.Models.ViewModels;
+﻿using KingPim.Data;
+using KingPim.Models.ViewModels;
 using KingPim.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -8,14 +9,15 @@ namespace KingPim.Web.Controllers
     [Authorize]
     public class ProductController : Controller
     {
-        // TODO: Don't forget to add authorization!
         private IProduct prodRepo;
-        private ISubCategory subCatrepo;
+        private ISubCategory subCatRepo;
+        private IAttributeGroup attrGrRepo;
 
-        public ProductController(IProduct prodRepository, ISubCategory subCatRepository)
+        public ProductController(IProduct prodRepository, ISubCategory subCatRepository, IAttributeGroup attrGrRepository)
         {
             prodRepo = prodRepository;
-            subCatrepo = subCatRepository;
+            subCatRepo = subCatRepository;
+            attrGrRepo = attrGrRepository;
         }
 
         [HttpGet]
@@ -26,7 +28,8 @@ namespace KingPim.Web.Controllers
             var prodVm = new ProductViewModel
             {
                 Products = prodRepo.GetAll(),
-                SubCategories = subCatrepo.GetAll()
+                SubCategories = subCatRepo.GetAll(),
+                AttributeGroups = attrGrRepo.GetAll()
             };
             
             return View(prodVm);

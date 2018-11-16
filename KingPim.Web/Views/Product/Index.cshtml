@@ -21,14 +21,12 @@
                 <th scope="col">Name:</th>
                 <th scope="col">Description:</th>
                 <th scope="col">Price:</th>
-                @*<th scope="col">Added Date:</th>
-                <th scope="col">Updated Date:</th>*@
                 <th scope="col">Export XML:</th>
                 <th scope="col">Export JSON:</th>
                 @if (User.IsInRole("Administrator") || User.IsInRole("Publisher"))
                 {
                     <th scope="col">Published:</th>
-                }
+                } 
                 <th><a>Details:</a></th>
             </tr>
         </thead>
@@ -39,8 +37,6 @@
                     <th scope="row"><input type="checkbox" class="chk" value="@prod.Id" data-name="@prod.Name" data-prodSubCat="@prod.SubCategory.SubCategoryAttributeGroups"/> @prod.Name</th>
                     <td><p><i>@prod.Description</i></p></td>
                     <td>@prod.Price:-</td>
-                    @*<td>@prod.AddedDate.ToString("yyyy-MM-dd")</td>
-                    <td>@prod.UpdatedDate.ToString("yyyy-MM-dd")</td>*@
                     <td><button type="submit" class="btn btn-info btn-sm">Export XML</button></td>
                     <td><button type="submit" class="btn btn-info btn-sm">Export JSON</button></td>
                     @if (User.Identity.IsAuthenticated)

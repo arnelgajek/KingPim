@@ -12,19 +12,21 @@ namespace KingPim.Web.Controllers
         private IProduct prodRepo;
         private ISubCategory subCatRepo;
         private IAttributeGroup attrGrRepo;
+        private IProductOneAttributeValues prodOneAttrValRepo;
 
-        public ProductController(IProduct prodRepository, ISubCategory subCatRepository, IAttributeGroup attrGrRepository)
+        public ProductController(IProduct prodRepository, ISubCategory subCatRepository, IAttributeGroup attrGrRepository, IProductOneAttributeValues prodOneattrValRepository)
         {
             prodRepo = prodRepository;
             subCatRepo = subCatRepository;
             attrGrRepo = attrGrRepository;
+            prodOneAttrValRepo = prodOneattrValRepository;
         }
 
         [HttpGet]
         public IActionResult Index()
         {
             ViewBag.EntityType = "Product";
-
+            
             var prodVm = new ProductViewModel
             {
                 Products = prodRepo.GetAll(),
@@ -61,6 +63,23 @@ namespace KingPim.Web.Controllers
         {
             prodRepo.Publish(vm);
             return Json(vm);
+        }
+
+        public IActionResult Details(int id)
+        {
+            var product = prodRepo.Get(id);
+            var productOneAttrValue = prodOneAttrValRepo.GetAll();
+
+            var prodDetVm = new ProductViewModel
+            {
+                Name = product.Name,
+                Description = product.Description,
+                AddedDate = product.AddedDate,
+                UpdatedDate = product.UpdatedDate,
+                SubCategoryAttributeGroups = subCatRepo.Get(product.SubCategoryId ?? 0).SubCategoryAttributeGroups,
+                ProductAttributeValues = productOneAttrValue
+            };
+            return View(prodDetVm);
         }
 
         [HttpPost]

@@ -12,6 +12,5 @@ namespace KingPim.Models.Models
         [Column(Order = 2)]
         public string Description { get; set; }
         public virtual List<OneAttribute> OneAttributes { get; set; } 
-        public virtual List<SubCategory> SubCategories { get; set; }
     }
 }

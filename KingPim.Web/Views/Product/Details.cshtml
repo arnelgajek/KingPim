@@ -34,7 +34,29 @@
                     }
                     else
                     {
-                        <td><input class="form-control"/></td>
+                        <td><input class="form-control" /></td>
+                    }
+                }
+                @if (attr.Type == "bool")
+                {
+                    @if (prodAttrValueRow != null)
+                    {
+                        <td><input type="checkbox" value="@prodAttrRow.Value" /></td>
+                    }
+                    else
+                    {
+                        <td><input type="checkbox" /></td>
+                    }
+                }
+                @if (attr.Type == "int")
+                {
+                    @if (prodAttrValueRow != null)
+                    {
+                        <td><input type="number" value="@prodAttrRow.Value" /></td>
+                    }
+                    else
+                    {
+                        <td><input type="number" /></td>
                     }
                 }
             }
@@ -42,10 +64,10 @@
         }
     </tbody>
 </table>
-@*<div class="float-sm-right">
-        <button type="button" class="btn btn-sm btn-warning">Close</button>
+<div class="container-fluid">
+        <a asp-controller="Product" asp-action="Index" class="btn btn-sm btn-warning">Back</a>
         <button type="button" class="btn btn-sm btn-success">Save</button>
-    </div>*@
+</div>
 
 <style>
     .hidden {

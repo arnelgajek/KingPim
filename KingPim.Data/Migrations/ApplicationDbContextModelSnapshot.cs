@@ -142,8 +142,6 @@ namespace KingPim.Data.Migrations
 
                     b.Property<DateTime>("AddedDate");
 
-                    b.Property<int?>("AttributeGroupId");
-
                     b.Property<int?>("CategoryId");
 
                     b.Property<string>("Name");
@@ -153,8 +151,6 @@ namespace KingPim.Data.Migrations
                     b.Property<DateTime>("UpdatedDate");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AttributeGroupId");
 
                     b.HasIndex("CategoryId");
 
@@ -372,11 +368,6 @@ namespace KingPim.Data.Migrations
 
             modelBuilder.Entity("KingPim.Models.Models.SubCategory", b =>
                 {
-                    b.HasOne("KingPim.Models.Models.AttributeGroup")
-                        .WithMany("SubCategories")
-                        .HasForeignKey("AttributeGroupId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
                     b.HasOne("KingPim.Models.Models.Category")
                         .WithMany("SubCategories")
                         .HasForeignKey("CategoryId")

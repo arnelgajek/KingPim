@@ -115,14 +115,10 @@
     });
 
     // DETAILS:
-    $('#productDetails').click(function () {
+    $('#productDetails').on('click', function () {
         getValueUsingClass();
 
-        $('#detailsModal').on('show.bs.modal', function () {
-            var modal = $(this);
-            var name = $(".table").find("input:checked").attr("data-name");
-            modal.find('#detailsModalLabel strong').text('Product details for "' + name + '"');
-        });
+        $('#prodDetailsForm').removeClass('hidden');
     });
 
     function getValueUsingClass() {

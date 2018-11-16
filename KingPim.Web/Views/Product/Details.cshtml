@@ -1,0 +1,54 @@
+﻿@model ProductViewModel
+
+    <h1>@Model.Name</h1>
+    <br />
+    <p><strong>Description: </strong><i>@Model.Description</i></p>
+    <p><strong>Added Date: </strong><i>@Model.AddedDate.ToString("yyyy-MM-dd")</i></p>
+    <p><strong>Updated Date: </strong><i>@Model.UpdatedDate.ToString("yyyy-MM-dd")</i></p>
+
+<table class="table col-md-6">
+    <thead>
+        <tr>
+            <th scope="col">AttributeGroup:</th>
+            <th scope="col">Attribute:</th>
+            <th scope="col">Value:</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var attrGr in Model.SubCategoryAttributeGroups)
+        {
+        <tr>
+            <td>@attrGr.AttributeGroup.Name</td>
+            @foreach (var attr in attrGr.AttributeGroup.OneAttributes)
+            {
+                <td>@attr.Name</td>
+
+                var prodAttrRow = Model.ProductAttributeValues.FirstOrDefault(x => x.OneAttributeId == attr.Id);
+                var prodAttrValueRow = prodAttrRow?.Value;
+
+                @if (attr.Type == "string")
+                {
+                    @if (prodAttrValueRow != null)
+                    {
+                        <td><input class="form-control" value="@prodAttrRow.Value" /></td>
+                    }
+                    else
+                    {
+                        <td><input class="form-control"/></td>
+                    }
+                }
+            }
+        </tr>
+        }
+    </tbody>
+</table>
+@*<div class="float-sm-right">
+        <button type="button" class="btn btn-sm btn-warning">Close</button>
+        <button type="button" class="btn btn-sm btn-success">Save</button>
+    </div>*@
+
+<style>
+    .hidden {
+        display: none;
+    }
+</style>

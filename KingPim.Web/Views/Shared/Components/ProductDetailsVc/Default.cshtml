@@ -8,6 +8,10 @@
                 <h5 class="modal-title mx-auto text-center" id="detailsModalLabel"><strong></strong></h5>
             </div>
             <div class="modal-body">
+                <i id="description"></i>
+                <br />
+                <i id="subCategory"></i>
+                <br />
                 <table class="table">
                     <thead>
                         <tr>
@@ -17,17 +21,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>The AttributeGroup</td>
-                            <td>The Attribute</td>
-                            <td><input type="text" class="form-control form-control-sm"/>@*<button type="submit"class="btn btn-sm btn-success">Add +</button>*@</td>
+                        <tr>                           
                         </tr>
                     </tbody>
                 </table>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
-                <input type="hidden" name="??" value="@Model.Id" />
+                @*<input type="hidden" name="??" value="@Model.Id" />*@
                 <button type="submit" id="createSomethingBtn" class="btn btn-success">Save</button>
             </div>
         </div>

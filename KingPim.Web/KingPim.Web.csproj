@@ -7,9 +7,13 @@
 
   <ItemGroup>
     <Compile Remove="Views\Login\**" />
+    <Compile Remove="Views\Shared\Components\ProductDetailsVc\**" />
     <Content Remove="Views\Login\**" />
+    <Content Remove="Views\Shared\Components\ProductDetailsVc\**" />
     <EmbeddedResource Remove="Views\Login\**" />
+    <EmbeddedResource Remove="Views\Shared\Components\ProductDetailsVc\**" />
     <None Remove="Views\Login\**" />
+    <None Remove="Views\Shared\Components\ProductDetailsVc\**" />
   </ItemGroup>
 
   <ItemGroup>

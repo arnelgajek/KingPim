@@ -8,26 +8,39 @@ namespace KingPim.Web.Components
     public class ProductDetailsVc : ViewComponent
     {
         private IProduct prodRepo;
+        private ISubCategory subCatRepo;
         private IAttributeGroup attrGroupRepo;
         private IOneAttribute oneAttributeRepo;
 
-        public ProductDetailsVc(IProduct prodRepository, IAttributeGroup attrGroupRepository, IOneAttribute oneAttrRepository)
+        public ProductDetailsVc(IProduct prodRepository, ISubCategory subCatRepository, IAttributeGroup attrGroupRepository, IOneAttribute oneAttrRepository)
         {
             prodRepo = prodRepository;
+            subCatRepo = subCatRepository;
             attrGroupRepo = attrGroupRepository;
             oneAttributeRepo = oneAttrRepository;
         }
 
         public IViewComponentResult Invoke(int id)
         {
-            var prodDetailsVm = new ProductDetailsViewModel()
+            if (id == 0)
             {
-                Product = prodRepo.Get(id),
-                AttributeGroup = attrGroupRepo.Get(id),
-                OneAttribute = oneAttributeRepo.Get(id)
-            };
+                var prodDetailsVm = new ProductDetailsViewModel()
+                {
+                    Product = prodRepo.Get(id),
+                    AttributeGroup = attrGroupRepo.Get(id),
+                    OneAttribute = oneAttributeRepo.Get(id)
+                };
 
-            return View(prodDetailsVm);
+                return View(prodDetailsVm);
+            }
+            else
+            {
+                var prod = prodRepo.Get(id);
+                var prodSub = subCatRepo.Get(prod.Id);
+                var attrGroup = attrGroupRepo.Get(prodSub.Id);
+
+                return View();
+            }
         }
     }
 }

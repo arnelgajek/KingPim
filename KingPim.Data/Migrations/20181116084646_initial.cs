@@ -221,18 +221,11 @@ namespace KingPim.Data.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
-                    CategoryId = table.Column<int>(nullable: true),
-                    AttributeGroupId = table.Column<int>(nullable: true)
+                    CategoryId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_SubCategories", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_SubCategories_AttributeGroups_AttributeGroupId",
-                        column: x => x.AttributeGroupId,
-                        principalTable: "AttributeGroups",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_SubCategories_Categories_CategoryId",
                         column: x => x.CategoryId,
@@ -379,11 +372,6 @@ namespace KingPim.Data.Migrations
                 column: "SubCategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SubCategories_AttributeGroupId",
-                table: "SubCategories",
-                column: "AttributeGroupId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_SubCategories_CategoryId",
                 table: "SubCategories",
                 column: "CategoryId");
@@ -435,10 +423,10 @@ namespace KingPim.Data.Migrations
                 name: "Products");
 
             migrationBuilder.DropTable(
-                name: "SubCategories");
+                name: "AttributeGroups");
 
             migrationBuilder.DropTable(
-                name: "AttributeGroups");
+                name: "SubCategories");
 
             migrationBuilder.DropTable(
                 name: "Categories");

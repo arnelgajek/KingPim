@@ -43,21 +43,30 @@ namespace KingPim.Web.Controllers
             };
 
             var result = await _userManager.CreateAsync(user, vm.Password);
-
             if (result.Succeeded)
             {
                 var findByEmail = await _userManager.FindByEmailAsync(user.Email);
-
                 await _userManager.AddToRoleAsync(findByEmail, vm.Roles);
             }
             return RedirectToAction(nameof(Index));
         }
 
-        // Forgotten Password:
-        
-        // Change Password:
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(AccountViewModel vm)
+        {
+            if (ModelState.IsValid)
+            {
+                var username = vm.UserName;
+                var changedPassword = vm.Password;
+                IdentityUser identityUser = await _userManager.FindByNameAsync(username);
+                var newPasswordHashed = _userManager.PasswordHasher.HashPassword(identityUser, changedPassword);
+                identityUser.PasswordHash = newPasswordHashed;
+                var save = await _userManager.UpdateAsync(identityUser);
+                var succeeded = save.Succeeded;
+            }
+            return RedirectToAction(nameof(Index));
+        }
 
-        // Sends the user back to the login page:
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();

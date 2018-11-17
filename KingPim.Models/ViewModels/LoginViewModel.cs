@@ -11,5 +11,7 @@ namespace KingPim.Models.ViewModels
         [DataType(DataType.Password)]
         [Required]
         public string Password { get; set; }
+        public string ConfirmPassword { get; set; }
+        public string Code { get; set; }
     }
 }

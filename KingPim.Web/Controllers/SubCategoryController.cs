@@ -1,8 +1,12 @@
 ﻿using KingPim.Models.ViewModels;
 using KingPim.Repositories;
 using KingPim.Repositories.Interfaces;
+using KingPim.Web.Infrastructure.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using System.Linq;
+using System.Text;
 
 namespace KingPim.Web.Controllers
 {
@@ -75,6 +79,48 @@ namespace KingPim.Web.Controllers
 
             }
             return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        [Produces("application/json")]
+        public IActionResult GetAllSubCategoriesToJson(int id)
+        {
+            var allSubCategories = subCatrepo.GetAll();
+            var getSubCategories = ExportHelper.GetSubCategoriesToXml(allSubCategories);
+            var selSubCategory = getSubCategories.FirstOrDefault(sc => sc.Id.Equals(id));
+
+            if (id == 0)
+            {
+                var subCatJson = JsonConvert.SerializeObject(getSubCategories);
+                var subCatBytes = Encoding.UTF8.GetBytes(subCatJson);
+                return File(subCatBytes, "application/octet-stream", "jsonsubcategories.json");
+            }
+            else
+            {
+                var selSubCatJson = JsonConvert.SerializeObject(selSubCategory);
+                var subCatBytes = Encoding.UTF8.GetBytes(selSubCatJson);
+                return File(subCatBytes, "application/octet-stream", "subcategoryid_" + id + ".json");
+            }
+        }
+
+        [HttpGet]
+        [Produces("application/xml")]
+        public IActionResult GetAllSubCategoriesToXml(int id)
+        {
+            // Gets all the categories:
+            var allCategories = catRepo.GetAll();
+            // Sends us to the XmlHelper method:
+            var getCategoriesToXml = ExportHelper.GetCategoriesToXml(allCategories);
+            var specificCategory = getCategoriesToXml.FirstOrDefault(c => c.Id.Equals(id));
+
+            if (id == 0)
+            {
+                return Ok(getCategoriesToXml);
+            }
+            else
+            {
+                return Ok(specificCategory);
+            }
         }
     }
 }

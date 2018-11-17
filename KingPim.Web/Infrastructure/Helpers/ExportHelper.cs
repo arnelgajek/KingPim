@@ -1,9 +1,6 @@
 ﻿using KingPim.Models.Models;
 using KingPim.Models.ViewModels;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace KingPim.Web.Infrastructure.Helpers
 {
@@ -42,6 +39,41 @@ namespace KingPim.Web.Infrastructure.Helpers
                     });
             }
             return subCatVmList;
+        }
+
+        public static List<SubCategoryViewModel> GetSubCategoriesToXml(IEnumerable<SubCategory> allSubCategories)
+        {
+            var subCatVmList = new List<SubCategoryViewModel>();
+
+            foreach (var subCat in allSubCategories)
+            {
+                subCatVmList.Add(
+                    new SubCategoryViewModel
+                    {
+                        Id = subCat.Id,
+                        Name = subCat.Name,
+                        Published = subCat.Published,
+                        Products = GetProductsToXml(subCat.Products)
+                    });
+            }
+            return subCatVmList;
+        }
+
+        private static List<ProductViewModel> GetProductsToXml(List<Product> allProducts)
+        {
+            var prodVmList = new List<ProductViewModel>();
+
+            foreach (var prod in allProducts)
+            {
+                prodVmList.Add(
+                    new ProductViewModel
+                    {
+                        Id = prod.Id,
+                        Name = prod.Name,
+                        Published = prod.Published
+                    });
+            }
+            return prodVmList;
         }
     }
 }

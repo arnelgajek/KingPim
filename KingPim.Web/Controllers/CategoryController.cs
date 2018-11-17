@@ -92,7 +92,7 @@ namespace KingPim.Web.Controllers
             {
                 var selCatJson = JsonConvert.SerializeObject(selCategory);
                 var catBytes = Encoding.UTF8.GetBytes(selCatJson);
-                return File(catBytes, "application/octet-stream", "categoryid" + id +  ".json");
+                return File(catBytes, "application/octet-stream", "categoryid_" + id +  ".json");
             }
         }
 

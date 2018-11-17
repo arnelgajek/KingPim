@@ -14,5 +14,6 @@ namespace KingPim.Models.ViewModels
         public IEnumerable<Category> Categories { get; set; }
         public IEnumerable<SubCategory> SubCategories { get; set; }
         public IEnumerable<AttributeGroup> AttributeGroups { get; set; }
+        public IEnumerable<ProductViewModel> Products { get; set; }
     }
 }

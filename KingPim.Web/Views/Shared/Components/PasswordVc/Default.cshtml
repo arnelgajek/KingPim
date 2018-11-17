@@ -8,17 +8,17 @@
                 <h5 class="modal-title mx-auto text-center" id="passwordModalLabel"><strong>RESET PASSWORD</strong></h5>
             </div>
             <div class="modal-body center">
-                <form asp-controller="Account" asp-action="SendPasswordResetLink" method="post">
+                <form asp-controller="Home" asp-action="ForgottenPassword" method="post">
                     <div class="modal-body">
                         <div class="form-group">
                                 <label asp-for="@Model.UserName"><strong></strong></label>
-                                <input asp-for="@Model.UserName" placeholder="Email Address..." class="form-control form-control-sm" />
+                                <input asp-for="@Model.UserName" placeholder="Email Address" class="form-control form-control-sm" />
                         </div>
-                        <p class="text-center"><strong>Open your email and follow the instructions.</strong></p>
+                        <p class="text-center"><strong>Press the "Reset Password"-button down below and follow the instructions in the mail.</strong></p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
-                        <button type="submit" value="Reset Password" id="resetPassword" class="btn btn-success">Send Link</button>
+                        <button type="submit" class="btn btn-success">Reset Password</button>
                     </div>
                 </form>
             </div>

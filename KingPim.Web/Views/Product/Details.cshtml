@@ -1,73 +1,74 @@
 ﻿@model ProductViewModel
-
+<form>
     <h1>@Model.Name</h1>
     <br />
     <p><strong>Description: </strong><i>@Model.Description</i></p>
     <p><strong>Added Date: </strong><i>@Model.AddedDate.ToString("yyyy-MM-dd")</i></p>
     <p><strong>Updated Date: </strong><i>@Model.UpdatedDate.ToString("yyyy-MM-dd")</i></p>
 
-<table class="table col-md-6">
-    <thead>
-        <tr>
-            <th scope="col">AttributeGroup:</th>
-            <th scope="col">Attribute:</th>
-            <th scope="col">Value:</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var attrGr in Model.SubCategoryAttributeGroups)
-        {
-        <tr>
-            <td>@attrGr.AttributeGroup.Name</td>
-            @foreach (var attr in attrGr.AttributeGroup.OneAttributes)
+    <table class="table col-md-6">
+        <thead>
+            <tr>
+                <th scope="col">AttributeGroup:</th>
+                <th scope="col">Attribute:</th>
+                <th scope="col">Value:</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var attrGr in Model.SubCategoryAttributeGroups)
             {
-                <td>@attr.Name</td>
+                <tr>
+                    <td>@attrGr.AttributeGroup.Name</td>
+                    @foreach (var attr in attrGr.AttributeGroup.OneAttributes)
+                    {
+                        <td>@attr.Name</td>
 
-                var prodAttrRow = Model.ProductAttributeValues.FirstOrDefault(x => x.OneAttributeId == attr.Id);
-                var prodAttrValueRow = prodAttrRow?.Value;
+                        var prodAttrRow = Model.ProductAttributeValues.FirstOrDefault(x => x.OneAttributeId == attr.Id);
+                        var prodAttrValueRow = prodAttrRow?.Value;
 
-                @if (attr.Type == "string")
-                {
-                    @if (prodAttrValueRow != null)
-                    {
-                        <td><input class="form-control" value="@prodAttrRow.Value" /></td>
+                        @if (attr.Type == "string")
+                        {
+                            @if (prodAttrValueRow != null)
+                            {
+                                <td><input class="form-control" value="@prodAttrRow.Value" /></td>
+                            }
+                            else
+                            {
+                                <td><input class="form-control" /></td>
+                            }
+                        }
+                        @if (attr.Type == "bool")
+                        {
+                            @if (prodAttrValueRow != null)
+                            {
+                                <td><input type="checkbox" value="@prodAttrRow.Value" /></td>
+                            }
+                            else
+                            {
+                                <td><input type="checkbox" /></td>
+                            }
+                        }
+                        @if (attr.Type == "int")
+                        {
+                            @if (prodAttrValueRow != null)
+                            {
+                                <td><input type="number" value="@prodAttrRow.Value" /></td>
+                            }
+                            else
+                            {
+                                <td><input type="number" /></td>
+                            }
+                        }
                     }
-                    else
-                    {
-                        <td><input class="form-control" /></td>
-                    }
-                }
-                @if (attr.Type == "bool")
-                {
-                    @if (prodAttrValueRow != null)
-                    {
-                        <td><input type="checkbox" value="@prodAttrRow.Value" /></td>
-                    }
-                    else
-                    {
-                        <td><input type="checkbox" /></td>
-                    }
-                }
-                @if (attr.Type == "int")
-                {
-                    @if (prodAttrValueRow != null)
-                    {
-                        <td><input type="number" value="@prodAttrRow.Value" /></td>
-                    }
-                    else
-                    {
-                        <td><input type="number" /></td>
-                    }
-                }
+                </tr>
             }
-        </tr>
-        }
-    </tbody>
-</table>
-<div class="container-fluid">
+        </tbody>
+    </table>
+    <div class="container-fluid">
         <a asp-controller="Product" asp-action="Index" class="btn btn-sm btn-warning">Back</a>
         <button type="button" class="btn btn-sm btn-success">Save</button>
-</div>
+    </div>
+</form>
 
 <style>
     .hidden {

@@ -1,5 +1,5 @@
 ﻿@model ProductViewModel
-<form>
+
     <h1>@Model.Name</h1>
     <br />
     <p><strong>Description: </strong><i>@Model.Description</i></p>
@@ -17,59 +17,41 @@
         <tbody>
             @foreach (var attrGr in Model.SubCategoryAttributeGroups)
             {
-                <tr>
-                    <td>@attrGr.AttributeGroup.Name</td>
-                    @foreach (var attr in attrGr.AttributeGroup.OneAttributes)
+            <tr>
+                <td>@attrGr.AttributeGroup.Name</td>
+                @foreach (var attr in attrGr.AttributeGroup.OneAttributes)
+                {
+                    <td>@attr.Name</td>
+
+                    var prodAttrRow = Model.ProductAttributeValues.FirstOrDefault(x => x.OneAttributeId == attr.Id);
+                    var prodAttrValueRow = prodAttrRow?.Value;
+
+                    @if (attr.Type == "string" || attr.Type == "int")
                     {
-                        <td>@attr.Name</td>
+                        <td>
+                            <form asp-controller="Product" asp-action="ProductAttributeValue">
+                                <input type="hidden" value="@attr.Id" asp-for="OneAttributeId" />
+                                <input type="hidden" value="@attrGr.Id" asp-for="ProductId" />
+                                @if (prodAttrValueRow != null)
+                                {
+                                    <input asp-for="Value" type="text" class="form-control" value="@prodAttrRow.Value" />
+                                }
+                                else
+                                {
 
-                        var prodAttrRow = Model.ProductAttributeValues.FirstOrDefault(x => x.OneAttributeId == attr.Id);
-                        var prodAttrValueRow = prodAttrRow?.Value;
-
-                        @if (attr.Type == "string")
-                        {
-                            @if (prodAttrValueRow != null)
-                            {
-                                <td><input class="form-control" value="@prodAttrRow.Value" /></td>
-                            }
-                            else
-                            {
-                                <td><input class="form-control" /></td>
-                            }
-                        }
-                        @if (attr.Type == "bool")
-                        {
-                            @if (prodAttrValueRow != null)
-                            {
-                                <td><input type="checkbox" value="@prodAttrRow.Value" /></td>
-                            }
-                            else
-                            {
-                                <td><input type="checkbox" /></td>
-                            }
-                        }
-                        @if (attr.Type == "int")
-                        {
-                            @if (prodAttrValueRow != null)
-                            {
-                                <td><input type="number" value="@prodAttrRow.Value" /></td>
-                            }
-                            else
-                            {
-                                <td><input type="number" /></td>
-                            }
-                        }
+                                    <input asp-for="Value" type="text" class="form-control" required/><button class="btn btn-sm btn-success" type="submit">Save</button>
+                                }
+                            </form>
+                        </td>
                     }
-                </tr>
-            }
+                }
+            </tr>
+        }
         </tbody>
     </table>
-    <div class="container-fluid">
-        <a asp-controller="Product" asp-action="Index" class="btn btn-sm btn-warning">Back</a>
-        <button>Save</button>
-        @*<a asp-controller="Product" asp-action="" class="btn btn-sm btn-success">Save</a>*@
-    </div>
-</form>
+<div class="container-fluid">
+    <a asp-controller="Product" asp-action="Index" class="btn btn-sm btn-warning">Back</a>
+</div>
 
 <style>
     .hidden {

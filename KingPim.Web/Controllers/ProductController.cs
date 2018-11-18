@@ -61,6 +61,13 @@ namespace KingPim.Web.Controllers
         }
 
         [HttpPost]
+        public IActionResult ProductAttributeValue(ProductViewModel vm)
+        {
+            prodRepo.ProductAttributeValue(vm);
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
         public IActionResult Publish(ProductViewModel vm)
         {
             prodRepo.Publish(vm);

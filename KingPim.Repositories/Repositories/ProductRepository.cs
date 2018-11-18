@@ -51,6 +51,21 @@ namespace KingPim.Repositories.Repositories
             _ctx.SaveChanges();
         }
 
+        public void ProductAttributeValue(ProductViewModel vm)
+        {
+            if (vm.Id == 0) {
+
+                var prodAttrVal = new ProductOneAttributeValue
+                {
+                    Value = vm.Value,
+                    OneAttributeId = vm.OneAttributeId,
+                    ProductId = vm.ProductId,
+            };
+            _ctx.ProductOneAttributeValues.Add(prodAttrVal);
+        }
+            _ctx.SaveChanges();
+        }
+
         public Product Delete(int id)
         {
             var ctxProduct = _ctx.Products.FirstOrDefault(p => p.Id.Equals(id));

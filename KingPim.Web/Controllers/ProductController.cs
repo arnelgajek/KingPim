@@ -1,8 +1,12 @@
 ﻿using KingPim.Data;
 using KingPim.Models.ViewModels;
 using KingPim.Repositories.Interfaces;
+using KingPim.Web.Infrastructure.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using System.Linq;
+using System.Text;
 
 namespace KingPim.Web.Controllers
 {
@@ -95,6 +99,48 @@ namespace KingPim.Web.Controllers
 
             }
             return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        [Produces("application/json")]
+        public IActionResult GetAllProductsToJson(int id)
+        {
+            var allProducts = prodRepo.GetAll();
+            var getProducts = ExportHelper.GetProductsToXml(allProducts);
+            var selProduct = getProducts.FirstOrDefault(p => p.Id.Equals(id));
+
+            if (id == 0)
+            {
+                var prodJson = JsonConvert.SerializeObject(getProducts);
+                var prodBytes = Encoding.UTF8.GetBytes(prodJson);
+                return File(prodBytes, "application/octet-stream", "jsonproducts.json");
+            }
+            else
+            {
+                var selProdJson = JsonConvert.SerializeObject(selProduct);
+                var prodBytes = Encoding.UTF8.GetBytes(selProdJson);
+                return File(prodBytes, "application/octet-stream", "productid_" + id + ".json");
+            }
+        }
+
+        [HttpGet]
+        [Produces("application/xml")]
+        public IActionResult GetAllProductsToXml(int id)
+        {
+            // Gets all the products:
+            var allProducts = prodRepo.GetAll();
+            // Sends us to the XmlHelper method:
+            var getProductsToXml = ExportHelper.GetProductsToXml(allProducts);
+            var specificProduct = getProductsToXml.FirstOrDefault(p => p.Id.Equals(id));
+
+            if (id == 0)
+            {
+                return Ok(getProductsToXml);
+            }
+            else
+            {
+                return Ok(specificProduct);
+            }
         }
     }
 }

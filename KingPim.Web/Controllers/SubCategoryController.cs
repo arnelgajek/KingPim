@@ -107,19 +107,19 @@ namespace KingPim.Web.Controllers
         [Produces("application/xml")]
         public IActionResult GetAllSubCategoriesToXml(int id)
         {
-            // Gets all the categories:
-            var allCategories = catRepo.GetAll();
+            // Gets all the subcategories:
+            var allSubCategories = subCatrepo.GetAll();
             // Sends us to the XmlHelper method:
-            var getCategoriesToXml = ExportHelper.GetCategoriesToXml(allCategories);
-            var specificCategory = getCategoriesToXml.FirstOrDefault(c => c.Id.Equals(id));
+            var getSubCategoriesToXml = ExportHelper.GetSubCategoriesToXml(allSubCategories);
+            var specificSubCategory = getSubCategoriesToXml.FirstOrDefault(sc => sc.Id.Equals(id));
 
             if (id == 0)
             {
-                return Ok(getCategoriesToXml);
+                return Ok(getSubCategoriesToXml);
             }
             else
             {
-                return Ok(specificCategory);
+                return Ok(specificSubCategory);
             }
         }
     }

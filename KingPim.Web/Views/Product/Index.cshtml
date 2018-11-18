@@ -36,8 +36,8 @@
                     <th scope="row"><input type="checkbox" class="chk" value="@prod.Id" data-name="@prod.Name" data-prodSubCat="@prod.SubCategory.SubCategoryAttributeGroups" /> @prod.Name</th>
                     <td><p><i>@prod.Description</i></p></td>
                     <td>@prod.Price:-</td>
-                    <td><button type="submit" class="btn btn-info btn-sm">Export XML</button></td>
-                    <td><button type="submit" class="btn btn-info btn-sm">Export JSON</button></td>
+                    <td><a asp-controller="Product" asp-action="GetAllProductsToXml" class="btn btn-info btn-sm" asp-route-id="@prod.Id">Export XML</a></td>
+                    <td><a asp-controller="Product" asp-action="GetAllProductsToJson" class="btn btn-info btn-sm" asp-route-id="@prod.Id">Export Json</a></td>
                     @if (User.Identity.IsAuthenticated)
                     {
                         @if (User.IsInRole("Administrator") || User.IsInRole("Publisher"))

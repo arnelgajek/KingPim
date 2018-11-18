@@ -18,9 +18,13 @@ namespace KingPim.Web
     {
         // IConfiguration is what you use to get info from the appsettings.json file:
         IConfiguration _configuration;
-        public Startup(IConfiguration conf)
+        public Startup(IConfiguration conf, IHostingEnvironment env)
         {
             _configuration = conf;
+
+            var builder = new ConfigurationBuilder();
+            builder.AddUserSecrets<Startup>();
+            _configuration = builder.Build();
         }
         
         public void ConfigureServices(IServiceCollection services)
@@ -33,11 +37,12 @@ namespace KingPim.Web
             });
 
             // Configuration for DB and SendGrid connection:
-            var conn = _configuration.GetConnectionString("KingPim");
+            var dbCon = _configuration["ConnectionStrings:KingPim"];
+            var sendGridCon = _configuration["SendGridUserSecret:SendGridKey"];
 
             // Service for the DB connection:
             services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseLazyLoadingProxies().UseSqlServer(conn));
+            options.UseLazyLoadingProxies().UseSqlServer(dbCon));
 
             // Service for Identity:
             services.AddIdentity<IdentityUser, IdentityRole>(config =>

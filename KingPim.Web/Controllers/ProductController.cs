@@ -99,13 +99,6 @@ namespace KingPim.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpPost]
-        public IActionResult UpdateProductAttributeValue(ProductViewModel vm)
-        {
-            prodRepo.UpdateProductAttributeValue(vm);
-            return RedirectToAction(nameof(Index));
-        }
-
         [HttpGet]
         [Produces("application/json")]
         public IActionResult GetAllProductsToJson(int id)

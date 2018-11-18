@@ -13,13 +13,11 @@ namespace KingPim.Web.Controllers
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public HomeController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, RoleManager<IdentityRole> roleManager)
+        public HomeController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _roleManager = roleManager;
         }
 
         [AllowAnonymous]
@@ -57,7 +55,7 @@ namespace KingPim.Web.Controllers
          
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> ForgottenPassword(LoginViewModel vm)
+        public async Task<IActionResult> ForgottenPassword(LoginViewModel vm, string apiKey)
         {
             var user = await _userManager.FindByNameAsync(vm.UserName);
             var confCode = await _userManager.GeneratePasswordResetTokenAsync(user);
@@ -68,7 +66,8 @@ namespace KingPim.Web.Controllers
                 protocol: Request.Scheme);
 
             // The new SendGridClient with the API-key:
-            var client = new SendGridClient("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");
+            var client = new SendGridClient(apiKey);
+
 
             // The message from SendGrid:
             var msg = new SendGridMessage

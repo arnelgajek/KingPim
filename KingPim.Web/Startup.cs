@@ -18,14 +18,18 @@ namespace KingPim.Web
     {
         // IConfiguration is what you use to get info from the appsettings.json file:
         IConfiguration _configuration;
-        public Startup(IConfiguration conf)
+        public Startup(IConfiguration conf, IHostingEnvironment env)
         {
             _configuration = conf;
+
+            var builder = new ConfigurationBuilder();
+            builder.AddUserSecrets<Startup>();
+            _configuration = builder.Build();
         }
         
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);          
 
             // So the Json() in the controller will return correctly:
             services.AddMvc().AddJsonOptions(options => {
@@ -33,11 +37,12 @@ namespace KingPim.Web
             });
 
             // Configuration for DB connection:
-            var conn = _configuration.GetConnectionString("KingPim");
+            var dbCon = _configuration["ConnectionStrings:KingPim"];
+            var sendGridCon = _configuration["SendGridUserSecret:SendGridKey"];
 
             // Service for the DB connection:
             services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseLazyLoadingProxies().UseSqlServer(conn));
+            options.UseLazyLoadingProxies().UseSqlServer(dbCon));
 
             // Service for Identity:
             services.AddIdentity<IdentityUser, IdentityRole>(config =>
@@ -65,16 +70,7 @@ namespace KingPim.Web
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false; // true
                 options.Password.RequireLowercase = false;
-                // options.Password.RequiredUniqueChars = 6;
                 options.Password.RequiredLength = 3;
-
-                // Lockout settings
-                // options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
-                // options.Lockout.MaxFailedAccessAttempts = 10;
-                // options.Lockout.AllowedForNewUsers = true;
-
-                // User settings
-                // options.User.RequireUniqueEmail = true;
             });
 
             services.AddMvc()

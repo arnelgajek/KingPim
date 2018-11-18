@@ -75,5 +75,22 @@ namespace KingPim.Web.Infrastructure.Helpers
             }
             return prodVmList;
         }
+
+        public static List<ProductViewModel> GetProductsToXml(IEnumerable<Product> allProducts)
+        {
+            var prodVmList = new List<ProductViewModel>();
+
+            foreach (var prod in allProducts)
+            {
+                prodVmList.Add(
+                    new ProductViewModel
+                    {
+                        Id = prod.Id,
+                        Name = prod.Name,
+                        Published = prod.Published
+                    });
+            }
+            return prodVmList;
+        }
     }
 }

@@ -1,5 +1,4 @@
-﻿using KingPim.Data;
-using KingPim.Models.ViewModels;
+﻿using KingPim.Models.ViewModels;
 using KingPim.Repositories.Interfaces;
 using KingPim.Web.Infrastructure.Helpers;
 using Microsoft.AspNetCore.Authorization;
@@ -61,7 +60,6 @@ namespace KingPim.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-
         [HttpPost]
         public IActionResult Publish(ProductViewModel vm)
         {
@@ -98,6 +96,13 @@ namespace KingPim.Web.Controllers
             {
 
             }
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public IActionResult UpdateProductAttributeValue(ProductViewModel vm)
+        {
+            prodRepo.UpdateProductAttributeValue(vm);
             return RedirectToAction(nameof(Index));
         }
 

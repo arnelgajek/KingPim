@@ -40,6 +40,8 @@ namespace KingPim.Repositories.Repositories
                     AddedDate = DateTime.Now,
                     UpdatedDate = DateTime.Now,
                     Published = false,
+                    Version = 1,
+                    ModifiedByUser = vm.ModifiedByUser
                 };
                 _ctx.SubCategories.Add(newSubCategory);
             }
@@ -55,6 +57,8 @@ namespace KingPim.Repositories.Repositories
                 ctxSubCategory.Name = vm.Name;
                 ctxSubCategory.CategoryId = vm.CategoryId;
                 ctxSubCategory.UpdatedDate = DateTime.Now;
+                ctxSubCategory.Version++;
+                ctxSubCategory.ModifiedByUser = vm.ModifiedByUser;
             }
             _ctx.SaveChanges();
         }

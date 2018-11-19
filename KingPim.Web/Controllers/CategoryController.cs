@@ -102,6 +102,7 @@ namespace KingPim.Web.Controllers
         {
             // Gets all the categories:
             var allCategories = catRepo.GetAll();
+
             // Sends us to the XmlHelper method:
             var getCategoriesToXml = ExportHelper.GetCategoriesToXml(allCategories);
             var specificCategory = getCategoriesToXml.FirstOrDefault(c => c.Id.Equals(id));

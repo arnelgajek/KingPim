@@ -21,13 +21,15 @@
                     <th scope="col">Name:</th>
                     <th scope="col">Added Date:</th>
                     <th scope="col">Updated Date:</th>
+                    <th scope="col">Version:</th>
+                    <th scope="col">Modified By:</th>
                     <th scope="col">Export XML:</th>
                     <th scope="col">Export JSON:</th>
                     @if (User.IsInRole("Administrator") || User.IsInRole("Publisher"))
                     {
                         <th scope="col">Published:</th>
                     }
-                    </tr>
+                </tr>
             </thead>
             @foreach (var subCat in Model.SubCategories)
             {
@@ -39,6 +41,8 @@
                         </th>
                         <td>@subCat.AddedDate.ToString("yyyy-MM-dd")</td>
                         <td>@subCat.UpdatedDate.ToString("yyyy-MM-dd")</td>
+                        <td>@subCat.Version<span>.0</span></td>
+                        <td>@subCat.ModifiedByUser</td>
                         <td><a asp-controller="SubCategory" asp-action="GetAllSubCategoriesToXml" class="btn btn-info btn-sm" asp-route-id="@subCat.Id">Export XML</a></td>
                         <td><a asp-controller="SubCategory" asp-action="GetAllSubCategoriesToJson" class="btn btn-info btn-sm" asp-route-id="@subCat.Id">Export Json</a></td>
                         @if (User.Identity.IsAuthenticated)

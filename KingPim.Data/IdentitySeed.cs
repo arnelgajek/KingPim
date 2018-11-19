@@ -10,10 +10,10 @@ namespace KingPim.Data
         private const string _password = "buggeroff";
 
         private const string _editor = "editor@kingpim.se";
-        private const string _password2 = "buggeroff2";
+        private const string _password2 = "buggeroff";
 
         private const string _publisher = "publisher@kingpim.se";
-        private const string _password3 = "buggeroff3";
+        private const string _password3 = "buggeroff";
 
         private readonly ApplicationDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;

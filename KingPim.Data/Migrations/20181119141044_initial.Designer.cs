@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KingPim.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181116084646_initial")]
+    [Migration("20181119141044_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,11 +31,15 @@ namespace KingPim.Data.Migrations
 
                     b.Property<string>("Description");
 
+                    b.Property<string>("ModifiedByUser");
+
                     b.Property<string>("Name");
 
                     b.Property<bool>("Published");
 
                     b.Property<DateTime>("UpdatedDate");
+
+                    b.Property<double>("Version");
 
                     b.HasKey("Id");
 
@@ -50,11 +54,15 @@ namespace KingPim.Data.Migrations
 
                     b.Property<DateTime>("AddedDate");
 
+                    b.Property<string>("ModifiedByUser");
+
                     b.Property<string>("Name");
 
                     b.Property<bool>("Published");
 
                     b.Property<DateTime>("UpdatedDate");
+
+                    b.Property<double>("Version");
 
                     b.HasKey("Id");
 
@@ -73,6 +81,8 @@ namespace KingPim.Data.Migrations
 
                     b.Property<string>("Description");
 
+                    b.Property<string>("ModifiedByUser");
+
                     b.Property<string>("Name");
 
                     b.Property<bool>("Published");
@@ -80,6 +90,8 @@ namespace KingPim.Data.Migrations
                     b.Property<string>("Type");
 
                     b.Property<DateTime>("UpdatedDate");
+
+                    b.Property<double>("Version");
 
                     b.HasKey("Id");
 
@@ -98,6 +110,8 @@ namespace KingPim.Data.Migrations
 
                     b.Property<string>("Description");
 
+                    b.Property<string>("ModifiedByUser");
+
                     b.Property<string>("Name");
 
                     b.Property<string>("Price");
@@ -107,6 +121,8 @@ namespace KingPim.Data.Migrations
                     b.Property<int?>("SubCategoryId");
 
                     b.Property<DateTime>("UpdatedDate");
+
+                    b.Property<double>("Version");
 
                     b.HasKey("Id");
 
@@ -146,11 +162,15 @@ namespace KingPim.Data.Migrations
 
                     b.Property<int?>("CategoryId");
 
+                    b.Property<string>("ModifiedByUser");
+
                     b.Property<string>("Name");
 
                     b.Property<bool>("Published");
 
                     b.Property<DateTime>("UpdatedDate");
+
+                    b.Property<double>("Version");
 
                     b.HasKey("Id");
 

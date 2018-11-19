@@ -1,21 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace KingPim.Models.Models
 {
     public class ReadOnlyAttribute
     {
-        [Column(Order = 997)]
+        [Column(Order = 777)]
         public DateTime AddedDate { get; set; }
-        [Column(Order = 998)]
+        [Column(Order = 888)]
         public DateTime UpdatedDate { get; set; }
         [Column(Order = 999)]
         public bool Published { get; set; }
-
-        //public double Version { get; set; }
-        //public virtual IdentityUser IdentityUser { get; set; }
-        //public int IdentityUserId { get; set; }
+        public double Version { get; set; }
+        public string ModifiedByUser { get; set; }
     }
 }

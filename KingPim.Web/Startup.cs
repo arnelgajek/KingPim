@@ -59,22 +59,21 @@ namespace KingPim.Web
             services.AddTransient<IProduct, ProductRepository>();
             services.AddTransient<IAttributeGroup, AttributeGroupRepository>();
             services.AddTransient<IOneAttribute, OneAttributeRepository>();
-            services.AddTransient<IHome, HomeRepository>();
             services.AddTransient<IProductOneAttributeValues, ProductOneAttributeValuesRepository>();
 
             services.Configure<IdentityOptions>(options =>
             {
                 // Password settings:
-                options.Password.RequireDigit = false; // true
-                options.Password.RequireLowercase = false; // 8
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
                 options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireUppercase = false; // true
+                options.Password.RequireUppercase = false;
                 options.Password.RequireLowercase = false;
                 options.Password.RequiredLength = 3;
             });
 
             services.AddMvc()
-                  // To return data in XML.
+                    // To return data in XML.
                 .AddXmlSerializerFormatters()
                 .AddXmlDataContractSerializerFormatters();
             services.AddMemoryCache();

@@ -134,6 +134,7 @@ namespace KingPim.Web.Controllers
         {
             // Gets all the products:
             var allProducts = prodRepo.GetAll();
+
             // Sends us to the XmlHelper method:
             var getProductsToXml = ExportHelper.GetProductsToXml(allProducts);
             var specificProduct = getProductsToXml.FirstOrDefault(p => p.Id.Equals(id));

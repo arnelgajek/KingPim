@@ -54,6 +54,8 @@ namespace KingPim.Data.Migrations
                     AddedDate = table.Column<DateTime>(nullable: false),
                     UpdatedDate = table.Column<DateTime>(nullable: false),
                     Published = table.Column<bool>(nullable: false),
+                    Version = table.Column<double>(nullable: false),
+                    ModifiedByUser = table.Column<string>(nullable: true),
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
@@ -71,6 +73,8 @@ namespace KingPim.Data.Migrations
                     AddedDate = table.Column<DateTime>(nullable: false),
                     UpdatedDate = table.Column<DateTime>(nullable: false),
                     Published = table.Column<bool>(nullable: false),
+                    Version = table.Column<double>(nullable: false),
+                    ModifiedByUser = table.Column<string>(nullable: true),
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true)
@@ -193,6 +197,8 @@ namespace KingPim.Data.Migrations
                     AddedDate = table.Column<DateTime>(nullable: false),
                     UpdatedDate = table.Column<DateTime>(nullable: false),
                     Published = table.Column<bool>(nullable: false),
+                    Version = table.Column<double>(nullable: false),
+                    ModifiedByUser = table.Column<string>(nullable: true),
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
@@ -218,6 +224,8 @@ namespace KingPim.Data.Migrations
                     AddedDate = table.Column<DateTime>(nullable: false),
                     UpdatedDate = table.Column<DateTime>(nullable: false),
                     Published = table.Column<bool>(nullable: false),
+                    Version = table.Column<double>(nullable: false),
+                    ModifiedByUser = table.Column<string>(nullable: true),
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
@@ -241,6 +249,8 @@ namespace KingPim.Data.Migrations
                     AddedDate = table.Column<DateTime>(nullable: false),
                     UpdatedDate = table.Column<DateTime>(nullable: false),
                     Published = table.Column<bool>(nullable: false),
+                    Version = table.Column<double>(nullable: false),
+                    ModifiedByUser = table.Column<string>(nullable: true),
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),

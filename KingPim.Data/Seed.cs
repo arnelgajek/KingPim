@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace KingPim.Data
 {
@@ -21,8 +20,8 @@ namespace KingPim.Data
             // Attribute:
             var oneAttribute = new OneAttribute
             {
-                Name = "White",
-                Description = "The specific color.",
+                Name = "Color",
+                Description = "The specific color of the product.",
                 Type = "string"
             };
             ctx.OneAttributes.Add(oneAttribute);
@@ -32,8 +31,8 @@ namespace KingPim.Data
             // AttributeGroup:
             var attributeGroup = new AttributeGroup
             {
-                Name = "Color",
-                Description = "The color.",
+                Name = "Style",
+                Description = "The style of the product.",
                 OneAttributes = oneAttributeList
             };
             ctx.AttributeGroups.Add(attributeGroup);
@@ -48,6 +47,8 @@ namespace KingPim.Data
                 UpdatedDate = DateTime.Now.Date,
                 AddedDate = DateTime.Today,
                 Published = false,
+                Version = 1,
+                ModifiedByUser = "administrator@kingpim.se"
             };
             productList.Add(product);
 
@@ -59,7 +60,9 @@ namespace KingPim.Data
                 SubCategoryAttributeGroups = subCategoryAttributeGroupList,
                 UpdatedDate = DateTime.Now.Date,
                 AddedDate = DateTime.Today,
-                Published = false
+                Published = false,
+                Version = 1,
+                ModifiedByUser = "administrator@kingpim.se"
             };
             subCategoryList.Add(subCategory);
 
@@ -81,6 +84,8 @@ namespace KingPim.Data
                     UpdatedDate = DateTime.Now.Date,
                     AddedDate = DateTime.Now,
                     Published = false,
+                    Version = 1,
+                    ModifiedByUser = "administrator@kingpim.se"
                 };
                 ctx.Categories.AddRange(category);
             };

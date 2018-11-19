@@ -1,6 +1,7 @@
 ﻿using KingPim.Data;
 using KingPim.Models.Models;
 using KingPim.Models.ViewModels;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +11,12 @@ namespace KingPim.Repositories.Repositories
     public class CategoryRepository : ICategory
     {
         private ApplicationDbContext _ctx;
-        public CategoryRepository(ApplicationDbContext ctx)
+        private UserManager<IdentityUser> _userManager;
+
+        public CategoryRepository(ApplicationDbContext ctx, UserManager<IdentityUser> userManager)
         {
             _ctx = ctx;
+            _userManager = userManager;
         }
 
         public void Add(CategoryViewModel vm)
@@ -25,7 +29,9 @@ namespace KingPim.Repositories.Repositories
                     SubCategories = null,
                     AddedDate = DateTime.Now,
                     UpdatedDate = DateTime.Now,                    
-                    Published = false
+                    Published = false,
+                    Version = 1,
+                    ModifiedByUser = vm.ModifiedByUser
                 };
                 _ctx.Categories.Add(newCategory);
             }
@@ -40,6 +46,8 @@ namespace KingPim.Repositories.Repositories
             {
                 ctxCategory.Name = vm.Name;
                 ctxCategory.UpdatedDate = DateTime.Now;
+                ctxCategory.Version++;
+                ctxCategory.ModifiedByUser = vm.ModifiedByUser;
             }
             
             _ctx.SaveChanges();

@@ -17,16 +17,38 @@
     <tbody>
         @foreach (var attrGr in Model.SubCategoryAttributeGroups)
         {
-            <tr>
-                <td>@attrGr.AttributeGroup.Name</td>
-                @foreach (var attr in attrGr.AttributeGroup.OneAttributes)
+        <tr>
+            <td>@attrGr.AttributeGroup.Name</td>
+            @foreach (var attr in attrGr.AttributeGroup.OneAttributes)
+            {
+                <td>@attr.Name</td>
+
+                var prodAttrRow = Model.ProductOneAttributeValues.FirstOrDefault(x => x.OneAttributeId == attr.Id);
+                var prodAttrValueRow = prodAttrRow?.Value;
+
+                var test = Model.PredefinedAttrLists.FirstOrDefault(x => x.Id == attr.Id);
+
+                @if (attr.Type == "string" || attr.Type == "int")
                 {
-                    <td>@attr.Name</td>
+                    <td>
+                        <form asp-controller="Product" asp-action="ProductAttributeValue">
+                            <input type="hidden" value="@attr.Id" asp-for="OneAttributeId" />
+                            <input type="hidden" value="@attrGr.Id" asp-for="ProductId" />
+                            @if (prodAttrValueRow != null)
+                            {
+                                <input asp-for="Value" type="text" class="form-control" value="@prodAttrRow.Value" /><button class="btn btn-sm btn-success" type="submit" style="float:right;border-radius:50px;">Update</button>
+                            }
+                            else
+                            {
 
-                    var prodAttrRow = Model.ProductAttributeValues.FirstOrDefault(x => x.OneAttributeId == attr.Id);
-                    var prodAttrValueRow = prodAttrRow?.Value;
-
-                    @if (attr.Type == "string" || attr.Type == "int")
+                                <input asp-for="Value" type="text" class="form-control" required /><button class="btn btn-sm btn-success" type="submit" style="float:right;border-radius:50px;">Save</button>
+                            }
+                        </form>
+                    </td>
+                }
+                @if (attr.Type == "bool")
+                {
+                    @if (attr.Type != null)
                     {
                         <td>
                             <form asp-controller="Product" asp-action="ProductAttributeValue">
@@ -34,27 +56,52 @@
                                 <input type="hidden" value="@attrGr.Id" asp-for="ProductId" />
                                 @if (prodAttrValueRow != null)
                                 {
-                                    <input asp-for="Value" type="text" class="form-control" value="@prodAttrRow.Value" />
+                                    <input asp-for="Value" type="checkbox" checked value="@prodAttrRow.Value" /><button class="btn btn-sm btn-success" type="submit" style="float:right;border-radius:50px;">Update</button>
                                 }
                                 else
                                 {
 
-                                    <input asp-for="Value" type="text" class="form-control" required /><button class="btn btn-sm btn-success" type="submit">Save</button>
+                                    <input asp-for="Value" type="checkbox" required /><button class="btn btn-sm btn-success" type="submit" style="float:right;border-radius:50px;">Save</button>
                                 }
                             </form>
                         </td>
                     }
                 }
-            </tr>
+                @if (attr.Type == "predefined")
+                {
+                    @if (attr.Type != null)
+                    {
+                        <td>
+                            <form asp-controller="Product" asp-action="ProductAttributeValue">
+                                <input type="hidden" value="@attr.Id" asp-for="OneAttributeId" />
+                                <input type="hidden" value="@attrGr.Id" asp-for="ProductId" />
+                                <select asp-for="Value" class="form-control-sm" required>
+                                    @if (test != null)
+                                    {
+                                        <option value="@test" disabled selected>Select a season</option>
+                                        foreach (var season in test.PredefinedAttrListOptions)
+                                        {
+                                            <option value="@test">@season.Name</option>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <option value="@test" disabled selected>Select a season</option>
+                                        foreach (var season in Model.PredefinedAttrListOptions)
+                                        {
+                                            <option value="@test">@season.Name</option>
+                                        }
+                                    }
+                                </select>
+                            </form>
+                        </td>
+                    }
+                }
+            }
+        </tr>
         }
     </tbody>
 </table>
 <div class="container-fluid">
     <a asp-controller="Product" asp-action="Index" class="btn btn-sm btn-warning">Back</a>
 </div>
-
-<style>
-    .hidden {
-        display: none;
-    }
-</style>

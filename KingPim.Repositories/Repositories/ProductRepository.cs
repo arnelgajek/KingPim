@@ -57,8 +57,10 @@ namespace KingPim.Repositories.Repositories
 
         public void ProductAttributeValue(ProductViewModel vm)
         {
-            if (vm.Id == 0) {
+            var prodAttrValId = _ctx.ProductOneAttributeValues.FirstOrDefault(pal => pal.Id.Equals(vm.Id));
 
+            if (vm.Id == 0)
+            {
                 var prodAttrVal = new ProductOneAttributeValue
                 {
                     Value = vm.Value,
@@ -66,7 +68,17 @@ namespace KingPim.Repositories.Repositories
                     ProductId = vm.ProductId,
             };
             _ctx.ProductOneAttributeValues.Add(prodAttrVal);
-        }
+            _ctx.SaveChanges();
+            }
+
+            // This shit does not work:
+            if(prodAttrValId != null)
+            {
+                prodAttrValId.Value = vm.Value;
+                prodAttrValId.OneAttributeId = vm.OneAttributeId;
+                prodAttrValId.ProductId = vm.ProductId;
+            }
+            _ctx.ProductOneAttributeValues.Update(prodAttrValId);
             _ctx.SaveChanges();
         }
 

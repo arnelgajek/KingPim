@@ -60,6 +60,7 @@ namespace KingPim.Web
             services.AddTransient<IAttributeGroup, AttributeGroupRepository>();
             services.AddTransient<IOneAttribute, OneAttributeRepository>();
             services.AddTransient<IProductOneAttributeValues, ProductOneAttributeValuesRepository>();
+            services.AddTransient<IPredefinedAttrList, PredefinedAttrlistRepository>();
 
             services.Configure<IdentityOptions>(options =>
             {

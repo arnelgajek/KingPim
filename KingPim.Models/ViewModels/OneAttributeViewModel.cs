@@ -13,5 +13,6 @@ namespace KingPim.Models.ViewModels
         public int AttributeGroupId { get; set; }
         public IEnumerable<OneAttribute> OneAttributes { get; set; }
         public IEnumerable<AttributeGroup> AttributeGroups { get; set; }
+
     }
 }

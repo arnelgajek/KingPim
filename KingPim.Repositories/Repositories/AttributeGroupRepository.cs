@@ -24,7 +24,6 @@ namespace KingPim.Repositories.Repositories
                 {
                     Name = vm.Name,
                     Description = vm.Description,
-                    //SubCategoryId = vm.SubCategoryId,
                     OneAttributes = null,
                     AddedDate = DateTime.Now,
                     UpdatedDate = DateTime.Now,
@@ -43,7 +42,6 @@ namespace KingPim.Repositories.Repositories
             {
                 ctxAttrGroup.Name = vm.Name;
                 ctxAttrGroup.Description = vm.Description;
-                //ctxAttrGroup.SubCategoryId = vm.SubCategoryId;
                 ctxAttrGroup.UpdatedDate = DateTime.Now;
             }
             _ctx.SaveChanges();

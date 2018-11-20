@@ -11,5 +11,7 @@ namespace KingPim.Models.ViewModels
         public int CategoryId { get; }
         public IEnumerable<Category> Categories { get; set; }
         public IEnumerable<SubCategoryViewModel> SubCategories { get; set; }
+        public double Version { get; set; }
+        public string ModifiedByUser { get; set; }
     }
 }

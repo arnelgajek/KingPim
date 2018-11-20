@@ -37,6 +37,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
                     <input type="hidden" name="categoryId" value="@Model.Id" />
+                    <input type="hidden" asp-for="@Model.ModifiedByUser" value="@User.Identity.Name" />
                     <button type="submit" id="createSomethingBtn" class="btn btn-success">Create</button>
                 </div>
             </form>
@@ -82,6 +83,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
                     <input type="hidden" name="id" value="@Model.Id" />
+                    <input type="hidden" asp-for="@Model.ModifiedByUser" value="@User.Identity.Name" />
                     <button type="submit" id="confirmUpdate" class="btn btn-success">Update</button>
                 </div>
             </form>

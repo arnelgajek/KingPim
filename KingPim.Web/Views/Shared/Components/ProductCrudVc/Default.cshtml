@@ -42,6 +42,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
                     <input type="hidden" name="productId" value="@Model.Id" />
+                    <input type="hidden" asp-for="@Model.ModifiedByUser" value="@User.Identity.Name" />
                     <button type="submit" id="createSomething" class="btn btn-success">Create</button>
                 </div>
             </form>
@@ -78,7 +79,7 @@
                     </div>
                     <div class="form-group">
                         <select asp-for="SubCategoryId" class="form-control" required>
-                            <option value="" selected>Select a category</option>
+                            <option value="" selected>Select a subcategory</option>
                             @foreach (var cat in Model.SubCategories)
                             {
                                 <option value="@cat.Id">@cat.Name</option>
@@ -90,6 +91,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
                     <input type="hidden" name="id" value="@Model.Id" />
+                    <input type="hidden" asp-for="@Model.ModifiedByUser" value="@User.Identity.Name" />
                     <button type="submit" id="confirmUpdate" class="btn btn-success">Update</button>
                 </div>
             </form>

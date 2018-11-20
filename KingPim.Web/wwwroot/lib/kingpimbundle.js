@@ -24,7 +24,6 @@ $(document).ready(function () {
         }
 
         var url = "";
-        //var entityType = "@ViewBag.EntityType";
 
         switch (entityType) {
             case "Category":
@@ -112,13 +111,6 @@ $(document).ready(function () {
             var name = $(".table").find("input:checked").attr("data-name");
             modal.find('.modal-body p strong').text('You are about to delete "' + name + '"');
         });
-    });
-
-    // DETAILS:
-    $('#productDetails').on('click', function () {
-        getValueUsingClass();
-
-        $('#prodDetailsForm').removeClass('hidden');
     });
 
     function getValueUsingClass() {

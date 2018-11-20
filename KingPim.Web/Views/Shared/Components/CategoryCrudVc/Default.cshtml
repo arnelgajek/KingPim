@@ -15,11 +15,12 @@
                             <input asp-for="@Model.Name" placeholder="Name..." class="form-control form-control-sm" />
                         </p>
                     </div>
-                    <p class="text-center"><strong>Make sure to save your changes.</strong></p>
+                    <p class="text-center"><strong>Press "Create" to add the new Category.</strong></p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
                     <input type="hidden" name="categoryId" value="@Model.Id" />
+                    <input type="hidden" asp-for="@Model.ModifiedByUser" value="@User.Identity.Name" />
                     <button type="submit" id="createSomething" class="btn btn-success">Create</button>
                 </div>
             </form>
@@ -46,6 +47,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
                     <input type="hidden" name="id" value="@Model.Id" />
+                    <input type="hidden" asp-for="@Model.ModifiedByUser" value="@User.Identity.Name" />
                     <button type="submit" id="confirmUpdate" class="btn btn-success">Update</button>
                 </div>
             </form>

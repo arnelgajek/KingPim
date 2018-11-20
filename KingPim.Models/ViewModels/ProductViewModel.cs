@@ -21,5 +21,7 @@ namespace KingPim.Models.ViewModels
         public IEnumerable<SubCategoryAttributeGroup> SubCategoryAttributeGroups {get; set;}
         public IEnumerable<ProductOneAttributeValue> ProductAttributeValues { get; set; }
         public IEnumerable<OneAttribute> OneAttributes { get; set; }
+        public double Version { get; set; }
+        public string ModifiedByUser { get; set; }
     }
 }

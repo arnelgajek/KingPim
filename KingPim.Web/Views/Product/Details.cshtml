@@ -1,22 +1,22 @@
 ﻿@model ProductViewModel
 
-    <h1>@Model.Name</h1>
-    <br />
-    <p><strong>Description: </strong><i>@Model.Description</i></p>
-    <p><strong>Added Date: </strong><i>@Model.AddedDate.ToString("yyyy-MM-dd")</i></p>
-    <p><strong>Updated Date: </strong><i>@Model.UpdatedDate.ToString("yyyy-MM-dd")</i></p>
+<h1>@Model.Name</h1>
+<br />
+<p><strong>Description: </strong><i>@Model.Description</i></p>
+<p><strong>Added Date: </strong><i>@Model.AddedDate.ToString("yyyy-MM-dd")</i></p>
+<p><strong>Updated Date: </strong><i>@Model.UpdatedDate.ToString("yyyy-MM-dd")</i></p>
 
-    <table class="table col-md-6">
-        <thead>
-            <tr>
-                <th scope="col">AttributeGroup:</th>
-                <th scope="col">Attribute:</th>
-                <th scope="col">Value:</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var attrGr in Model.SubCategoryAttributeGroups)
-            {
+<table class="table col-md-6">
+    <thead>
+        <tr>
+            <th scope="col">AttributeGroup:</th>
+            <th scope="col">Attribute:</th>
+            <th scope="col">Value:</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var attrGr in Model.SubCategoryAttributeGroups)
+        {
             <tr>
                 <td>@attrGr.AttributeGroup.Name</td>
                 @foreach (var attr in attrGr.AttributeGroup.OneAttributes)
@@ -39,7 +39,7 @@
                                 else
                                 {
 
-                                    <input asp-for="Value" type="text" class="form-control" required/><button class="btn btn-sm btn-success" type="submit">Save</button>
+                                    <input asp-for="Value" type="text" class="form-control" required /><button class="btn btn-sm btn-success" type="submit">Save</button>
                                 }
                             </form>
                         </td>
@@ -47,8 +47,8 @@
                 }
             </tr>
         }
-        </tbody>
-    </table>
+    </tbody>
+</table>
 <div class="container-fluid">
     <a asp-controller="Product" asp-action="Index" class="btn btn-sm btn-warning">Back</a>
 </div>

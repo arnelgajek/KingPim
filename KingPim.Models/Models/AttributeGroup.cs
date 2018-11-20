@@ -7,9 +7,7 @@ namespace KingPim.Models.Models
     {
         [Column(Order = 0)]
         public int Id { get; set; }
-        [Column(Order = 1)]
         public string Name { get; set; }
-        [Column(Order = 2)]
         public string Description { get; set; }
         public virtual List<OneAttribute> OneAttributes { get; set; } 
     }

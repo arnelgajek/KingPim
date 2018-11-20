@@ -20,12 +20,14 @@
                 <th scope="col">Name:</th>
                 <th scope="col">Description:</th>
                 <th scope="col">Price:</th>
+                <th scope="col">Version:</th>
+                <th scope="col">Modified By:</th>
                 <th scope="col">Export XML:</th>
                 <th scope="col">Export JSON:</th>
                 @if (User.IsInRole("Administrator") || User.IsInRole("Publisher"))
                 {
                     <th scope="col">Published:</th>
-                } 
+                }
                 <th><a>Details:</a></th>
             </tr>
         </thead>
@@ -33,9 +35,13 @@
         {
             <tbody>
                 <tr>
-                    <th scope="row"><input type="checkbox" class="chk" value="@prod.Id" data-name="@prod.Name" data-prodSubCat="@prod.SubCategory.SubCategoryAttributeGroups" /> @prod.Name</th>
+                    <th scope="row">
+                        <input type="checkbox" class="chk" value="@prod.Id" data-name="@prod.Name" data-prodSubCat="@prod.SubCategory" /> @prod.Name
+                    </th>
                     <td><p><i>@prod.Description</i></p></td>
                     <td>@prod.Price:-</td>
+                    <td>@prod.Version<span>.0</span></td>
+                    <td>@prod.ModifiedByUser</td>
                     <td><a asp-controller="Product" asp-action="GetAllProductsToXml" class="btn btn-info btn-sm" asp-route-id="@prod.Id">Export XML</a></td>
                     <td><a asp-controller="Product" asp-action="GetAllProductsToJson" class="btn btn-info btn-sm" asp-route-id="@prod.Id">Export Json</a></td>
                     @if (User.Identity.IsAuthenticated)

@@ -44,7 +44,6 @@ namespace KingPim.Repositories.Repositories
                 ctxOneAttr.Name = vm.Name;
                 ctxOneAttr.Description = vm.Description;
                 ctxOneAttr.Type = vm.Type;
-                //ctxOneAttr.AttributeGroupId = vm.AttributeGroupId;
                 ctxOneAttr.UpdatedDate = DateTime.Now;
             }
             _ctx.SaveChanges();

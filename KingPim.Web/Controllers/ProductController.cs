@@ -16,13 +16,15 @@ namespace KingPim.Web.Controllers
         private ISubCategory subCatRepo;
         private IAttributeGroup attrGrRepo;
         private IProductOneAttributeValues prodOneAttrValRepo;
+        private IPredefinedAttrList predefAttrList;
 
-        public ProductController(IProduct prodRepository, ISubCategory subCatRepository, IAttributeGroup attrGrRepository, IProductOneAttributeValues prodOneattrValRepository)
+        public ProductController(IProduct prodRepository, ISubCategory subCatRepository, IAttributeGroup attrGrRepository, IProductOneAttributeValues prodOneattrValRepository, IPredefinedAttrList predefAttrListRepository)
         {
             prodRepo = prodRepository;
             subCatRepo = subCatRepository;
             attrGrRepo = attrGrRepository;
             prodOneAttrValRepo = prodOneattrValRepository;
+            predefAttrList = predefAttrListRepository;
         }
 
         [HttpGet]
@@ -78,6 +80,8 @@ namespace KingPim.Web.Controllers
         {
             var product = prodRepo.Get(id);
             var productOneAttrValue = prodOneAttrValRepo.GetAll();
+            var preDefAttrList = predefAttrList.GetAllLists();
+            var preDefAttrListOption = predefAttrList.GetAllOptions();
 
             var prodDetVm = new ProductViewModel
             {
@@ -86,7 +90,10 @@ namespace KingPim.Web.Controllers
                 AddedDate = product.AddedDate,
                 UpdatedDate = product.UpdatedDate,
                 SubCategoryAttributeGroups = subCatRepo.Get(product.SubCategoryId ?? 0).SubCategoryAttributeGroups,
-                ProductAttributeValues = productOneAttrValue
+                ProductOneAttributeValues = productOneAttrValue,
+                PredefinedAttrLists = preDefAttrList,
+                PredefinedAttrListOptions = preDefAttrListOption
+                
             };
             return View(prodDetVm);
         }

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KingPim.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181119141044_initial")]
+    [Migration("20181120105110_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -98,6 +98,36 @@ namespace KingPim.Data.Migrations
                     b.HasIndex("AttributeGroupId");
 
                     b.ToTable("OneAttributes");
+                });
+
+            modelBuilder.Entity("KingPim.Models.Models.PredefinedAttrList", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PredefinedAttrLists");
+                });
+
+            modelBuilder.Entity("KingPim.Models.Models.PredefinedAttrListOptions", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.Property<int?>("PredefinedAttrListId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PredefinedAttrListId");
+
+                    b.ToTable("PredefinedAttrListOptions");
                 });
 
             modelBuilder.Entity("KingPim.Models.Models.Product", b =>
@@ -364,6 +394,14 @@ namespace KingPim.Data.Migrations
                     b.HasOne("KingPim.Models.Models.AttributeGroup", "AttributeGroup")
                         .WithMany("OneAttributes")
                         .HasForeignKey("AttributeGroupId")
+                        .OnDelete(DeleteBehavior.SetNull);
+                });
+
+            modelBuilder.Entity("KingPim.Models.Models.PredefinedAttrListOptions", b =>
+                {
+                    b.HasOne("KingPim.Models.Models.PredefinedAttrList", "PredefinedAttrList")
+                        .WithMany("PredefinedAttrListOptions")
+                        .HasForeignKey("PredefinedAttrListId")
                         .OnDelete(DeleteBehavior.SetNull);
                 });
 

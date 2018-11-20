@@ -27,7 +27,6 @@ namespace KingPim.Data
             ctx.OneAttributes.Add(oneAttribute);
             ctx.SaveChanges();
 
-
             // AttributeGroup:
             var attributeGroup = new AttributeGroup
             {

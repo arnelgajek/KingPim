@@ -19,6 +19,8 @@ namespace KingPim.Data
         public DbSet<ProductOneAttributeValue> ProductOneAttributeValues { get; set; }
         public DbSet<SubCategoryAttributeGroup> SubCategoryAttributeGroups { get; set; }
         public DbSet<SubCategory> SubCategories { get; set; }
+        public DbSet<PredefinedAttrList> PredefinedAttrLists { get; set; }
+        public DbSet<PredefinedAttrListOptions> PredefinedAttrListOptions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelbuilder)
         {

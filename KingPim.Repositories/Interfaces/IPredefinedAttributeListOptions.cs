@@ -5,8 +5,8 @@ using System.Text;
 
 namespace KingPim.Repositories.Interfaces
 {
-    public interface IPredefinedAttrList
+    public interface IPredefinedAttributeListOptions
     {
-        IEnumerable<PredefinedAttrList> GetAllLists();
+        IEnumerable<PredefinedAttrListOptions> GetAllOptions();
     }
 }

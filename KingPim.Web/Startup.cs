@@ -11,6 +11,7 @@ using KingPim.Repositories;
 using KingPim.Repositories.Repositories;
 using KingPim.Repositories.Interfaces;
 using Newtonsoft.Json;
+using KingPim.Models.Models;
 
 namespace KingPim.Web
 {
@@ -61,6 +62,7 @@ namespace KingPim.Web
             services.AddTransient<IOneAttribute, OneAttributeRepository>();
             services.AddTransient<IProductOneAttributeValues, ProductOneAttributeValuesRepository>();
             services.AddTransient<IPredefinedAttrList, PredefinedAttrlistRepository>();
+            services.AddTransient<IPredefinedAttributeListOptions, PredefinedAttributeListOptionsRepository>();
 
             services.Configure<IdentityOptions>(options =>
             {
@@ -101,6 +103,10 @@ namespace KingPim.Web
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}");
+
+                routes.MapRoute(
+                    name: "details",
+                    template: "{controller=Product}/{action=Details}/{id?}");
             });
 
             var runIdentitySeed = Task.Run(async () => await identitySeed.CreateAdminAccountIfEmpty()).Result;

@@ -12,6 +12,7 @@ namespace KingPim.Repositories.Interfaces
         void Update(ProductViewModel updateProduct);
         void Publish(ProductViewModel publishProduct);
         Product Delete(int id);
-        void ProductAttributeValue(ProductViewModel attributeValueProduct);
+        void AddProductAttributeValue(ProductViewModel addAttributeValueProduct);
+        void UpdateProductAttributeValue(ProductViewModel updateAttributeValueProduct);
     }
 }

@@ -7,17 +7,17 @@ using System.Text;
 
 namespace KingPim.Repositories.Repositories
 {
-    public class PredefinedAttrlistRepository : IPredefinedAttrList
+    public class PredefinedAttributeListOptionsRepository : IPredefinedAttributeListOptions
     {
         private ApplicationDbContext _ctx;
-        public PredefinedAttrlistRepository(ApplicationDbContext ctx)
+        public PredefinedAttributeListOptionsRepository(ApplicationDbContext ctx)
         {
             _ctx = ctx;
         }
 
-        public IEnumerable<PredefinedAttrList> GetAllLists()
+        public IEnumerable<PredefinedAttrListOptions> GetAllOptions()
         {
-            return _ctx.PredefinedAttrLists;
+            return _ctx.PredefinedAttrListOptions;
         }
     }
 }

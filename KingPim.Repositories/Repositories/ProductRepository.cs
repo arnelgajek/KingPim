@@ -55,30 +55,33 @@ namespace KingPim.Repositories.Repositories
             _ctx.SaveChanges();
         }
 
-        public void ProductAttributeValue(ProductViewModel vm)
+        public void AddProductAttributeValue(ProductViewModel vm)
         {
-            var prodAttrValId = _ctx.ProductOneAttributeValues.FirstOrDefault(pal => pal.Id.Equals(vm.Id));
-
             if (vm.Id == 0)
             {
-                var prodAttrVal = new ProductOneAttributeValue
+                // Adding a new product attribute value:
+                var newProdAttrVal = new ProductOneAttributeValue
                 {
                     Value = vm.Value,
-                    OneAttributeId = vm.OneAttributeId,
                     ProductId = vm.ProductId,
-            };
-            _ctx.ProductOneAttributeValues.Add(prodAttrVal);
+                    OneAttributeId = vm.OneAttributeId
+                };
+                _ctx.ProductOneAttributeValues.Add(newProdAttrVal);
+            }
             _ctx.SaveChanges();
-            }
+        }
 
-            // This shit does not work:
-            if(prodAttrValId != null)
+        public void UpdateProductAttributeValue(ProductViewModel vm)
+        {
+            var ctxProductAttributeValue = _ctx.ProductOneAttributeValues.FirstOrDefault(pav => pav.Id.Equals(vm.Id));
+
+            if (ctxProductAttributeValue != null)
             {
-                prodAttrValId.Value = vm.Value;
-                prodAttrValId.OneAttributeId = vm.OneAttributeId;
-                prodAttrValId.ProductId = vm.ProductId;
+                ctxProductAttributeValue.Value = vm.Value;
+                ctxProductAttributeValue.ProductId = vm.ProductId;
+                ctxProductAttributeValue.OneAttributeId = vm.OneAttributeId;
             }
-            _ctx.ProductOneAttributeValues.Update(prodAttrValId);
+            _ctx.ProductOneAttributeValues.Update(ctxProductAttributeValue);
             _ctx.SaveChanges();
         }
 

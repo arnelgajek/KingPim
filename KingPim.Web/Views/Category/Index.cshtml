@@ -3,7 +3,7 @@
 <!-- EXPORT-buttons: -->
 <div class="container">
     <div class="float-sm-left" style="margin-bottom:10px; margin-top:80px;">
-        <a asp-controller="Category" asp-action="GetAllCategoriesToXml" class="btn btn-info btn-md">Export XML</a>
+        @*<a asp-controller="Category" asp-action="GetAllCategoriesToXml" class="btn btn-info btn-md">Export XML</a>*@
         <a asp-controller="Category" asp-action="GetAllCategoriesToJson" class="btn btn-info btn-md">Export Json</a>
     </div>
 
@@ -23,7 +23,7 @@
                 <th scope="col">Updated Date:</th>
                 <th scope="col">Version:</th>
                 <th scope="col">Modified By:</th>
-                <th scope="col">Export XML:</th>
+                @*<th scope="col">Export XML:</th>*@
                 <th scope="col">Export JSON:</th>
                 @if (User.IsInRole("Administrator") || User.IsInRole("Publisher"))
                 {
@@ -42,7 +42,7 @@
                     <td>@cat.UpdatedDate.ToString("yyyy-MM-dd")</td>
                     <td>@cat.Version<span>.0</span></td>
                     <td>@cat.ModifiedByUser</td>
-                    <td><a asp-controller="Category" asp-action="GetAllCategoriesToXml" class="btn btn-info btn-sm" asp-route-id="@cat.Id">Export XML</a></td>
+                    @*<td><a asp-controller="Category" asp-action="GetAllCategoriesToXml" class="btn btn-info btn-sm" asp-route-id="@cat.Id">Export XML</a></td>*@
                     <td><a asp-controller="Category" asp-action="GetAllCategoriesToJson" class="btn btn-info btn-sm" asp-route-id="@cat.Id">Export Json</a></td>
                     @if (User.Identity.IsAuthenticated)
                     {

@@ -16,15 +16,17 @@ namespace KingPim.Web.Controllers
         private ISubCategory subCatRepo;
         private IAttributeGroup attrGrRepo;
         private IProductOneAttributeValues prodOneAttrValRepo;
-        private IPredefinedAttrList predefAttrList;
+        private IPredefinedAttrList predefAttrListRepo;
+        private IPredefinedAttributeListOptions predefAttrListOptionsRepo;
 
-        public ProductController(IProduct prodRepository, ISubCategory subCatRepository, IAttributeGroup attrGrRepository, IProductOneAttributeValues prodOneattrValRepository, IPredefinedAttrList predefAttrListRepository)
+        public ProductController(IProduct prodRepository, ISubCategory subCatRepository, IAttributeGroup attrGrRepository, IProductOneAttributeValues prodOneattrValRepository, IPredefinedAttrList predefAttrListRepository, IPredefinedAttributeListOptions predefAttrListOptionsRepository)
         {
             prodRepo = prodRepository;
             subCatRepo = subCatRepository;
             attrGrRepo = attrGrRepository;
             prodOneAttrValRepo = prodOneattrValRepository;
-            predefAttrList = predefAttrListRepository;
+            predefAttrListRepo = predefAttrListRepository;
+            predefAttrListOptionsRepo = predefAttrListOptionsRepository;
         }
 
         [HttpGet]
@@ -63,10 +65,17 @@ namespace KingPim.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult ProductAttributeValue(ProductViewModel vm)
+        public IActionResult AddProductAttributeValue(ProductViewModel vm)
         {
-            prodRepo.ProductAttributeValue(vm);
-            return RedirectToAction(nameof(Index));
+            prodRepo.AddProductAttributeValue(vm);
+            return RedirectToAction(nameof(Details), new { id = vm.ProductId });
+        }
+
+        [HttpPost]
+        public IActionResult UpdateProductAttributeValue(ProductViewModel vm)
+        {
+            prodRepo.UpdateProductAttributeValue(vm);
+            return RedirectToAction(nameof(Details), new { id = vm.ProductId });
         }
 
         [HttpPost]
@@ -79,21 +88,21 @@ namespace KingPim.Web.Controllers
         public IActionResult Details(int id)
         {
             var product = prodRepo.Get(id);
-            var productOneAttrValue = prodOneAttrValRepo.GetAll();
-            var preDefAttrList = predefAttrList.GetAllLists();
-            var preDefAttrListOption = predefAttrList.GetAllOptions();
+            var productOneAttrValue = prodOneAttrValRepo.GetAll().Where(p => p.ProductId == id);
+            var preDefAttrList = predefAttrListRepo.GetAllLists();
+            var preDefAttrListOptions = predefAttrListOptionsRepo.GetAllOptions();
 
             var prodDetVm = new ProductViewModel
             {
+                ProductId = id,
                 Name = product.Name,
                 Description = product.Description,
                 AddedDate = product.AddedDate,
                 UpdatedDate = product.UpdatedDate,
                 SubCategoryAttributeGroups = subCatRepo.Get(product.SubCategoryId ?? 0).SubCategoryAttributeGroups,
                 ProductOneAttributeValues = productOneAttrValue,
-                PredefinedAttrLists = preDefAttrList,
-                PredefinedAttrListOptions = preDefAttrListOption
-                
+                PredefinedAttrLists = preDefAttrList,  
+                PredefinedAttrListOptions = preDefAttrListOptions
             };
             return View(prodDetVm);
         }

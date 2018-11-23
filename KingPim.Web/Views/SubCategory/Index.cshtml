@@ -3,7 +3,7 @@
 <!-- EXPORT-buttons: -->
 <div class="container">
     <div class="float-sm-left" style="margin-bottom:10px; margin-top:80px;">
-        <a asp-controller="SubCategory" asp-action="GetAllSubCategoriesToXml" class="btn btn-info btn-md" asp-route-id="@Model.Id">Export XML</a>
+        @*<a asp-controller="SubCategory" asp-action="GetAllSubCategoriesToXml" class="btn btn-info btn-md" asp-route-id="@Model.Id">Export XML</a>*@
         <a asp-controller="SubCategory" asp-action="GetAllSubCategoriesToJson" class="btn btn-info btn-md" asp-route-id="@Model.Id">Export Json</a>
     </div>
     <!-- CRUD-buttons to modals:-->
@@ -23,7 +23,7 @@
                     <th scope="col">Updated Date:</th>
                     <th scope="col">Version:</th>
                     <th scope="col">Modified By:</th>
-                    <th scope="col">Export XML:</th>
+                    @*<th scope="col">Export XML:</th>*@
                     <th scope="col">Export JSON:</th>
                     @if (User.IsInRole("Administrator") || User.IsInRole("Publisher"))
                     {
@@ -43,7 +43,7 @@
                         <td>@subCat.UpdatedDate.ToString("yyyy-MM-dd")</td>
                         <td>@subCat.Version<span>.0</span></td>
                         <td>@subCat.ModifiedByUser</td>
-                        <td><a asp-controller="SubCategory" asp-action="GetAllSubCategoriesToXml" class="btn btn-info btn-sm" asp-route-id="@subCat.Id">Export XML</a></td>
+                        @*<td><a asp-controller="SubCategory" asp-action="GetAllSubCategoriesToXml" class="btn btn-info btn-sm" asp-route-id="@subCat.Id">Export XML</a></td>*@
                         <td><a asp-controller="SubCategory" asp-action="GetAllSubCategoriesToJson" class="btn btn-info btn-sm" asp-route-id="@subCat.Id">Export Json</a></td>
                         @if (User.Identity.IsAuthenticated)
                         {

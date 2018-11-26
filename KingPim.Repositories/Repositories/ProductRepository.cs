@@ -81,7 +81,6 @@ namespace KingPim.Repositories.Repositories
                 ctxProductAttributeValue.ProductId = vm.ProductId;
                 ctxProductAttributeValue.OneAttributeId = vm.OneAttributeId;
             }
-            _ctx.ProductOneAttributeValues.Update(ctxProductAttributeValue);
             _ctx.SaveChanges();
         }
 

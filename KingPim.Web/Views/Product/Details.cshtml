@@ -13,6 +13,7 @@
             <th scope="col">Attribute:</th>
             <th scope="col">Value:</th>
             <th scope="col"></th>
+            <th scope="col"></th>
         </tr>
     </thead>
     <tbody>
@@ -25,8 +26,8 @@
                 var prodAttrRow = Model.ProductOneAttributeValues.FirstOrDefault(x => x.OneAttributeId == attr.Id);
                 var prodAttrValueRow = prodAttrRow?.Value;
 
-                var predefAttrListRow = Model.ProductOneAttributeValues.FirstOrDefault(x => x.OneAttributeId == attr.Id);
-                var predefAttrListOptionsRow = predefAttrListRow?.Value;
+                var predefAttrListRow = Model.PredefinedAttrListOptions.FirstOrDefault(x => x.OneAttributeId == attr.Id);
+                var predefAttrListOptionsRow = predefAttrListRow?.Name;
 
                 <td>@attr.Name</td>
 
@@ -89,46 +90,48 @@
                 @if (attr.Type == "predefined")
                 {
                     <td>
-                        @if (predefAttrListRow != null && predefAttrListOptionsRow != null)
+                        @if (predefAttrListOptionsRow != null)
                         {
                         <form asp-controller="Product" asp-action="UpdateProductAttributeValue">
                             <input type="hidden" value="@attr.Id" asp-for="OneAttributeId" />
                             <input type="hidden" value="@Model.ProductId" asp-for="ProductId" />
-                            <input type="hidden" value="@predefAttrListRow.Id" asp-for="Id" />
+                            <input type="hidden" value="@prodAttrRow.Id" asp-for="Id" />
                             <button class="btn btn-sm btn-success" type="submit" style="float:right;border-radius:50px;">Update</button>
 
-                            @foreach (var list in Model.PredefinedAttrLists)
-                            {
-                                <select asp-for="Value" class="form-control-sm">
-                                    <option value="@predefAttrListOptionsRow" selected>@predefAttrListRow.Value</option>
+                            <select asp-for="Value" class="form-control-sm">
+                                <option value="" disabled selected>@prodAttrValueRow</option>
 
-                                    @foreach (var option in Model.PredefinedAttrListOptions)
-                                    {
-                                        <option value="@option.Name">@option.Name</option>
-                                    }
-                                </select>
-                            }
+                                @foreach (var option in Model.PredefinedAttrListOptions)
+                                {
+                                    <option value="@option.Name">@option.Name</option>
+                                }
+                            </select>
                         </form>
-                        }
-                        else
-                        {
-                            <form asp-controller="Product" asp-action="AddProductAttributeValue">
+                            <br />
+
+                            <form asp-controller="Product" asp-action="CreateOptionToPredefinedList">
                                 <input type="hidden" value="@attr.Id" asp-for="OneAttributeId" />
                                 <input type="hidden" value="@Model.ProductId" asp-for="ProductId" />
-                                <button class="btn btn-sm btn-success" type="submit" style="float:right;border-radius:50px;">Add</button>                         
-
-                            @foreach (var list in Model.PredefinedAttrLists)
-                            {
-                                <select asp-for="Value" class="form-control-sm">
-                                    <option value="@predefAttrListOptionsRow" disabled selected>@list.Name</option>
-                                    
-                                    @foreach (var option in Model.PredefinedAttrListOptions)
-                                    {
-                                        <option value="@option.Name">@option.Name</option>
-                                    }
-                                </select>
-                            }
+                                <input type="text" value="" asp-for="Name" />
+                                <button class="btn btn-sm btn-info" type="submit" style="float:right;border-radius:50px;">Add option</button>
                             </form>
+                                }
+                                else
+                                {
+                                <select>
+                                    <option disabled selected>@attr.Name</option>
+                                </select>
+                            <td>
+                                <form asp-controller="Product" asp-action="AddOptionIfNotExists">
+                                    <input type="hidden" value="@attr.Id" asp-for="OneAttributeId" />
+                                    <input type="hidden" value="@Model.ProductId" asp-for="ProductId" />
+                                    <input type="hidden" value="@Model.PredefinedAttrListId" asp-for="PredefinedAttrListId" />
+
+                                    <!-- Add new option to list: -->
+                                    <input asp-for="Name" value="" type="text" class="form-control-sm" />
+                                    <button class="btn btn-sm btn-info" type="submit" style="float:right;border-radius:50px;">Add option</button>
+                                </form>
+                            </td>
                         }
                     </td>
                 }

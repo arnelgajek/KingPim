@@ -262,11 +262,18 @@ namespace KingPim.Data.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
+                    OneAttributeId = table.Column<int>(nullable: true),
                     PredefinedAttrListId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PredefinedAttrListOptions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PredefinedAttrListOptions_OneAttributes_OneAttributeId",
+                        column: x => x.OneAttributeId,
+                        principalTable: "OneAttributes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_PredefinedAttrListOptions_PredefinedAttrLists_PredefinedAttrListId",
                         column: x => x.PredefinedAttrListId,
@@ -398,6 +405,11 @@ namespace KingPim.Data.Migrations
                 name: "IX_OneAttributes_AttributeGroupId",
                 table: "OneAttributes",
                 column: "AttributeGroupId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PredefinedAttrListOptions_OneAttributeId",
+                table: "PredefinedAttrListOptions",
+                column: "OneAttributeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PredefinedAttrListOptions_PredefinedAttrListId",

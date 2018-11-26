@@ -119,9 +119,13 @@ namespace KingPim.Data.Migrations
 
                     b.Property<string>("Name");
 
+                    b.Property<int?>("OneAttributeId");
+
                     b.Property<int?>("PredefinedAttrListId");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("OneAttributeId");
 
                     b.HasIndex("PredefinedAttrListId");
 
@@ -397,7 +401,12 @@ namespace KingPim.Data.Migrations
 
             modelBuilder.Entity("KingPim.Models.Models.PredefinedAttrListOptions", b =>
                 {
-                    b.HasOne("KingPim.Models.Models.PredefinedAttrList", "PredefinedAttrList")
+                    b.HasOne("KingPim.Models.Models.OneAttribute", "OneAttributes")
+                        .WithMany()
+                        .HasForeignKey("OneAttributeId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.HasOne("KingPim.Models.Models.PredefinedAttrList")
                         .WithMany("PredefinedAttrListOptions")
                         .HasForeignKey("PredefinedAttrListId")
                         .OnDelete(DeleteBehavior.SetNull);

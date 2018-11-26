@@ -1,12 +1,15 @@
 ﻿using KingPim.Models.Models;
-using System;
+using KingPim.Models.ViewModels;
 using System.Collections.Generic;
-using System.Text;
 
 namespace KingPim.Repositories.Interfaces
 {
     public interface IPredefinedAttributeListOptions
     {
         IEnumerable<PredefinedAttrListOptions> GetAllOptions();
+
+        void CreateOptionToPredefinedList(ProductViewModel vm);
+        void AddOptionIfNotExists(ProductViewModel vm);
+        void UpdateProductAttributeValue(ProductViewModel vm);
     }
 }

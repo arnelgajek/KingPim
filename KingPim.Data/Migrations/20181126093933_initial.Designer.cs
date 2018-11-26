@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KingPim.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181120105110_initial")]
+    [Migration("20181126093933_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -121,9 +121,13 @@ namespace KingPim.Data.Migrations
 
                     b.Property<string>("Name");
 
+                    b.Property<int?>("OneAttributeId");
+
                     b.Property<int?>("PredefinedAttrListId");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("OneAttributeId");
 
                     b.HasIndex("PredefinedAttrListId");
 
@@ -399,7 +403,12 @@ namespace KingPim.Data.Migrations
 
             modelBuilder.Entity("KingPim.Models.Models.PredefinedAttrListOptions", b =>
                 {
-                    b.HasOne("KingPim.Models.Models.PredefinedAttrList", "PredefinedAttrList")
+                    b.HasOne("KingPim.Models.Models.OneAttribute", "OneAttributes")
+                        .WithMany()
+                        .HasForeignKey("OneAttributeId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.HasOne("KingPim.Models.Models.PredefinedAttrList")
                         .WithMany("PredefinedAttrListOptions")
                         .HasForeignKey("PredefinedAttrListId")
                         .OnDelete(DeleteBehavior.SetNull);

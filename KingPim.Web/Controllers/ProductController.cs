@@ -79,6 +79,20 @@ namespace KingPim.Web.Controllers
         }
 
         [HttpPost]
+        public IActionResult CreateOptionToPredefinedList(ProductViewModel vm)
+        {
+            predefAttrListOptionsRepo.CreateOptionToPredefinedList(vm);
+            return RedirectToAction(nameof(Details), new { id = vm.ProductId });
+        }
+
+        [HttpPost]
+        public IActionResult AddOptionIfNotExists(ProductViewModel vm)
+        {
+            predefAttrListOptionsRepo.AddOptionIfNotExists(vm);
+            return RedirectToAction(nameof(Details), new { id = vm.ProductId });
+        }
+
+        [HttpPost]
         public IActionResult Publish(ProductViewModel vm)
         {
             prodRepo.Publish(vm);
